@@ -19,6 +19,24 @@ class UserController extends Controller
         return view('users.index', ['users' => $model->paginate(15)]);
     }
 
+    public function departamento(User $model)
+    {
+        return view('users.Departamento', ['users' => $model->paginate(15)]);
+    }
+    public function plantel(User $model)
+    {
+        return view('users.Plantel', ['users' => $model->paginate(15)]);
+    }
+    public function materia(User $model)
+    {
+        return view('users.Materia', ['users' => $model->paginate(15)]);
+    }
+
+    public function grupo(User $model)
+    {
+        return view('users.Grupo', ['users' => $model->paginate(15)]);
+    }
+
     /**
      * Show the form for creating a new user
      *

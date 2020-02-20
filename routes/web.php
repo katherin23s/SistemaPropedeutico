@@ -16,6 +16,7 @@
 
 Route::get('/dashboard', 'AdminController@admin')->name('Dashboard');
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -55,6 +56,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
+	//Route::resource('departamento', 'UserController@departamento', ['except' => ['show']]);
+	Route::get('/departamento', 'UserController@departamento')->name('Departamento');
+	Route::get('/plantel', 'UserController@plantel')->name('Plantel');
+	Route::get('/materia', 'UserController@materia')->name('Materia');
+	Route::get('/grupo', 'UserController@grupo')->name('Grupo');
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);

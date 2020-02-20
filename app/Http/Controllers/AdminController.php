@@ -8,6 +8,12 @@ class AdminController extends Controller
 {
     public function admin()
     {
-        return view('Dashboard');
+        return view('Departamento');
     }
+
+    public function departamento()
+    {
+        return view('Departamento');
+    }
+
 }
