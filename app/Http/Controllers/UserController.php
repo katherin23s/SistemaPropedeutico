@@ -37,6 +37,38 @@ class UserController extends Controller
         return view('users.Grupo', ['users' => $model->paginate(15)]);
     }
 
+    public function gestionAlumnos(User $model)
+    {
+        return view('users.GestionAlumnos', ['users' => $model->paginate(15)]);
+    }
+
+    public function gestionDocentes(User $model)
+    {
+        return view('users.GestionDocentes', ['users' => $model->paginate(15)]);
+    }
+
+
+    public function dashboardDocentes(User $model)
+    {
+        return view('users.SidebarDocente', ['users' => $model->paginate(15)]);
+    }
+
+    public function informacionPerfilAlumno(User $model)
+    {
+        return view('users.InformacionPerfilAlumno', ['users' => $model->paginate(15)]);
+    }
+
+    public function configuracionAlumno(User $model)
+    {
+        return view('users.ConfiguracionAlumno', ['users' => $model->paginate(15)]);
+    }
+
+    public function kardexAlumno(User $model)
+    {
+        return view('users.Kardex_Alumno', ['users' => $model->paginate(15)]);
+    }
+
+
     /**
      * Show the form for creating a new user
      *

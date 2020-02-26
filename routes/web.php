@@ -25,42 +25,27 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
-Route::group(['middleware' => 'auth'], function () {
-		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'PageController@icons']);
-		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
-		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'PageController@notifications']);
-		Route::get('rtl', ['as' => 'pages.rtl', 'uses' => 'PageController@rtl']);
-		Route::get('tables', ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
-		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
-		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
-});
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
 	//Route::resource('departamento', 'UserController@departamento', ['except' => ['show']]);
+	Route::resource('planteles', 'PlantelController');
+//	Route::resource('informacionAlumno', 'AlumnosController');
+
 	Route::get('/departamento', 'UserController@departamento')->name('Departamento');
 	Route::get('/plantel', 'UserController@plantel')->name('Plantel');
 	Route::get('/materia', 'UserController@materia')->name('Materia');
 	Route::get('/grupo', 'UserController@grupo')->name('Grupo');
+	Route::get('/gestionAlumnos', 'UserController@gestionAlumnos')->name('GestionAlumnos');
+	Route::get('/gestionDocentes', 'UserController@gestionDocentes')->name('GestionDocentes');
+	Route::get('/dashboardDocentes', 'UserController@dashboardDocentes')->name('SidebarDocente');
+	Route::get('/informacionPerfilAlumno', 'UserController@InformacionPerfilAlumno')->name('InformacionPerfilAlumno');
+	Route::get('/configuracionAlumno', 'UserController@configuracionAlumno')->name('ConfiguracionAlumno');
+	Route::get('/kardex_Alumno', 'UserController@kardexAlumno')->name('Kardex_Alumno');
+	
+
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
