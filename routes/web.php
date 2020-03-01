@@ -42,8 +42,17 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/gestionDocentes', 'UserController@gestionDocentes')->name('GestionDocentes');
 	Route::get('/dashboardDocentes', 'UserController@dashboardDocentes')->name('SidebarDocente');
 	Route::get('/informacionPerfilAlumno', 'UserController@InformacionPerfilAlumno')->name('InformacionPerfilAlumno');
+	Route::get('/informacionPerfilDocente', 'UserController@InformacionPerfilDocente')->name('InformacionPerfilDocente');
 	Route::get('/configuracionAlumno', 'UserController@configuracionAlumno')->name('ConfiguracionAlumno');
+	Route::get('/configuracionDocente', 'UserController@configuracionDocente')->name('ConfiguracionDocente');
 	Route::get('/kardex_Alumno', 'UserController@kardexAlumno')->name('Kardex_Alumno');
+	Route::get('/horarioAlumno', 'UserController@horarioAlumno')->name('HorarioAlumno');
+	Route::get('/horarioDocente', 'UserController@horarioDocente')->name('HorarioDocente');
+	Route::get('/DocumentosAlumnos', 'UserController@documentosAlumnos')->name('DocumentosAlumnos');
+	Route::get('/DocumentosDocentes', 'UserController@documentosDocente')->name('DocumentosDocentes');
+	
+	
+	
 	
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);

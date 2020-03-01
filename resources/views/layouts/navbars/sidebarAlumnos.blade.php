@@ -9,12 +9,7 @@
                 </a>
             </li>
             <!-- TODO: GESTION DE OFERTA EDUCATIVA -->
-            <li>
-                <a data-toggle="collapse" href="#laravel-examples" aria-expanded="false">
-                    <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Informacion Perfil') }}</span>
-                    <b class="caret mt-1"></b>
-                </a>
+            <li>            
                 <div class="collapse show" id="laravel-examples">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
@@ -28,30 +23,36 @@
             </li>
              <!-- TODO: DOCUMENTOS -->
              <li>
-                <a data-toggle="collapse" href="#laravel-examples3" aria-expanded="false">
-                    <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Carga Documentos') }}</span>
-                    <b class="caret mt-1"></b>
-                </a>
+                <div class="collapse show" id="laravel-examples">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
+                            <a href="{{ route('DocumentosAlumnos')  }}">
+                                <i class="tim-icons icon-single-02"></i>
+                                <p>{{ _('Documentos Alumnos') }}</p>
+                            </a>
+                        </li>          
+                    </ul>
+                </div>
         
             </li>
             <!-- -->
             <!-- TODO: HORARIO-->
             <li>
-                <a data-toggle="collapse" href="#laravel-examples5" aria-expanded="false">
-                    <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Horario') }}</span>
-                    <b class="caret mt-1"></b>
-                </a>           
+           
+                <div class="collapse show" id="laravel-examples">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
+                            <a href="{{ route('HorarioAlumno')  }}">
+                                <i class="tim-icons icon-single-02"></i>
+                                <p>{{ _('Horario Alumno') }}</p>
+                            </a>
+                        </li>          
+                    </ul>
+                </div>       
             </li>
             <!-- -->   
              <!-- TODO: KARDEX -->
-             <li>
-                <a data-toggle="collapse" href="#laravel-examples6" aria-expanded="false">
-                    <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Kardex') }}</span>
-                    <b class="caret mt-1"></b>
-                </a>
+             <li>           
                 <div class="collapse show" id="laravel-examples">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
@@ -67,11 +68,6 @@
 
              <!-- TODO: CONFIGURACION -->
              <li>
-                <a data-toggle="collapse" href="#laravel-examples6" aria-expanded="false">
-                    <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Configuracion') }}</span>
-                    <b class="caret mt-1"></b>
-                </a>
                 <div class="collapse show" id="laravel-examples">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
