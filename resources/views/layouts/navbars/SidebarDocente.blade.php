@@ -27,7 +27,7 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
                             <a href="{{ route('DocumentosDocentes')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="tim-icons icon-single-copy-04"></i>
                                 <p>{{ _('Documentos ') }}</p>
                             </a>
                         </li>          

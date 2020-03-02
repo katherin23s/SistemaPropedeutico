@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlantelsTable extends Migration
+class CreateCarrerasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreatePlantelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('planteles', function (Blueprint $table) {
+        Schema::create('carreras', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->string('direccion');
-            $table->string('telefono');
-            $table->string('correo');
+            $table->string('numero_serie');
+            $table->unsignedBigInteger('departamento_id');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreatePlantelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plantels');
+        Schema::dropIfExists('carreras');
     }
 }

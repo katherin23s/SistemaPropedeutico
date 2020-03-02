@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plantel extends Model
 {
+    //Esta nos obtendra todos los departamentos que le pertenezcan a este plantel
+    //utiliza los IDs de ambas tablas para hacer la relacion
+    public function departamentos()
+    {
+        return $this->hasMany('App\Departamento');
+    }
+
     public $fillable = [
         'nombre',
         'direccion',

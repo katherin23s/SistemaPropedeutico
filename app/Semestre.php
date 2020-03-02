@@ -25,5 +25,10 @@ class Semestre extends Model
         'fecha_inicio',
         'fecha_final'
     ];
-    
+
+    //Un semestre tiene muchos grupos
+    public function grupos()
+    {
+        return $this->hasMany('App\Grupo');
+    }
 }
