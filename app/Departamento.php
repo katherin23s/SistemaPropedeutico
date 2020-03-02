@@ -17,6 +17,12 @@ class Departamento extends Model
         return $this->hasMany('App\Carrera');
     }
 
+    //Un departamento tiene muchos docentes
+    public function docentes()
+    {
+        return $this->hasMany('App\Docente');
+    }
+
     public $fillable = [
         'nombre',
         'plantel_id',
