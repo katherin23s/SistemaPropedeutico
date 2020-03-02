@@ -14,8 +14,9 @@ class PlantelController extends Controller
      */
     public function index()
     {
+        //el index donde se muestra la lista de todos los planteles
         $planteles = Plantel::paginate(15);
-        return view('planteles.index', compact('planteles'));
+        return view('Admin.Planteles.index', compact('planteles'));
     }
 
     /**
@@ -25,7 +26,7 @@ class PlantelController extends Controller
      */
     public function create()
     {
-        //
+        //solo dirige a la vista para crear un nuevo plantel
     }
 
     /**
@@ -36,7 +37,7 @@ class PlantelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //solo guarda el nuevo plantel
     }
 
     /**
@@ -47,7 +48,7 @@ class PlantelController extends Controller
      */
     public function show(Plantel $plantel)
     {
-        //
+        //la vista de un solo plantel
     }
 
     /**
@@ -58,7 +59,7 @@ class PlantelController extends Controller
      */
     public function edit(Plantel $plantel)
     {
-        //
+        //solo dirige a la vista para editar
     }
 
     /**
@@ -70,7 +71,7 @@ class PlantelController extends Controller
      */
     public function update(Request $request, Plantel $plantel)
     {
-        //
+        //solo para editar / actualizar
     }
 
     /**

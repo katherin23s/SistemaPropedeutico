@@ -13,6 +13,8 @@ class Plantel extends Model
         return $this->hasMany('App\Departamento');
     }
 
+    protected $table = 'planteles';
+
     public $fillable = [
         'nombre',
         'direccion',

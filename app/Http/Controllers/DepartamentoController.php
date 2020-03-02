@@ -14,7 +14,9 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        //
+        //el index donde se muestra la lista de todos los planteles
+        $departamentos = Departamento::paginate(15);
+        return view('Admin.Departamento.index', compact('departamentos'));
     }
 
     /**

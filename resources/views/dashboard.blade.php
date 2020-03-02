@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
                 <a class="after-loop-item card border-0 card-themes shadow-lg " style="padding-bottom: 16px;">
-                    <div class="card-body d-flex align-items-end flex-column text-right" style="background-color: aquamarine;">
+                    <div class="card-body d-flex align-items-end flex-column text-right" style="background-color: #28CA00;">
                         <h4>Themes</h4>
                         <p class="w-75">Fully designed and ready to modify and publish!</p>
                         <i class="fal fa-paint-brush-alt"></i>
@@ -15,7 +15,7 @@
             </div>
             <div class="col-lg-4 col-md-8 mx-auto">
                 <a class="after-loop-item card border-0 card-guides shadow-lg" style="padding-bottom: 13px;">
-                    <div class="card-body d-flex align-items-end flex-column text-right" style="background-color: hotpink;">
+                    <div class="card-body d-flex align-items-end flex-column text-right" style="background-color: #28CA00;">
                         <h4>Guides</h4>
                         <p class="w-75">Guides and tutorials to help you learn Bootstrap!</p>
                         <i class="fal fa-books"></i>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-lg-4 col-md-8 mx-auto">
                 <a class="after-loop-item card border-0 card-guides shadow-lg" style="padding-bottom: 13px;">
-                    <div class="card-body d-flex align-items-end flex-column text-right" style="background-color: deepskyblue;">
+                    <div class="card-body d-flex align-items-end flex-column text-right" style="background-color: #28CA00;">
                         <h4>Guides</h4>
                         <p class="w-75">Guides and tutorials to help you learn Bootstrap!</p>
                         <i class="fal fa-books"></i>
@@ -38,7 +38,7 @@
         <div class="row">
      <div class="col-lg-6 col-md-6" >
             <table class="table " style="background-color: white;">
-              <thead style="background-color: deepskyblue;" >
+              <thead style="background-color: #28CA00;" >
                 <tr>
                   <th>Firstname</th>
                   <th>Lastname</th>
@@ -82,7 +82,7 @@
         </div>
         <div class="col-lg-6 col-md-6">
             <table class="table " style="background-color: white;">
-              <thead style="background-color: deepskyblue;" >
+              <thead style="background-color: #28CA00;" >
                 <tr>
                   <th>Firstname</th>
                   <th>Lastname</th>

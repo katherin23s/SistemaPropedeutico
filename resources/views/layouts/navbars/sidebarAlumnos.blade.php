@@ -1,7 +1,7 @@
 <div class="sidebar">
-    <div class="sidebar-wrapper">
+    <div class="sidebar-wrapper" style="background: #28CA00;">
               <!-- MENU SIDEBAR -->
-        <ul class="nav">
+        <ul class="nav ">
             <li @if ($pageSlug ?? '' == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
                     <i class="tim-icons icon-chart-pie-36"></i>
@@ -27,7 +27,7 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
                             <a href="{{ route('DocumentosAlumnos')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="tim-icons icon-single-copy-04"></i>
                                 <p>{{ _('Documentos Alumnos') }}</p>
                             </a>
                         </li>          
@@ -43,7 +43,7 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
                             <a href="{{ route('HorarioAlumno')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                  <i class="tim-icons icon-time-alarm"></i>  
                                 <p>{{ _('Horario Alumno') }}</p>
                             </a>
                         </li>          
@@ -57,7 +57,7 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
                             <a href="{{ route('Kardex_Alumno')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="tim-icons icon-puzzle-10"></i>
                                 <p>{{ _('Kardex') }}</p>
                             </a>
                         </li>          
@@ -72,7 +72,7 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
                             <a href="{{ route('ConfiguracionAlumno')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="tim-icons icon-settings-gear-63"></i>
                                 <p>{{ _('Configuracion') }}</p>
                             </a>
                         </li>          

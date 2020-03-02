@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Departamento::class, function (Faker $faker) {
     return [
-        //
+        'nombre' => $faker->name,
+        'plantel_id' => factory(App\Plantel::class)->create(),
     ];
 });

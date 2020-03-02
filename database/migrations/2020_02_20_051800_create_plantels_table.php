@@ -30,6 +30,6 @@ class CreatePlantelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plantels');
+        Schema::dropIfExists('planteles');
     }
 }

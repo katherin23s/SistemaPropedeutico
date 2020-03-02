@@ -23,8 +23,8 @@
     <body class="white-content {{ $class ?? '' }}">
         @auth()
             <div class="wrapper">
-                    @include('layouts.navbars.SidebarDocente')
-                <div class="main-panel">
+                    @include('layouts.navbars.sidebar')
+                <div class="main-panel" style="border-top : 2px solid #28CA00">
                     @include('layouts.navbars.navbar')
 
                     <div class="content">

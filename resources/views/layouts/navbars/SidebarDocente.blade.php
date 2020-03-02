@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <div class="sidebar-wrapper">
+    <div class="sidebar-wrapper" style="background: #28CA00;">
               <!-- MENU SIDEBAR -->
         <ul class="nav">
             <li @if ($pageSlug ?? '' == 'dashboard') class="active " @endif>
@@ -14,7 +14,7 @@
                         <ul class="nav pl-4">
                             <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
                                 <a href="{{ route('InformacionPerfilDocente')  }}">
-                                    <i class="tim-icons icon-single-02"></i>
+                                    <i class="tim-icons icon-single-02"></i>                                
                                     <p>{{ _('Informacion Perfil') }}</p>
                                 </a>
                             </li>          
@@ -43,7 +43,7 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
                             <a href="{{ route('HorarioDocente')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                   <i class="tim-icons icon-time-alarm"></i>    
                                 <p>{{ _('Horario') }}</p>
                             </a>
                         </li>          
@@ -57,7 +57,7 @@
         <ul class="nav pl-4">
             <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
                 <a href="{{ route('ConfiguracionAlumno')  }}">
-                    <i class="tim-icons icon-single-02"></i>
+                    <i class="tim-icons icon-components"></i>
                     <p>{{ _('Grupos') }}</p>
                 </a>
             </li>          
@@ -71,7 +71,7 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
                             <a href="{{ route('ConfiguracionDocente')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="tim-icons icon-settings-gear-63"></i>
                                 <p>{{ _('Configuracion') }}</p>
                             </a>
                         </li>          
