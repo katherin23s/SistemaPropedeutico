@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <div class="sidebar-wrapper">
+    <div class="sidebar-wrapper" style="background: #28CA00;">
               <!-- MENU SIDEBAR -->
         <ul class="nav">
             <li @if ($pageSlug ?? '' == 'dashboard') class="active " @endif>
@@ -10,7 +10,7 @@
             </li>
             <!-- TODO: GESTION DE OFERTA EDUCATIVA -->
             <li>
-                <a data-toggle="collapse" href="#laravel-examples" aria-expanded="false">
+                <a  href="#laravel-examples" >
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Gestion de oferta Educativa') }}</span>
                     <b class="caret mt-1"></b>
@@ -30,7 +30,7 @@
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users') class="active " @endif>
-                            <a href="{{ route('user.index')  }}">
+                            <a href="{{ route('Carreras')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('Carrera') }}</p>
                             </a>
@@ -40,7 +40,7 @@
             </li>
              <!-- TODO: CURSOS PROPEDEUTICOS -->
              <li>
-                <a data-toggle="collapse" href="#laravel-examples3" aria-expanded="false">
+                <a href="#laravel-examples3" >
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Cursos Propedeuticos') }}</span>
                     <b class="caret mt-1"></b>
@@ -48,13 +48,13 @@
                 <div class="collapse show" id="laravel-examples3">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile') class="active " @endif>
-                            <a href="{{ route('grupos.index')  }}">
+                            <a href="{{ route('Grupo')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Grupos') }}</p>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users') class="active " @endif>
-                            <a href="{{ route('materias.index')  }}">
+                            <a href="{{ route('Materia')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('Materias') }}</p>
                             </a>
@@ -65,7 +65,7 @@
             <!-- -->
             <!-- TODO: GESTION DEL ESTUDIANTE-->
             <li>
-                <a data-toggle="collapse" href="#laravel-examples5" aria-expanded="false">
+                <a href="#laravel-examples5" >
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Gestion de Estudiantes') }}</span>
                     <b class="caret mt-1"></b>
@@ -73,7 +73,7 @@
                 <div class="collapse show" id="laravel-examples5">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug ?? '' == 'profile') class="active " @endif>
-                            <a href="{{ route('alumnos.index')  }}">
+                            <a href="{{ route('GestionAlumnos')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Inscripciones') }}</p>
                             </a>
@@ -85,7 +85,7 @@
             <!-- -->
              <!-- TODO: GESTION DEL DOCENTE -->
              <li>
-                <a data-toggle="collapse" href="#laravel-examples6" aria-expanded="false">
+                <a href="#laravel-examples6">
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Gestion de Docente') }}</span>
                     <b class="caret mt-1"></b>
@@ -93,7 +93,7 @@
                 <div class="collapse show" id="laravel-examples6">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug ?? '' == 'profile') class="active " @endif>
-                            <a href="{{ route('docentes.index')  }}">
+                            <a href="{{ route('GestionDocentes')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Inscripcion') }}</p>
                             </a>

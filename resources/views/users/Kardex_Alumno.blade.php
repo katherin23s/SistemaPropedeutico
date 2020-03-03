@@ -8,7 +8,7 @@
                       <label for="recipient-name" class="col-form-label col-6 "style="padding-left: 0px ">Calificaciones:</label>           
                     </div>
                     <table class="table tablesorter col-lg-12 col-md-9 col-sm-8 col-xs-6" id="" >
-                        <thead class=" text-primary" style="border: Gray 2px solid; background: deepskyblue; ">
+                        <thead class=" text-primary" style="border: Gray 2px solid; background: #28CA00; ">
                             <th scope="col">{{ __('Materia') }}</th>
                             <th scope="col">{{ __('Unidad I') }}</th>
                             <th scope="col">{{ __('Unidad II') }}</th>

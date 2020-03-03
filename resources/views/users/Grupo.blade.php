@@ -1,7 +1,7 @@
 @extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'users'])
 @section('content')
 <div class="row col-12 center-block" style="left: 430px;">
-<a class="navbar-brand " href="#">GRUPO</a>
+<a class="navbar-brand " href="#"  style="color: #28CA00;">GRUPO</a>
 </div>
     <div class="row">
             <div class="row" style="
@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <div class="row col-12  ">
                     <div class="col-4 " style="padding-left: 0px;">   
-                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar</button>   
+                      <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="background: #28CA00;">Agregar</button>   
                     </div>  
                           <div class="col-4" style="left: 320px;">
                           <!-- Search form -->
@@ -30,7 +30,7 @@
                     <div style=" position: absolute; top: 85px; left: 15px; width: 970px;   height:auto;">    
                         
                         <table class="table tablesorter col-lg-12 col-md-9 col-sm-8 col-xs-6" id="" >
-                            <thead class=" text-primary" style="border: Gray 2px solid; background: deepskyblue; ">
+                            <thead class=" text-primary" style="border: Gray 2px solid; background: #28CA00; ">
                                 <th scope="col">{{ __('ID') }}</th>
                                 <th scope="col">{{ __('Grupo') }}</th>
                                 <th scope="col">{{ __('Unidad') }}</th>
@@ -203,7 +203,7 @@
                   <label for="recipient-name" class="col-form-label col-6 "style="padding-left: 0px ">Unidad: Otay</label>
                 </div>
                 <table class="table tablesorter col-lg-12 col-md-9 col-sm-8 col-xs-6" id="" >
-                    <thead class=" text-primary" style="border: Gray 2px solid; background: deepskyblue; ">
+                    <thead class=" text-primary" style="border: Gray 2px solid; background: #28CA00; ">
                         <th scope="col">{{ __('ID') }}</th>
                         <th scope="col">{{ __('Departamento') }}</th>
                     </thead>

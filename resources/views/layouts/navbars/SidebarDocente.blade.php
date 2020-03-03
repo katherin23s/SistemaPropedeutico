@@ -56,7 +56,7 @@
     <div class="collapse show" id="laravel-examples">
         <ul class="nav pl-4">
             <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
-                <a href="{{ route('ConfiguracionAlumno')  }}">
+                <a href="{{ route('GruposDocente')  }}">
                     <i class="tim-icons icon-components"></i>
                     <p>{{ _('Grupos') }}</p>
                 </a>

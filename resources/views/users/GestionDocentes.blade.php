@@ -16,26 +16,26 @@
                 <div class="card-body">
                     <div class="row col-12  ">
                     <div class="col-3 " style="padding-left: 0px;">   
-                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar</button>   
+                   <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="background: #28CA00;">Agregar</button>   
                     </div>  
                         <div class="dropdown col-3">
                            
-                        <select class="btn btn mdb-select md-form " style="background:mediumorchid background-color: mediumorchid;width: 188.4832px;background: mediumorchid;padding-top: 9px;padding-bottom: 6px;margin-left: 0px;padding-left: 20px;padding-right: 30px;margin-top: ‒10;left: 20px; background-image: none;
-                          background-image: linear-gradient(to bottom left, #ba55d3, #ba55d3, #ba55d3) !important; left: 70px;">
-                            <option value="" disabled selected style="background:mediumorchid ">Plantel</option>
-                            <option value="1" style="background:mediumorchid ">Option 1</option>
-                            <option value="2" style="background:mediumorchid ">Option 2</option>
-                            <option value="3" style="background:mediumorchid ">Option 3</option>
+                        <select class="btn btn mdb-select md-form " style="background:#28CA00 background-color: #28CA00;width: 188.4832px;background: #28CA00;padding-top: 9px;padding-bottom: 6px;margin-left: 0px;padding-left: 20px;padding-right: 30px;margin-top: ‒10;left: 20px; background-image: none;
+                          background-image: linear-gradient(to bottom left, #28CA00, #28CA00, #28CA00) !important; left: 70px;">
+                            <option value="" disabled selected style="background:#28CA00 ">Plantel</option>
+                            <option value="1" style="background:#28CA00 ">Option 1</option>
+                            <option value="2" style="background:#28CA00 ">Option 2</option>
+                            <option value="3" style="background:#28CA00 ">Option 3</option>
                           </select>
                           </div>
     
                           <div class="dropdown col-3 ">
-                            <select class="btn btn mdb-select md-form " style="background:mediumorchid background-color: mediumorchid;width: 188.4832px;background: mediumorchid;padding-top: 9px;padding-bottom: 6px;margin-left: 0px;padding-left: 20px;margin-top: ‒10;left: 20px; background-image: none;
-                                background-image: linear-gradient(to bottom left, #ba55d3, #ba55d3, #ba55d3) !important; ">
-                                <option value="" disabled selected  style="background:mediumorchid ">Departamento</option>
-                                <option value="1" style="background:mediumorchid">Option 1</option>
-                                <option value="2" style="background:mediumorchid">Option 2</option>
-                                <option value="3" style="background:mediumorchid">Option 3</option>
+                            <select class="btn btn mdb-select md-form " style="background:#28CA00 background-color: #28CA00;width: 188.4832px;background: #28CA00;padding-top: 9px;padding-bottom: 6px;margin-left: 0px;padding-left: 20px;margin-top: ‒10;left: 20px; background-image: none;
+                                background-image: linear-gradient(to bottom left, #28CA00, #28CA00, #28CA00) !important; ">
+                                <option value="" disabled selected  style="background:#28CA00 ">Departamento</option>
+                                <option value="1" style="background:#28CA00">Option 1</option>
+                                <option value="2" style="background:#28CA00">Option 2</option>
+                                <option value="3" style="background:#28CA00">Option 3</option>
                               </select>
            
                           </div>
@@ -44,12 +44,12 @@
                           padding-left: 0px;
                           right: 30px;
                       ">
-                            <select class="btn btn mdb-select md-form " style="background:mediumorchid background-color: mediumorchid;width: 188.4832px;background: mediumorchid;padding-top: 9px;padding-bottom: 6px;margin-left: 0px;padding-left: 20px;margin-top: ‒10;left: 20px; background-image: none;
-                                background-image: linear-gradient(to bottom left, #ba55d3, #ba55d3, #ba55d3) !important; ">
-                                <option value="" disabled selected  style="background:mediumorchid ">Carrera</option>
-                                <option value="1" style="background:mediumorchid">Option 1</option>
-                                <option value="2" style="background:mediumorchid">Option 2</option>
-                                <option value="3" style="background:mediumorchid">Option 3</option>
+                            <select class="btn btn mdb-select md-form " style="background:#28CA00 background-color: #28CA00;width: 188.4832px;background: #28CA00;padding-top: 9px;padding-bottom: 6px;margin-left: 0px;padding-left: 20px;margin-top: ‒10;left: 20px; background-image: none;
+                                background-image: linear-gradient(to bottom left, #28CA00, #28CA00, #28CA00) !important; ">
+                                <option value="" disabled selected  style="background:#28CA00 ">Carrera</option>
+                                <option value="1" style="background:#28CA00">Option 1</option>
+                                <option value="2" style="background:#28CA00">Option 2</option>
+                                <option value="3" style="background:#28CA00">Option 3</option>
                               </select>
            
                           </div>
@@ -75,7 +75,7 @@
                         <table class="table tablesorter col-lg-12 col-md-9 col-sm-8 col-xs-6" id="" style="
                         left: 20px;
                     " >
-                            <thead class=" text-primary" style="border: Gray 2px solid; background: deepskyblue; ">
+                            <thead class=" text-primary" style="border: Gray 2px solid; background: #28CA00; ">
                                 <th scope="col">{{ __('No_Empleado') }}</th>
                                 <th scope="col">{{ __('Nombre') }}</th>
                                 <th scope="col">{{ __('Domicilio') }}</th>
@@ -276,7 +276,7 @@
                     <label for="recipient-name" class="col-form-label col-6" style="padding-left: 25px">Ingenieria en Sistemas Computacionales</label>
                   </div>
                 <table class="table tablesorter col-lg-12 col-md-9 col-sm-8 col-xs-6" id="" >
-                    <thead class=" text-primary" style="border: Gray 2px solid; background: deepskyblue; ">
+                    <thead class=" text-primary" style="border: Gray 2px solid; background: #28CA00; ">
                         <th scope="col">{{ __('No Serie') }}</th>
                         <th scope="col">{{ __('Nombre') }}</th>
                     </thead>
@@ -352,7 +352,7 @@
                           <label for="recipient-name" class="col-form-label col-6 "style="padding-left: 0px ">Inscripciones:</label>           
                         </div>
                         <table class="table tablesorter col-lg-12 col-md-9 col-sm-8 col-xs-6" id="" >
-                            <thead class=" text-primary" style="border: Gray 2px solid; background: deepskyblue; ">
+                            <thead class=" text-primary" style="border: Gray 2px solid; background: #28CA00; ">
                                 <th scope="col">{{ __('Materia') }}</th>
                                 <th scope="col">{{ __('Unidad I') }}</th>
                                 <th scope="col">{{ __('Unidad II') }}</th>
