@@ -58,6 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/gruposDocente', 'UserController@gruposDocente')->name('GruposDocente');
     Route::get('/Carreras', 'UserController@carreras')->name('Carreras');
 
+    Route::post('planteles/encontrar', 'PlantelController@encontrar')->name('planteles.encontrar');
+
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);

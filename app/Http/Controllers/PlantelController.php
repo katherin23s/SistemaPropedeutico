@@ -84,4 +84,11 @@ class PlantelController extends Controller
     {
         //
     }
+
+    public function encontrar(Request $request)
+    {
+        $id = $request->plantel_id;
+        $plantel = Plantel::find($id);
+        return json_encode($plantel);
+    }
 }

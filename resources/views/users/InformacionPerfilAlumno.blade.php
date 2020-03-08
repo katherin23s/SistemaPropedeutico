@@ -61,14 +61,14 @@
                 <div class="row col-12" style="top: 40px;">
               
                     <select class="col-6 custom-select" id="inputGroupSelect04" style="color:#525f7f;">
-                      <option selected>Plantel</option>
+                      <option selected>Carrera</option>
                       <option value="1">One</option>
                       <option value="2">Two</option>
                       <option value="3">Three</option>
                     </select>
 
                     <select class="col-6 custom-select" id="inputGroupSelect04" style="color:#525f7f; left: 25px;">
-                        <option selected>Departamento</option>
+                        <option selected>Grupo</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>

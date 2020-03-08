@@ -22,7 +22,7 @@
     </head>
     <body class="white-content {{ $class ?? '' }}">
         @auth()
-            <div class="wrapper">
+            <div class="wrapper">Alumnos
                     @include('layouts.navbars.sidebar')
                 <div class="main-panel" style="border-top : 2px solid #28CA00">
                     @include('layouts.navbars.navbar')

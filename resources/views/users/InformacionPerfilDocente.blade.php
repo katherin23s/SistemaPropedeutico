@@ -3,7 +3,7 @@
 @section('content')
             <div class="modal-body" style="padding-bottom: 60px; padding-top: 30px;">
               <form>
-                <h1 align="center"> INFORMACION DE PERFIL </h1>
+                <h1 align="center"> INFORMACION DE PERFIL DOCENTE</h1>
                 <div class="row form-group col-auto col-12" style="height: 25px;">
                   <label for="recipient-name" class="col-form-label col-6 "style="padding-left: 0px ">No Empleado</label>
                   <label for="recipient-name" class="col-form-label col-6" style="padding-left: 25px">Nombre</label>
