@@ -66,12 +66,18 @@ class PlantelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Plantel  $plantel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plantel $plantel)
+    public function update(Request $request)
     {
         //solo para editar / actualizar
+        $id = $request->id;
+        $plantel = Plantel::find($id);
+        $datos_validados = $this->validar();
+        $plantel->fill($datos_validados);
+        $plantel->save();
+
+        return response('OK', 200);
     }
 
     /**
@@ -90,5 +96,10 @@ class PlantelController extends Controller
         $id = $request->plantel_id;
         $plantel = Plantel::find($id);
         return json_encode($plantel);
+    }
+
+    public function validar()
+    {
+        return request()->validate(Plantel::$rules);
     }
 }

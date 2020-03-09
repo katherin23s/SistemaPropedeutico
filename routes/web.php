@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
     //Route::resource('departamento', 'UserController@departamento', ['except' => ['show']]);
-    Route::resource('planteles', 'PlantelController');
+    Route::resource('planteles', 'PlantelController', ['except' => ['update']]);
     Route::resource('departamentos', 'DepartamentoController');
     Route::resource('carreras', 'CarreraController');
     Route::resource('grupos', 'GrupoController');
@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/Carreras', 'UserController@carreras')->name('Carreras');
 
     Route::post('planteles/encontrar', 'PlantelController@encontrar')->name('planteles.encontrar');
+    Route::patch('planteles/actualizar', 'PlantelController@update')->name('planteles.update');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

@@ -45,7 +45,7 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary " style="left: 355px;" >Guardar</button>
+              <button id="actualizar-plantel" type="button" class="btn btn-primary " style="left: 355px;" >Guardar</button>
             </div>
           </div>
         </div>
@@ -57,26 +57,22 @@
         obtenerPlantel(id); 
         $('#ModalEditar').modal('show')
     }
-    function updateCall(id, number, claim, date, 
-    comments){
+    function actualizarPlantel(id, nombre, direccion, correo, 
+    telefono){
         $.ajax({
-            url: "{{route('planteles.encontrar')}}",
+            url: "{{route('planteles.update')}}",
             dataType: 'json',
             type:"patch",
             data: {
                 "_token": "{{ csrf_token() }}",
                 "id": id,
-                "number": number,
-                "claim": claim,
-                "date": date,
-                "comments": comments,
+                "nombre": nombre,
+                "direccion": direccion,
+                "correo": correo,
+                "telefono": telefono,
             },
-        success: function (response) {
-            console.log(response.data);
-            var calls = response.data;
-            displayCalls(calls); //on callsModal
-                
-            $('#modal-update-call').modal('hide')
+        success: function (response) {                       
+            $('#ModalEditar').modal('hide')
             }
         });
             return false;
@@ -110,16 +106,18 @@
         /* $('#calls_table').on("click", ".update-call", function(event) {
             var id = $(this).data('call');
             obtenerPlantel(id);
-        })
-        $("#update_call").click(function(){
-            var call_id = document.getElementById("update-call_id").value;
-            var number = document.getElementById("update-number").value;
-            var claim = document.getElementById("update-claim").value;
-            var date = document.getElementById("update-date").value;
-            var comments = document.getElementById("update-comments").value;
-            updateCall(call_id, number, claim, date, comments);
+        })*/
+        $("#actualizar-plantel").click(function(){
+          //obtener valores de los inputs
+            var plantel_id = document.getElementById("update-plantel_id").value;
+            var nombre = document.getElementById("update-nombre").value;
+            var direccion = document.getElementById("update-direccion").value;
+            var correo = document.getElementById("update-correo").value;
+            var telefono = document.getElementById("update-telefono").value;
+
+            actualizarPlantel(plantel_id, nombre, direccion, correo, telefono);
             
-        }); */
+        }); 
     });
 </script>
     
