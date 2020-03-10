@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('planteles/encontrar', 'PlantelController@encontrar')->name('planteles.encontrar');
     Route::patch('planteles/actualizar', 'PlantelController@update')->name('planteles.update');
+    Route::post('planteles/departamentos', 'PlantelController@obtenerDepartamentos')->name('planteles.departamentos');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

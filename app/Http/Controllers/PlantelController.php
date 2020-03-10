@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Departamento;
 use App\Plantel;
 use Illuminate\Http\Request;
 
@@ -100,6 +101,14 @@ class PlantelController extends Controller
         $id = $request->plantel_id;
         $plantel = Plantel::find($id);
         return json_encode($plantel);
+    }
+
+    public function obtenerDepartamentos(Request $request)
+    {
+        $id = $request->plantel_id;
+        $departamentos = Departamento::where('plantel_id', $id)->get();
+
+        return json_encode($departamentos);
     }
 
     public function validar()

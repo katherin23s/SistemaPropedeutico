@@ -66,8 +66,8 @@
                                   <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $plantel->id }})">
                                           <i class="fas fa-pencil-alt fa-2 "></i>
                                   </button>
-                                  <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalEditar({{ $plantel->id }})">
-                                          <i class="fas fa-pencil-alt fa-2 "></i>
+                                  <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalDepartamentos({{ $plantel->id }}, '{{ $plantel->nombre }}')">
+                                          <i class="fa fa-eye "></i>
                                   </button>
                                   <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="mostrarModalEditar({{ $plantel->id }})">
                                           <i class="fas fa-edit"></i>
@@ -93,45 +93,6 @@
 
 @include('Admin.Planteles.editarModal')
 
-<!--MODAL VER DEPARTAMENTOS DE LAS CARRERAS -->
-<div class="modal fade" id="ModalDepartamentos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5  align="center" class="modal-title" id="exampleModalLabel">PLANTEL</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="padding-bottom: 60px; padding-top: 30px;">
-        <form>
-          <div class="row form-group col-auto col-12" style="height: 25px;">
-            <label for="recipient-name" class="col-form-label col-6 "style="padding-left: 0px ">Unidad: Otay</label>
-          </div>
-          <table class="table tablesorter col-lg-12 col-md-9 col-sm-8 col-xs-6" id="" >
-              <thead class=" text-primary" style="border: Gray 2px solid; background: deepskyblue; ">
-                  <th scope="col">{{ __('ID') }}</th>
-                  <th scope="col">{{ __('Departamento') }}</th>
-              </thead>
-              <tbody style="background: whitesmoke; border: Gray 2px solid;">
-                  @foreach ($planteles as $plantel)
-                      <tr>
-                          <td>{{ $plantel->name }}</td>
-                          <td>
-                              <a href="mailto:{{ $plantel->email }}">{{ $plantel->email }}</a>
-                          </td>           
-                      </td>
-                      </tr>
-                  @endforeach
-              </tbody>
-          </table>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary " style="left: 355px;" >Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
+@include('Admin.Planteles.verModal')
 
 @endsection
