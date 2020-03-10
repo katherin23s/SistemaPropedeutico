@@ -38,6 +38,10 @@ class PlantelController extends Controller
     public function store(Request $request)
     {
         //solo guarda el nuevo plantel
+        $datos_validados = $this->validar();
+        Plantel::create($datos_validados);
+
+        return response()->json(['status' => 'xd'], 200);
     }
 
     /**

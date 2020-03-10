@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <div class="sidebar-wrapper" style="background: #28CA00;">
+    <div class="sidebar-wrapper" style="background: #28a745;"> {{-- background: #28CA00; --}}
               <!-- MENU SIDEBAR -->
         <ul class="nav">
             <li @if ($pageSlug ?? '' == 'dashboard') class="active " @endif>

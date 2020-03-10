@@ -16,13 +16,13 @@
                 </div>
                 <div class="row col-12">
                   <input type="text" class=" col-6 form-control" id="update-plantel_id" readonly>
-                  <input type="text" class="col-6 form-control" id="update-nombre" style="left: 25px;">
+                  <input required type="text" class="col-6 form-control" id="update-nombre" style="left: 25px;">
                 </div>
                 <div class="row col-12">
                   <label for="recipient-name" class="col-form-label "style="padding-left: 0px ">Direccion</label>
                 </div>
                 <div class="row col-12">
-                  <input type="text" class="form-control" id="update-direccion">
+                  <input required type="text" class="form-control" id="update-direccion">
                 </div>
 
                 <div class="row form-group col-auto col-12" style="height: 25px;">
@@ -31,17 +31,8 @@
                 </div>
                 <div class="row col-12">
                   <input type="text" class=" col-6 form-control" id="update-telefono">
-                  <input type="text" class="col-6 form-control" id="update-correo" style="left: 25px;">
-                </div>
-
-                <div class="row col-12" style="top: 30px;">
-                  <select class="custom-select" id="inputGroupSelect04" style="color:#525f7f; top: 30px;">
-                    <option selected>Plantel</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </div>
+                  <input required type="text" class="col-6 form-control" id="update-correo" style="left: 25px;">
+                </div>               
               </form>
             </div>
             <div class="modal-footer">
@@ -103,10 +94,6 @@
             return false;
     }
     $(document).ready(function(){
-        /* $('#calls_table').on("click", ".update-call", function(event) {
-            var id = $(this).data('call');
-            obtenerPlantel(id);
-        })*/
         $("#actualizar-plantel").click(function(){
           //obtener valores de los inputs
             var plantel_id = document.getElementById("update-plantel_id").value;
