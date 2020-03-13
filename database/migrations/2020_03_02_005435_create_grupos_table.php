@@ -18,8 +18,8 @@ class CreateGruposTable extends Migration
             $table->unsignedBigInteger('semestre_id');
             $table->unsignedBigInteger('carrera_id');
             $table->string('numero');
-            $table->time('hora_inicio');
-            $table->time('hora_final');
+            $table->datetime('hora_inicio');
+            $table->datetime('hora_final');
             //si el semestre al que esta relacionado es eliminado, tambien
             //se borraran los grupos ligados a ese semestre para evitar errores y aja
             $table->foreign('semestre_id')->references('id')->on('semestres')->onDelete('cascade');

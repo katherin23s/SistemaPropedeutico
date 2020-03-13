@@ -29,7 +29,7 @@ class Departamento extends Model
     ];
     public static $rules = [
         'nombre' => 'required|max:255|min:5',
-        'plantel_id' => 'required|integer',
+        'plantel_id' => 'required|integer'
     ];
     protected $casts = [
         'id' => 'integer',

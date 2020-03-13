@@ -26,7 +26,7 @@ class Carrera extends Model
     public static $rules = [
         'nombre' => 'required|max:255|min:5',
         'numero_serie' => 'required|max:255|min:1',
-        'departamento_id' => 'required|integer',
+        /* 'departamento_id' => 'required|integer', */
     ];
     protected $casts = [
         'id' => 'integer',

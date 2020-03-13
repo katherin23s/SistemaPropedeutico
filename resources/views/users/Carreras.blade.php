@@ -1,13 +1,13 @@
 @extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'users'])
 @section('content')
 <div class="row col-12 center-block" style="left: 430px;">
-<a class="navbar-brand " href="#">MATERIA</a>
+<a class="navbar-brand " href="#">CARRERAS</a>
 </div>
     <div class="row">
             <div class="row" style="
             margin-left: 0px;">
                 <div class="col-8">
-                    <h4 class="card-title">{{ __('Materia') }}</h4>
+                    <h4 class="card-title">{{ __('Carrera') }}</h4>
                 </div>
 
             </div>

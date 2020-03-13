@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('planteles', 'PlantelController', ['except' => ['update']]);
     Route::resource('departamentos', 'DepartamentoController');
     Route::resource('carreras', 'CarreraController');
+    Route::resource('semestres', 'SemestreController');
     Route::resource('grupos', 'GrupoController');
     Route::resource('materias', 'MateriaController');
     Route::resource('alumnos', 'AlumnoController');
@@ -56,11 +57,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/DocumentosAlumnos', 'UserController@documentosAlumnos')->name('DocumentosAlumnos');
     Route::get('/DocumentosDocentes', 'UserController@documentosDocente')->name('DocumentosDocentes');
     Route::get('/gruposDocente', 'UserController@gruposDocente')->name('GruposDocente');
-    Route::get('/Carreras', 'UserController@carreras')->name('Carreras');
+    /*  Route::get('/Carreras', 'UserController@carreras')->name('Carreras');*/
 
     Route::post('planteles/encontrar', 'PlantelController@encontrar')->name('planteles.encontrar');
     Route::patch('planteles/actualizar', 'PlantelController@update')->name('planteles.update');
     Route::post('planteles/departamentos', 'PlantelController@obtenerDepartamentos')->name('planteles.departamentos');
+
+    Route::post('departamentos/encontrar', 'DepartamentoController@encontrar')->name('departamento.encontrar');
+    Route::post('departamentos/actualizar', 'DepartamentoController@update')->name('planteles.update');
+
+    Route::post('carreras/encontrar', 'CarreraController@encontrar')->name('carreras.encontrar');
+    Route::post('carreras/actualizar', 'CarreraController@update')->name('departamento.update');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

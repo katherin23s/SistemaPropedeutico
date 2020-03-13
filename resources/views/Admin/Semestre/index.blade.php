@@ -39,21 +39,19 @@
                 <table class="table" id="" >
                     <thead>
                         <th scope="col">{{ __('ID') }}</th>
-                        <th scope="col">{{ __('Nombre') }}</th>
-                        <th scope="col">{{ __('Direccion') }}</th>
-                        <th scope="col">{{ __('Telefono') }}</th>
-                        <th scope="col">{{ __('Correo') }}</th>
+                        <th scope="col">{{ __('Numero') }}</th>
+                        <th scope="col">{{ __('Fecha de inicio') }}</th>
+                        <th scope="col">{{ __('Fecha final') }}</th>
                         <th class="text-right" scope="col">{{ __('Acciones') }}</th>
                     </thead>
                     <tbody>
-                        @foreach ($planteles as $plantel)
+                          @foreach ($semestres as $semestre)
                             <tr>
-                                <td>{{ $plantel->id }}</td>
-                                <td>{{ $plantel->nombre }}</td>
-                                <td>{{ $plantel->direccion }}</td>
-                                <td>{{ $plantel->telefono }}</td>
-                                <td>
-                                    <a href="mailto:{{ $plantel->correo }}">{{ $plantel->correo }}</a>
+                                <td>{{ $semestre->id }}</td>
+                                <td>{{ $semestre->numero }}</td>
+                                <td>{{ $semestre->fecha_inicio->format('d-m-Y')}}</td>
+                                <td>{{ $semestre->fecha_final->format('d-m-Y') }}</td>
+                                                               
                                 </td>
                                 {{-- <td style="background: whitesmoke; border: Gray 2px solid;">
                                   <div style="text-align: center;">
@@ -63,13 +61,13 @@
                                   </div>
                                 </td> --}}
                                 <td class="td-actions text-right">
-                                  <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $plantel->id }})">
+                                  <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $semestre->id }})">
                                           <i class="fas fa-pencil-alt fa-2 "></i>
                                   </button>
-                                  <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalDepartamentos({{ $plantel->id }}, '{{ $plantel->nombre }}')">
+                                  <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalDepartamentos({{ $semestre->id }}, '{{ $semestre->nombre }}')">
                                           <i class="fa fa-eye "></i>
                                   </button>
-                                  <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="mostrarModalEditar({{ $plantel->id }})">
+                                  <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="mostrarModalEditar({{ $semestre->id }})">
                                           <i class="fas fa-edit"></i>
                                   </button>
                                 </td>

@@ -14,7 +14,9 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        //
+        //el index donde se muestra la lista de todos los planteles
+        $grupos = Grupo::paginate(15);
+        return view('Admin.Grupos.index', compact('grupos'));
     }
 
     /**

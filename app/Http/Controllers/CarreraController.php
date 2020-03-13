@@ -14,7 +14,9 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        //
+        //el index donde se muestra la lista de todos los planteles
+        $carreras = Carrera::paginate(15);
+        return view('Admin.Carrera.index', compact('carreras'));
     }
 
     /**

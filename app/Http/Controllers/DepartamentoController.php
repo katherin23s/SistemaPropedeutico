@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Departamento;
+use App\Plantel;
 use Illuminate\Http\Request;
 
 class DepartamentoController extends Controller
@@ -16,7 +17,8 @@ class DepartamentoController extends Controller
     {
         //el index donde se muestra la lista de todos los planteles
         $departamentos = Departamento::paginate(15);
-        return view('Admin.Departamento.index', compact('departamentos'));
+        $planteles = Plantel::get();
+        return view('Admin.Departamento.index', compact('departamentos', 'planteles'));
     }
 
     /**
@@ -29,6 +31,21 @@ class DepartamentoController extends Controller
         //
     }
 
+    public function encontrar(Request $request)
+    {
+        $id = $request->departamento_id;
+        $departamento = Departamento::find($id);
+        return json_encode($departamento);
+    }
+
+    public function obtenerPlanteles(Request $request)
+    {
+        $id = $request->departamento_id;
+        $departamentos = Departamento::where('departamento_id', $id)->get();
+
+        return json_encode($departamentos);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -37,7 +54,10 @@ class DepartamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos_validados = $this->validar();
+        Departamento::create($datos_validados);
+
+        return response()->json(['status' => 'xd'], 200);
     }
 
     /**
@@ -69,9 +89,16 @@ class DepartamentoController extends Controller
      * @param  \App\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Departamento $departamento)
+    public function update(Request $request)
     {
-        //
+        //solo para editar / actualizar
+        $id = $request->departamento_id;
+        $departamento = Departamento::find($id);
+        $datos_validados = $this->validar();
+        $departamento->fill($datos_validados);
+        $departamento->save();
+
+        return json_encode('OK', 200);
     }
 
     /**
@@ -83,5 +110,10 @@ class DepartamentoController extends Controller
     public function destroy(Departamento $departamento)
     {
         //
+    }
+
+    public function validar()
+    {
+        return request()->validate(Departamento::$rules);
     }
 }

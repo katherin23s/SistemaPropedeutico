@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Carrera::class, function (Faker $faker) {
     return [
-        //
+        'nombre' => $faker->company,
+        'numero_serie' => $faker->streetAddress
     ];
 });

@@ -30,7 +30,7 @@
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users') class="active " @endif>
-                            <a href="{{ route('Carreras')  }}">
+                            <a href="{{ route('carreras.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('Carrera') }}</p>
                             </a>
@@ -47,8 +47,14 @@
                 </a>
                 <div class="collapse show" id="laravel-examples3">
                     <ul class="nav pl-4">
+                             <li @if ($pageSlug == 'users') class="active " @endif>
+                            <a href="{{ route('semestres.index')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ _('Semestre') }}</p>
+                            </a>
+                        </li>
                         <li @if ($pageSlug == 'profile') class="active " @endif>
-                            <a href="{{ route('Grupo')  }}">
+                            <a href="{{ route('grupos.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Grupos') }}</p>
                             </a>

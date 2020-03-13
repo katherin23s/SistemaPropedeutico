@@ -14,7 +14,9 @@ class SemestreController extends Controller
      */
     public function index()
     {
-        //
+        //el index donde se muestra la lista de todos los planteles
+        $semestres = Semestre::paginate(15);
+        return view('Admin.Semestre.index', compact('semestres'));
     }
 
     /**

@@ -23,8 +23,8 @@ class CreateClasesTable extends Migration
             //materiaokko al momento de asignarla, por default
             //seria el nombre/clave de la materia
 
-            $table->time('hora_inicio');
-            $table->time('hora_final');
+            $table->datetime('hora_inicio');
+            $table->datetime('hora_final');
             $table->string('dias');
             $table->string('salon');
             $table->integer('capacidad');
