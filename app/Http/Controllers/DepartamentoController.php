@@ -112,6 +112,23 @@ class DepartamentoController extends Controller
         //
     }
 
+    public function busqueda(Request $request)
+    {
+        $search = $request->search;
+        $departamentos = Departamento::query()
+            ->whereLike(['nombre'], $search)
+            ->get()->take(4);
+        $response = [];
+        foreach ($departamentos as $departamento) {
+            $response[] = [
+                'id' => $departamento->id,
+                'text' => $departamento->nombre,
+            ];
+        }
+        echo json_encode($response);
+        exit;
+    }
+
     public function validar()
     {
         return request()->validate(Departamento::$rules);

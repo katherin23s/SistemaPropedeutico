@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('carreras/encontrar', 'CarreraController@encontrar')->name('carreras.encontrar');
     Route::post('carreras/actualizar', 'CarreraController@update')->name('departamento.update');
+    Route::post('departamentos/busqueda', 'DepartamentoController@busqueda')->name('departamentos.busqueda');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

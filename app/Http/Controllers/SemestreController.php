@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SemestreRequest;
 use App\Semestre;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,12 @@ class SemestreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SemestreRequest $request)
     {
-        //
+        $datosvalidados = $request->validated();
+        $semestre = Semestre::create($datosvalidados);
+
+        return json_encode($semestre);
     }
 
     /**

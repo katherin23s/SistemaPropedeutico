@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Carrera;
+use App\Http\Requests\CarreraRequest;
 use Illuminate\Http\Request;
 
 class CarreraController extends Controller
@@ -35,9 +36,12 @@ class CarreraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CarreraRequest $request)
     {
-        //
+        $datosvalidados = $request->validated();
+        $carrera = Carrera::create($datosvalidados);
+
+        return json_encode($carrera);
     }
 
     /**

@@ -1,14 +1,14 @@
 @extends('layouts.app', ['page' => __('carrera Management'), 'pageSlug' => 'carreras'])
 @section('content')
 <div class="row col-12 center-block" style="left: 430px;">
-<a class="navbar-brand " href="#" style="color: #28CA00;">carrera</a>
+<a class="navbar-brand " href="#" style="color: #28CA00;">Carrera</a>
 </div>
     <div class="row">
             <div class="row" style="
             margin-left: 0px;
         ">
                 <div class="col-8">
-                    <h4 class="card-title">{{ __('carrera') }}</h4>
+                    <h4 class="card-title">{{ __('Carrera') }}</h4>
                 </div>
 
             </div>
@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <div class="row col-12  ">
                     <div class="col-4 " style="padding-left: 0px;">   
-                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="background: #28CA00;">Agregar</button>   
+                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo" style="background: #28CA00;">Agregar</button>   
                     </div>  
                         <div class="dropdown col-4">                   
                         <select class="btn btn mdb-select md-form " style="background:#28CA00 background-color: #28CA00;width: 188.4832px;background: #28CA00;padding-top: 9px;padding-bottom: 6px;margin-left: 0px;padding-left: 20px;padding-right: 30px;margin-top: ‒10;left: 20px; background-image: none;
@@ -88,4 +88,7 @@
             </div>
 
     </div>
+@include('Admin.Carrera.agregarModal')
+{{-- @include('Admin.Carrera.editarModal')
+@include('Admin.Carrera.verModal') --}}
 @endsection

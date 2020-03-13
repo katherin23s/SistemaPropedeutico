@@ -1,13 +1,13 @@
-@extends('layouts.app', ['page' => __('Planteles'), 'pageSlug' => 'planteles'])
+@extends('layouts.app', ['page' => __('Semestre'), 'pageSlug' => 'Semestre'])
 @section('content')
 <div class="row col-12 center-block" style="left: 430px;">
-  <a class="navbar-brand " href="#">Planteles</a>
+  <a class="navbar-brand " href="#">Semestre</a>
 </div>
 <div class="row">
         <div class="row" style="
         margin-left: 0px;">
             <div class="col-8">
-                <h4 class="card-title">{{ __('Planteles') }}</h4>
+                <h4 class="card-title">{{ __('Semestre') }}</h4>
             </div>
 
         </div>
@@ -87,10 +87,10 @@
 
 </div>
 
-@include('Admin.Planteles.agregarModal')
+@include('Admin.Semestre.agregarModal')
 
-@include('Admin.Planteles.editarModal')
+@include('Admin.Semestre.editarModal')
 
-@include('Admin.Planteles.verModal')
+@include('Admin.Semestre.verModal')
 
 @endsection
