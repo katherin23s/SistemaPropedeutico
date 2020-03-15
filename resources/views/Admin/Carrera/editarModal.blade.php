@@ -3,7 +3,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 align="center" class="modal-title">Actualizar Carrera</h5>
+              <h5 align="center" class="modal-title">Editar Carrera</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

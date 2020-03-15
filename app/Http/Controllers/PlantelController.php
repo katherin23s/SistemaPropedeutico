@@ -96,10 +96,9 @@ class PlantelController extends Controller
      */
     public function eliminar(Request $request)
     {
-        //solo para editar / actualizar
         $id = $request->plantel_id;
-        $departamento = Plantel::find($id);
-        $departamento->delete();
+        $plantel = Plantel::findOrFail($id);
+        $plantel->delete();
 
         return PlantelResource::collection(Plantel::paginate(10));
     }
@@ -107,7 +106,7 @@ class PlantelController extends Controller
     public function encontrar(Request $request)
     {
         $id = $request->plantel_id;
-        $plantel = Plantel::find($id);
+        $plantel = Plantel::findOrFail($id);
 
         return json_encode($plantel);
     }
