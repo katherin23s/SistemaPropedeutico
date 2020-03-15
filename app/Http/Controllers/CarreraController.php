@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Carrera;
+use App\Http\Requests\ActualizarCarreraRequest;
 use App\Http\Requests\CarreraRequest;
 use App\Http\Resources\CarreraResource;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        //el index donde se muestra la lista de todos los planteles
+        //el index donde se muestra la lista de todos los carreraes
         $carreras = Carrera::paginate(15);
 
         return view('Admin.Carrera.index', compact('carreras'));
@@ -41,9 +42,9 @@ class CarreraController extends Controller
     public function store(CarreraRequest $request)
     {
         $datosvalidados = $request->validated();
-        $carrera = Carrera::create($datosvalidados);
+        Carrera::create($datosvalidados);
 
-        return json_encode($carrera);
+        return CarreraResource::collection(Carrera::paginate(10));
     }
 
     /**
@@ -69,8 +70,16 @@ class CarreraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Carrera $carrera)
+    public function update(ActualizarCarreraRequest $request)
     {
+        $datos_validados = $request->validated();
+        $id = $request->carrera_id;
+        $carrera = Carrera::findOrFail($id);
+
+        $carrera->fill($datos_validados);
+        $carrera->save();
+
+        return CarreraResource::collection(Carrera::paginate(10));
     }
 
     /**
@@ -84,14 +93,14 @@ class CarreraController extends Controller
 
     public function encontrar(Request $request)
     {
-        $carrera = Carrera::find($request->carrera_id);
+        $carrera = Carrera::findOrFail($request->carrera_id);
 
         return new CarreraResource($carrera);
     }
 
     public function eliminar(Request $request)
     {
-        $carrera = Carrera::find($request->carrera_id);
+        $carrera = Carrera::findOrFail($request->carrera_id);
 
         $carrera->delete();
 

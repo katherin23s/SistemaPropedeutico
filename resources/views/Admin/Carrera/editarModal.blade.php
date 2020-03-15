@@ -23,7 +23,7 @@
                 </div>
                 {{--  numero-serie  --}}
                 <div class="form-group {{ $errors->has('numero-serie') ? ' has-danger' : '' }}">
-                    <label for="actualizar-numero_serie">Numero de serie</label>
+                    <label for="actualizar-numero_serie">Número de serie</label>
                     <input type="text" name="numero-serie" id="actualizar-numero_serie" class="form-control {{ $errors->has('numero-serie') ? ' is-invalid' : '' }}" 
                     value="{{ old('numero-serie') }}" required>
                     @if ($errors->has('numero-serie'))
@@ -51,18 +51,20 @@
         obtenerCarrera(id); 
         $('#ModalEditar').modal('show')
     }
-    function actualizarDepartamento(id, nombre){
+    function actualizarCarrera(id, nombre, numero_serie){
         $.ajax({
-            url: "{{route('planteles.update')}}",
+            url: "{{route('carreras.update')}}",
             dataType: 'json',
             type:"patch",
             data: {
                 "_token": "{{ csrf_token() }}",
-                'departamento_id': id,
-                "nombre": nombre
+                'carrera_id': id,
+                "nombre": nombre,
+                "numero_serie": numero_serie
             },
-        success: function (response) {                       
-            $('#Modalactualizar').modal('hide')
+        success: function (response) {   
+            mostrarCarreras(response.data);                      
+            $('#ModalEditar').modal('hide')
             }
         });
             return false;
@@ -82,20 +84,19 @@
                 "_token": "{{ csrf_token() }}",
                 "carrera_id" : id
             },
-        success: function (response) {   
-            console.log(response);       
+        success: function (response) {       
                 mostrarDatosEnModal(response.data.id, response.data.nombre,response.data.numero_serie, response.data.departamento_id);            
             }
         });
             return false;
     }
     $(document).ready(function(){
-        $("#actualizar-departamento").click(function(){
+        $("#actualizar-carrera").click(function(){
           //obtener valores de los inputs
-            var departamento_id = document.getElementById("update-departamento-id").value;
-            var nombre = document.getElementById("update-nombre").value;
-            var plantel_id = 1; //por ahora que asi quede jeje
-            actualizarDepartamento(departamento_id, nombre);
+            var carrera_id = document.getElementById("actualizar-carrera_id").value;
+            var nombre = document.getElementById("actualizar-nombre").value;
+            var numero_serie= document.getElementById("actualizar-numero_serie").value;
+            actualizarCarrera(carrera_id, nombre, numero_serie);
             
         }); 
     });

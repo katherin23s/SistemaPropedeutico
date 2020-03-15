@@ -26,8 +26,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
     //Route::resource('departamento', 'UserController@departamento', ['except' => ['show']]);
-    Route::resource('planteles', 'PlantelController', ['except' => ['update', 'destroy']]);
-    Route::resource('departamentos', 'DepartamentoController', ['except' => ['update', 'destroy']]);
+    /* Route::resource('planteles', 'PlantelController', ['except' => ['update', 'destroy']]);
+    Route::resource('departamentos', 'DepartamentoController', ['except' => ['update', 'destroy']]); */
     // Route::resource('carreras', 'CarreraController', ['except' => ['update', 'destroy']]);
     Route::resource('semestres', 'SemestreController');
     Route::resource('grupos', 'GrupoController');
@@ -59,11 +59,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/gruposDocente', 'UserController@gruposDocente')->name('GruposDocente');
     // Route::get('/Carreras', 'UserController@carreras')->name('Carreras');
 
+    Route::get('planteles', 'PlantelController@index')->name('planteles.index');
+    Route::post('planteles/agregar', 'PlantelController@store')->name('planteles.store');
     Route::post('planteles/encontrar', 'PlantelController@encontrar')->name('planteles.encontrar');
     Route::patch('planteles/actualizar', 'PlantelController@update')->name('planteles.update');
     Route::post('planteles/departamentos', 'PlantelController@obtenerDepartamentos')->name('planteles.departamentos');
     Route::delete('planteles/eliminar', 'PlantelController@eliminar')->name('planteles.eliminar');
 
+    Route::get('departamentos', 'DepartamentoController@index')->name('departamentos.index');
+    Route::post('departamentos/agregar', 'DepartamentoController@store')->name('departamentos.store');
     Route::post('departamentos/encontrar', 'DepartamentoController@encontrar')->name('departamento.encontrar');
     Route::post('departamentos/busqueda', 'DepartamentoController@busqueda')->name('departamentos.busqueda');
     Route::patch('departamentos/actualizar', 'DepartamentoController@update')->name('departamentos.update');
@@ -72,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('carreras', 'CarreraController@index')->name('carreras.index');
     Route::post('carreras/agregar', 'CarreraController@store')->name('carreras.store');
     Route::post('carreras/encontrar', 'CarreraController@encontrar')->name('carreras.encontrar');
-    Route::post('carreras/actualizar', 'CarreraController@update')->name('carreras.update');
+    Route::patch('carreras/actualizar', 'CarreraController@update')->name('carreras.update');
     Route::delete('carreras/eliminar', 'CarreraController@eliminar')->name('carreras.eliminar');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);

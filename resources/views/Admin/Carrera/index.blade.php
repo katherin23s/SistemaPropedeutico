@@ -36,7 +36,7 @@
                     @include('alerts.success')               
                     <div class="row">    
                         <div class="col-lg-12">
-                            <table class="table">
+                            <table class="table" id="tabla-carreras">
                                 <thead class=" text-primary" >
                                     <th scope="col">{{ __('ID') }}</th>
                                     <th scope="col">{{ __('Nombre') }}</th>
@@ -84,6 +84,24 @@
 @endsection
 @push('js')
 <script>
+    function mostrarCarreras(data){
+        var carreras = data;
+        var output = "";
+
+        for(var i = 0; i < carreras.length; i++){
+            output += "<tr value="+carreras[i].id+">"
+                + "<td>" + carreras[i].id + "</td>"
+                + "<td>" + carreras[i].nombre + "</td>" 
+                + "<td>" + carreras[i].numero_serie + "</td>" 
+                + "<td>" + carreras[i].departamento + "</td>" 
+                +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + carreras[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
+                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalcarreras(\'' + carreras[i].id + '\',\'' + carreras[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + carreras[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
+                +  "</tr>";
+        }
+
+        $('#tabla-carreras tbody').html(output);
+    }
     function Eliminar(id){
         var r = confirm("Confirme la eliminación:");
         if(r){
@@ -95,7 +113,8 @@
                     "_token": "{{ csrf_token() }}",
                     "carrera_id" : id
                 },
-            success: function (data) {          
+            success: function (response) {   
+                mostrarCarreras(response.data);       
                               
                 }
             });

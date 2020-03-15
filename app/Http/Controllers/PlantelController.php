@@ -77,9 +77,9 @@ class PlantelController extends Controller
     public function update(ActualizarPlantelRequest $request)
     {
         //solo para editar / actualizar
+        $datos_validados = $request->validated();
         $id = $request->plantel_id;
         $plantel = Plantel::findOrFail($id);
-        $datos_validados = $request->validated();
 
         $plantel->fill($datos_validados);
         $plantel->save();
