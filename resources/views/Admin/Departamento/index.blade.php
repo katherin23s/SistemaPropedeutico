@@ -1,7 +1,7 @@
 @extends('layouts.app', ['page' => __('departamento Management'), 'pageSlug' => 'departamentos'])
 @section('content')
 <div class="row col-12 center-block" style="left: 430px;">
-<a class="navbar-brand " href="#" style="color: #28CA00;">DEPARTAMENTO</a>
+<a class="navbar-brand " href="#" style="color: #0800ff;">DEPARTAMENTO</a>
 </div>
     <div class="row">
             <div class="row" style="
