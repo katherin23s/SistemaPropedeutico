@@ -102,6 +102,8 @@
             var correo = document.getElementById("update-correo").value;
             var telefono = document.getElementById("update-telefono").value;
 
+            console.log("valores obetnidos");
+
             actualizarPlantel(plantel_id, nombre, direccion, correo, telefono);
             
         }); 
