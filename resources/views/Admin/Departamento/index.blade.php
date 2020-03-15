@@ -33,7 +33,7 @@
             @include('alerts.success')            
             <div class="row">    
                 <div class="col-lg-12">
-                    <table class="table">
+                    <table class="table" id="tabla-departamentos">
                         <thead>
                             <th scope="col">{{ __('ID') }}</th>
                             <th scope="col">{{ __('Nombre') }}</th>
@@ -87,21 +87,22 @@
 @endsection
 @push('js')
 <script>
-    function mostrarCarreras(data){
-        var carreras = data;
+    function mostrarDepartamentos(data){
+        var departamentos = data;
         var output = "";
 
-        for(var i = 0; i < carreras.length; i++){
-            output += "<tr value="+carreras[i].id+">"
-                + "<td>" + carreras[i].id + "</td>"
-                + "<td>" + carreras[i].nombre + "</td>" 
-                + "<td>" + carreras[i].numero_serie + "</td>" 
-                + "<td>" + carreras[i].comments+ "</td>"
-                +'<td class="text-right"><button class="btn btn-icon btn-outline-warning btn-sm"  type="button" onClick="showEditCallModal(\'' + carreras[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-edit"></i></span></button>' 
-                +  "</td></tr>";
+        for(var i = 0; i < departamentos.length; i++){
+            output += "<tr value="+departamentos[i].id+">"
+                + "<td>" + departamentos[i].id + "</td>"
+                + "<td>" + departamentos[i].nombre + "</td>" 
+                + "<td>" + departamentos[i].plantel + "</td>" 
+                +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + departamentos[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
+                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalDepartamentos(\'' + departamentos[i].id + '\',\'' + departamentos[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + departamentos[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
+                +  "</tr>";
         }
 
-        $('#carreras_table tbody').html(output);
+        $('#tabla-departamentos tbody').html(output);
     }
  
     function Eliminar(id){
@@ -115,8 +116,8 @@
                     "_token": "{{ csrf_token() }}",
                     "departamento_id" : id
                 },
-            success: function (data) {          
-                              
+            success: function (response) {     
+                mostrarDepartamentos(response.data);                             
                 }
             });
             return false;

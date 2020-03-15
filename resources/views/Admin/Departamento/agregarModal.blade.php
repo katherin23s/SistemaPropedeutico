@@ -17,7 +17,7 @@
             </div>
             <div class="form-group col-md-6 col-auto">
                 <label for="plantel_id" class="col-auto col-form-label">{{ __('Plantel') }}</label>
-                <select class="custom-select form-control name="plantel_id" id="add-plantel_id">
+                <select class="custom-select form-control" name="plantel_id" id="add-plantel_id">
                 @foreach($planteles as $plantel)
                     <option value="{{ $plantel->id }}">{{ $plantel->nombre }}</option>
                 @endforeach
@@ -43,7 +43,8 @@
                 'plantel_id': plantel_id,
                 "nombre": nombre,
             },
-        success: function () {                       
+        success: function (response) {       
+            mostrarDepartamentos(response.data); 
             $('#AgregarModal').modal('hide')
             }
         });
