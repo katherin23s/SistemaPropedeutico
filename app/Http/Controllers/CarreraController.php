@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Carrera;
 use App\Http\Requests\CarreraRequest;
+use App\Http\Resources\CarreraResource;
 use Illuminate\Http\Request;
 
 class CarreraController extends Controller
@@ -17,6 +18,7 @@ class CarreraController extends Controller
     {
         //el index donde se muestra la lista de todos los planteles
         $carreras = Carrera::paginate(15);
+
         return view('Admin.Carrera.index', compact('carreras'));
     }
 
@@ -27,13 +29,13 @@ class CarreraController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CarreraRequest $request)
@@ -47,45 +49,43 @@ class CarreraController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
     public function show(Carrera $carrera)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
     public function edit(Carrera $carrera)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Carrera $carrera)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
     public function destroy(Carrera $carrera)
     {
-        //
+    }
+
+    public function encontrar(Request $request)
+    {
+        $carrera = Carrera::find($request->carrera_id);
+
+        return new CarreraResource($carrera);
     }
 }
