@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Departamento;
+use App\Http\Requests\ActualizarPlantelRequest;
 use App\Plantel;
 use Illuminate\Http\Request;
 
@@ -73,12 +74,13 @@ class PlantelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(ActualizarPlantelRequest $request)
     {
         //solo para editar / actualizar
-        $id = $request->id;
-        $plantel = Plantel::find($id);
-        $datos_validados = $this->validar();
+        $id = $request->plantel_id;
+        $plantel = Plantel::findOrFail($id);
+        $datos_validados = $request->validated();
+
         $plantel->fill($datos_validados);
         $plantel->save();
 
@@ -91,9 +93,14 @@ class PlantelController extends Controller
      * @param  \App\Plantel  $plantel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Plantel $plantel)
+    public function eliminar(Request $request)
     {
-        //
+        //solo para editar / actualizar
+        $id = $request->plantel_id;
+        $departamento = Plantel::find($id);
+        $departamento->delete();
+
+        return json_encode('OK', 200);
     }
 
     public function encontrar(Request $request)

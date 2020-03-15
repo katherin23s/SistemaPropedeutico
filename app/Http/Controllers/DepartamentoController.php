@@ -93,10 +93,20 @@ class DepartamentoController extends Controller
     {
         //solo para editar / actualizar
         $id = $request->departamento_id;
+        $nombre = $request->nombre;
         $departamento = Departamento::find($id);
-        $datos_validados = $this->validar();
-        $departamento->fill($datos_validados);
+        $departamento->nombre = $nombre;
         $departamento->save();
+
+        return json_encode('OK', 200);
+    }
+
+    public function eliminar(Request $request)
+    {
+        //solo para editar / actualizar
+        $id = $request->departamento_id;
+        $departamento = Departamento::find($id);
+        $departamento->delete();
 
         return json_encode('OK', 200);
     }
@@ -107,11 +117,6 @@ class DepartamentoController extends Controller
      * @param  \App\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Departamento $departamento)
-    {
-        //
-    }
-
     public function busqueda(Request $request)
     {
         $search = $request->search;

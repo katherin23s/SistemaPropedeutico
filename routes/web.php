@@ -26,8 +26,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
     //Route::resource('departamento', 'UserController@departamento', ['except' => ['show']]);
-    Route::resource('planteles', 'PlantelController', ['except' => ['update']]);
-    Route::resource('departamentos', 'DepartamentoController');
+    Route::resource('planteles', 'PlantelController', ['except' => ['update', 'destroy']]);
+    Route::resource('departamentos', 'DepartamentoController', ['except' => ['update', 'destroy']]);
     Route::resource('carreras', 'CarreraController');
     Route::resource('semestres', 'SemestreController');
     Route::resource('grupos', 'GrupoController');
@@ -62,9 +62,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('planteles/encontrar', 'PlantelController@encontrar')->name('planteles.encontrar');
     Route::patch('planteles/actualizar', 'PlantelController@update')->name('planteles.update');
     Route::post('planteles/departamentos', 'PlantelController@obtenerDepartamentos')->name('planteles.departamentos');
+    Route::delete('planteles/eliminar', 'PlantelController@eliminar')->name('planteles.eliminar');
 
     Route::post('departamentos/encontrar', 'DepartamentoController@encontrar')->name('departamento.encontrar');
-    Route::post('departamentos/actualizar', 'DepartamentoController@update')->name('planteles.update');
+    Route::patch('departamentos/actualizar', 'DepartamentoController@update')->name('departamentos.update');
+    Route::delete('departamentos/eliminar', 'DepartamentoController@eliminar')->name('departamentos.eliminar');
 
     Route::post('carreras/encontrar', 'CarreraController@encontrar')->name('carreras.encontrar');
     Route::post('carreras/actualizar', 'CarreraController@update')->name('departamento.update');

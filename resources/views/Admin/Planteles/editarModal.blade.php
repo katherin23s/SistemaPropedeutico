@@ -56,7 +56,7 @@
             type:"patch",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "id": id,
+                "plantel_id": id,
                 "nombre": nombre,
                 "direccion": direccion,
                 "correo": correo,
@@ -96,7 +96,7 @@
     $(document).ready(function(){
         $("#actualizar-plantel").click(function(){
           //obtener valores de los inputs
-            var plantel_id = document.getElementById("update-plantel_id").value;
+            var plantel_id = Number(document.getElementById("update-plantel_id").value);
             var nombre = document.getElementById("update-nombre").value;
             var direccion = document.getElementById("update-direccion").value;
             var correo = document.getElementById("update-correo").value;

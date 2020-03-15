@@ -66,7 +66,7 @@
                                           <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalDepartamentos({{ $departamento->id }}, '{{ $departamento->nombre }}')">
                                                   <i class="fa fa-eye "></i>
                                           </button>
-                                          <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="mostrarModalEditar({{ $departamento->id }})">
+                                          <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $departamento->id }})">
                                                   <i class="fas fa-edit"></i>
                                           </button>
                                         </td>
@@ -93,3 +93,23 @@
 @include('Admin.Departamento.editarModal')
 @include('Admin.Departamento.verModal')
 @endsection
+@push('js')
+<script>
+    function Eliminar(id){
+        $.ajax({
+            url: "{{route('departamentos.eliminar')}}",
+            dataType: 'json',
+            type:"delete",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "departamento_id" : id
+            },
+        success: function (data) {          
+                          
+            }
+        });
+            return false;
+    }
+</script>
+
+@endpush

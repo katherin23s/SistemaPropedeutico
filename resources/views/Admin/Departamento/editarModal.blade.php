@@ -35,7 +35,7 @@
     }
     function actualizarDepartamento(id, nombre){
         $.ajax({
-            url: "{{route('planteles.update')}}",
+            url: "{{route('departamentos.update')}}",
             dataType: 'json',
             type:"patch",
             data: {
