@@ -61,7 +61,7 @@
                                                 <i class="fa fa-eye "></i>
                                         </button>
                                         <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $departamento->id }})">
-                                                <i class="fas fa-edit"></i>
+                                                <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -87,20 +87,44 @@
 @endsection
 @push('js')
 <script>
+    function mostrarCarreras(data){
+        var carreras = data;
+        var output = "";
+
+        for(var i = 0; i < carreras.length; i++){
+            output += "<tr value="+carreras[i].id+">"
+                + "<td>" + carreras[i].id + "</td>"
+                + "<td>" + carreras[i].nombre + "</td>" 
+                + "<td>" + carreras[i].numero_serie + "</td>" 
+                + "<td>" + carreras[i].comments+ "</td>"
+                +'<td class="text-right"><button class="btn btn-icon btn-outline-warning btn-sm"  type="button" onClick="showEditCallModal(\'' + carreras[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-edit"></i></span></button>' 
+                +  "</td></tr>";
+        }
+
+        $('#carreras_table tbody').html(output);
+    }
+ 
     function Eliminar(id){
-        $.ajax({
-            url: "{{route('departamentos.eliminar')}}",
-            dataType: 'json',
-            type:"delete",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "departamento_id" : id
-            },
-        success: function (data) {          
-                          
-            }
-        });
+        var r = confirm("Confirme la eliminación:");
+        if(r){
+            $.ajax({
+                url: "{{route('departamentos.eliminar')}}",
+                dataType: 'json',
+                type:"delete",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "departamento_id" : id
+                },
+            success: function (data) {          
+                              
+                }
+            });
             return false;
+        }
+        else {
+
+        }
+        
     }
 </script>
 

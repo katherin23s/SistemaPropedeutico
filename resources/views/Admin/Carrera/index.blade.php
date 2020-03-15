@@ -58,8 +58,8 @@
                                               <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalcarreras({{ $carrera->id }}, '{{ $carrera->nombre }}')">
                                                       <i class="fa fa-eye "></i>
                                               </button>
-                                              <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="mostrarModalEditar({{ $carrera->id }})">
-                                                      <i class="fas fa-edit"></i>
+                                              <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $carrera->id }})">
+                                                      <i class="fa fa-trash"></i>
                                               </button>
                                             </td>
                                         </tr>
@@ -82,3 +82,27 @@
 @include('Admin.Carrera.editarModal')
 @include('Admin.Carrera.verModal')
 @endsection
+@push('js')
+<script>
+    function Eliminar(id){
+        var r = confirm("Confirme la eliminación:");
+        if(r){
+            $.ajax({
+                url: "{{route('carreras.eliminar')}}",
+                dataType: 'json',
+                type:"delete",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "carrera_id" : id
+                },
+            success: function (data) {          
+                              
+                }
+            });
+            return false;
+        }
+        
+    }
+</script>
+
+@endpush

@@ -88,4 +88,13 @@ class CarreraController extends Controller
 
         return new CarreraResource($carrera);
     }
+
+    public function eliminar(Request $request)
+    {
+        $carrera = Carrera::find($request->carrera_id);
+
+        $carrera->delete();
+
+        return CarreraResource::collection(Carrera::paginate(10));
+    }
 }

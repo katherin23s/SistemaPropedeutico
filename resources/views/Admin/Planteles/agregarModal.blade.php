@@ -62,7 +62,8 @@
                 "correo": correo,
                 "telefono": telefono,
             },
-        success: function () {                       
+        success: function (response) {
+            mostrarPlanteles(response.data);                         
             $('#AgregarModal').modal('hide')
             }
         });

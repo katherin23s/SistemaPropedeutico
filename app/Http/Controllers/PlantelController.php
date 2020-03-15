@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Departamento;
 use App\Http\Requests\ActualizarPlantelRequest;
+use App\Http\Resources\PlantelResource;
 use App\Plantel;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,7 @@ class PlantelController extends Controller
     {
         //el index donde se muestra la lista de todos los planteles
         $planteles = Plantel::paginate(15);
+
         return view('Admin.Planteles.index', compact('planteles'));
     }
 
@@ -34,7 +36,6 @@ class PlantelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,13 +44,12 @@ class PlantelController extends Controller
         $datos_validados = $this->validar();
         Plantel::create($datos_validados);
 
-        return response()->json(['status' => 'xd'], 200);
+        return PlantelResource::collection(Plantel::paginate(10));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Plantel  $plantel
      * @return \Illuminate\Http\Response
      */
     public function show(Plantel $plantel)
@@ -60,7 +60,6 @@ class PlantelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Plantel  $plantel
      * @return \Illuminate\Http\Response
      */
     public function edit(Plantel $plantel)
@@ -71,7 +70,8 @@ class PlantelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(ActualizarPlantelRequest $request)
@@ -84,13 +84,14 @@ class PlantelController extends Controller
         $plantel->fill($datos_validados);
         $plantel->save();
 
-        return response('OK', 200);
+        return PlantelResource::collection(Plantel::paginate(10));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Plantel  $plantel
+     * @param \App\Plantel $plantel
+     *
      * @return \Illuminate\Http\Response
      */
     public function eliminar(Request $request)
@@ -100,13 +101,14 @@ class PlantelController extends Controller
         $departamento = Plantel::find($id);
         $departamento->delete();
 
-        return json_encode('OK', 200);
+        return PlantelResource::collection(Plantel::paginate(10));
     }
 
     public function encontrar(Request $request)
     {
         $id = $request->plantel_id;
         $plantel = Plantel::find($id);
+
         return json_encode($plantel);
     }
 
