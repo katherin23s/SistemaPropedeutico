@@ -67,8 +67,8 @@
             </div>
     </div>
 @include('Admin.Grupos.agregarModal')
-{{-- @include('Admin.Grupos.editarModal')
-@include('Admin.Grupos.verModal') --}}
+@include('Admin.Grupos.editarModal')
+@include('Admin.Grupos.verModal')
 @endsection
 @push('js')
 <script>
@@ -79,11 +79,13 @@
         for(var i = 0; i < grupos.length; i++){
             output += "<tr value="+grupos[i].id+">"
                 + "<td>" + grupos[i].id + "</td>"
-                + "<td>" + grupos[i].nombre + "</td>" 
-                + "<td>" + grupos[i].numero_serie + "</td>" 
-                + "<td>" + grupos[i].departamento + "</td>" 
+                + "<td>" + grupos[i].semestre + "</td>" 
+                + "<td>" + grupos[i].carrera + "</td>" 
+                + "<td>" + grupos[i].numero + "</td>" 
+                + "<td>" + grupos[i].hora_inicio + "</td>" 
+                + "<td>" + grupos[i].hora_final + "</td>" 
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + grupos[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
-                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalgrupos(\'' + grupos[i].id + '\',\'' + grupos[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalgrupos(\'' + grupos[i].id + '\',\'' + grupos[i].numero + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
                 +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + grupos[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
                 +  "</tr>";
         }

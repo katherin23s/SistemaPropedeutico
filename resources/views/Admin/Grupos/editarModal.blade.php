@@ -9,46 +9,35 @@
               </button>
             </div>
             <div class="modal-body" style="padding-bottom: 60px; padding-top: 30px;">
-              <form>
-                <div class="row form-group col-auto col-12" style="height: 25px;">
-                    <label for="recipient-name" class="col-form-label col-6 "style="padding-left: 0px ">ID</label>
-                    <label for="recipient-name" class="col-form-label col-6" style="padding-left: 25px">Grupo</label>
-                  </div>
-                  <div class="row col-12">
-                    <input type="text" class=" col-6 form-control" id="recipient-name">
-                    <input type="text" class="col-6 form-control" id="recipient-name" style="left: 25px;">
-                  </div>
-              
-  
-                  <div class="row col-12">
-                    <select class="col-6 custom-select" id="inputGroupSelect04" style="color:#525f7f; top: 30px; ">
-                      <option selected>Unidad</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                    <select class="col-6 custom-select" id="inputGroupSelect04" style="color:#525f7f; top: 30px; left: 25px;">
-                      <option selected>Departamento</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-  
-  
-                  <div class="row col-12" style="top: 30px;">
-                      <select class="col-12 custom-select" id="inputGroupSelect04" style="color:#525f7f; top: 30px;">
-                        <option selected>Carrera</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                      
-                    </div>
-              </form>
+              <input type="hidden" id="actualizar-grupo_id">
+              {{--  numero  --}}
+              <div class="form-group {{ $errors->has('numero') ? ' has-danger' : '' }}">
+                <label for="input-numero">Número de serie</label>
+                <input type="text" name="numero" id="actualizar-numero" class="form-control {{ $errors->has('numero') ? ' is-invalid' : '' }}" 
+                value="{{ old('numero') }}" required>
+                @if ($errors->has('numero'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('numero') }}</strong>
+                    </span>
+                @endif
+              </div>  
+              {{-- Hora inicio --}}
+              <div class="form-group row">
+                <label for="actualizar-hora_inicio" class="col-3 col-form-label">Hora de inicio</label>
+                <div class="col-3">
+                  <input class="form-control" type="time" min="06:00" max="23:00" value="07:00:00" id="actualizar-hora_inicio" required>
+                </div>
+              </div>  
+              {{-- Hora final --}}
+              <div class="form-group row">
+                <label for="actualizar-hora_final" class="col-3 col-form-label">Hora final</label>
+                <div class="col-3">
+                  <input class="form-control" type="time" min="06:00" max="23:00" value="13:00:00" id="actualizar-hora_final" required>
+                </div>
+              </div> 
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary " style="left: 355px; top: 10px;" >Guardar</button>
+              <button id="actualizar-grupo" type="button" class="btn btn-primary ">Guardar</button>
             </div>
           </div>
         </div>
@@ -58,64 +47,71 @@
 
 <script>
     function mostrarModalEditar(id){
-        obtenerPlantel(id); 
+        obtenerGrupo(id); 
         $('#ModalEditar').modal('show')
     }
-    function actualizarPlantel(id, nombre, direccion, correo, 
-    telefono){
+    function actualizarGrupo(id, numero, hora_inicio_fecha, hora_final_fecha){
         $.ajax({
-            url: "{{route('planteles.update')}}",
+            url: "{{route('grupos.update')}}",
             dataType: 'json',
             type:"patch",
             data: {
                 "_token": "{{ csrf_token() }}",
                 "id": id,
-                "nombre": nombre,
-                "direccion": direccion,
-                "correo": correo,
-                "telefono": telefono,
+                "numero": numero,
+                "hora_inicio": hora_inicio_fecha,
+                "hora_final": hora_final_fecha
             },
-        success: function (response) {                       
+        success: function (response) {   
+          mostrarGrupos(response.data);                     
             $('#ModalEditar').modal('hide')
             }
         });
             return false;
     }
-    function mostrarDatosEnModal(plantel_id, nombre, direccion, correo, 
-        telefono){
-            document.getElementById("update-plantel_id").value = plantel_id;
-            document.getElementById("update-nombre").value = nombre;
-            document.getElementById("update-direccion").value = direccion;
-            document.getElementById("update-correo").value = correo;
-            document.getElementById("update-telefono").value = telefono;
+    function mostrarDatosEnModal(grupo_id, numero, hora_inicio_fecha, hora_final_fecha){
+            document.getElementById("actualizar-grupo_id").value = grupo_id;
+            document.getElementById("actualizar-numero").value = numero;
+            document.getElementById("actualizar-hora_inicio").value = hora_inicio_fecha;
+            document.getElementById("actualizar-hora_final").value = hora_final_fecha;
             
     }
-    function obtenerPlantel(id){
+    function obtenerGrupo(id){
         $.ajax({
-            url: "{{route('planteles.encontrar')}}",
+            url: "{{route('grupos.encontrar')}}",
             dataType: 'json',
             type:"post",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "plantel_id" : id
+                "grupo_id" : id
             },
-        success: function (data) {          
-                mostrarDatosEnModal(data.id, data.nombre, 
-                data.direccion, data.correo, data.telefono);            
+        success: function (response) {          
+              mostrarDatosEnModal(response.data.id, response.data.numero, 
+              response.data.hora_inicio_fecha, response.data.hora_final_fecha);            
             }
         });
-            return false;
+        return false;
     }
     $(document).ready(function(){
-        $("#actualizar-plantel").click(function(){
+        $("#actualizar-grupo").click(function(){
           //obtener valores de los inputs
-            var plantel_id = document.getElementById("update-plantel_id").value;
-            var nombre = document.getElementById("update-nombre").value;
-            var direccion = document.getElementById("update-direccion").value;
-            var correo = document.getElementById("update-correo").value;
-            var telefono = document.getElementById("update-telefono").value;
+          var hora_inicio = document.getElementById("input-hora_inicio").value;
+          var hora_final= document.getElementById("input-hora_final").value;
 
-            actualizarPlantel(plantel_id, nombre, direccion, correo, telefono);
+          var hora_inicio_fecha = tiempoAFecha(hora_inicio);
+          var hora_final_fecha = tiempoAFecha(hora_final);
+          if(hora_final_fecha.getTime() > hora_inicio_fecha.getTime()){
+
+              var grupo_id = document.getElementById("actualizar-grupo_id").value;
+              var numero = document.getElementById("actualizar-numero").value;
+              hora_inicio_fecha = hora_inicio_fecha.toISOString().split('T')[0]+' '+hora_inicio_fecha.toTimeString().split(' ')[0];
+              hora_final_fecha = hora_final_fecha.toISOString().split('T')[0]+' '+hora_final_fecha.toTimeString().split(' ')[0];
+
+              actualizarGrupo(grupo_id, numero, hora_inicio_fecha, hora_inicio_fecha);
+          }
+          else {
+            alert("Horario invalido.");
+          }
             
         }); 
     });

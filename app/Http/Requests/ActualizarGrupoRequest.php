@@ -24,7 +24,12 @@ class ActualizarGrupoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'grupo_id' => 'required',
+            'numero' => 'required|max:255|min:1',
+            'hora_inicio' => 'required',
+            'hora_final' => 'required',
+            'semestre_id' => 'required|integer',
+            'carrera_id' => 'required|integer',
         ];
     }
 }

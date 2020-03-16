@@ -23,14 +23,14 @@
                 <option value='0'>{{ __('Seleccionar carrera') }}</option>
             </select>
           </div>
-          {{--  numero-serie  --}}
-          <div class="form-group {{ $errors->has('numero-serie') ? ' has-danger' : '' }}">
-              <label for="input-numero_serie">Número de serie</label>
-              <input type="text" name="numero-serie" id="input-numero_serie" class="form-control {{ $errors->has('numero-serie') ? ' is-invalid' : '' }}" 
-              value="{{ old('numero-serie') }}" required>
-              @if ($errors->has('numero-serie'))
+          {{--  numero  --}}
+          <div class="form-group {{ $errors->has('numero') ? ' has-danger' : '' }}">
+              <label for="input-numero">Número</label>
+              <input type="text" name="numero" id="input-numero" class="form-control {{ $errors->has('numero') ? ' is-invalid' : '' }}" 
+              value="{{ old('numero') }}" required>
+              @if ($errors->has('numero'))
                   <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('numero-serie') }}</strong>
+                      <strong>{{ $errors->first('numero') }}</strong>
                   </span>
               @endif
           </div>  
@@ -38,19 +38,19 @@
           <div class="form-group row">
             <label for="input-hora_inicio" class="col-3 col-form-label">Hora de inicio</label>
             <div class="col-3">
-              <input class="form-control" type="time" value="07:00:00" id="input-hora_inicio">
+              <input class="form-control" type="time" min="06:00" max="23:00" value="07:00:00" id="input-hora_inicio" required>
             </div>
           </div>  
           {{-- Hora final --}}
           <div class="form-group row">
             <label for="input-hora_final" class="col-3 col-form-label">Hora final</label>
             <div class="col-3">
-              <input class="form-control" type="time" value="13:00:00" id="input-hora_final">
+              <input class="form-control" type="time" min="06:00" max="23:00" value="13:00:00" id="input-hora_final" required>
             </div>
           </div>       
         </div>
         <div class="modal-footer">
-            <button type="button" id="agregar_carrera" class="btn btn-primary " style="left: 355px;" >Guardar</button>
+            <button type="button" id="agregar_grupo" class="btn btn-primary ">Guardar</button>
         </div>
         </div>
     </div>
@@ -61,35 +61,62 @@
 <script>
     // CSRF Token
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    function agregarCarrera(nombre, numero_serie, departamento_id){
+    function agregarGrupo(numero, hora_inicio_fecha, hora_final_fecha, 
+    carrera_id, semestre_id){
         $.ajax({
-            url: "{{route('carreras.store')}}",
+            url: "{{route('grupos.store')}}",
             dataType: 'json',
             type:"post",
             data: {
                 "_token": "{{ csrf_token() }}",
-                'departamento_id': departamento_id,
-                "nombre": nombre,
-                "numero_serie": numero_serie
+                'carrera_id': carrera_id,
+                'semestre_id': semestre_id,
+                "numero": numero,
+                "hora_inicio": hora_inicio_fecha,
+                "hora_final": hora_final_fecha
             },
         success: function (response) {  
-            mostrarCarreras(response.data);                       
+            mostrarGrupos(response.data);                       
             $('#AgregarModal').modal('hide')
             }
         });
             return false;
     }
 
+    const timeNow = new Date();
+
+    function tiempoAFecha(time){
+      var timeParts = time.split(":");
+      var inputTime = new Date(timeNow.getYear() , timeNow.getMonth() , timeNow.getDate() , parseInt(timeParts[0]), parseInt(timeParts[1]), 0, 0);
+      return inputTime;
+    }
+
 
     $(document).ready(function(){
 
-        $("#agregar_carrera").click(function(){
+        $("#agregar_grupo").click(function(){
           //obtener valores de los inputs
-            var nombre = document.getElementById("input-nombre").value;
-            var numero_serie = document.getElementById("input-numero_serie").value;
-            var departamento_id = document.getElementById("departamento_id").value;
+          var hora_inicio = document.getElementById("input-hora_inicio").value;
+          var hora_final= document.getElementById("input-hora_final").value;
 
-            agregarCarrera(nombre, numero_serie, departamento_id);
+          var hora_inicio_fecha = tiempoAFecha(hora_inicio);
+          var hora_final_fecha = tiempoAFecha(hora_final);
+
+          if(hora_final_fecha.getTime() > hora_inicio_fecha.getTime()){
+            hora_inicio_fecha = hora_inicio_fecha.toISOString().split('T')[0]+' '+hora_inicio_fecha.toTimeString().split(' ')[0];
+            hora_final_fecha = hora_final_fecha.toISOString().split('T')[0]+' '+hora_final_fecha.toTimeString().split(' ')[0];
+            var numero = document.getElementById("input-numero").value;
+            var carrera_id = document.getElementById("carrera_id").value;
+            var semestre_id = document.getElementById("semestre_id").value;
+
+            agregarGrupo(numero, hora_inicio_fecha, hora_final_fecha, 
+              carrera_id, semestre_id);
+          }
+          else {
+            alert("Horario invalido.");
+          }
+
+          
             
         }); 
         $("#semestre_id").select2({
