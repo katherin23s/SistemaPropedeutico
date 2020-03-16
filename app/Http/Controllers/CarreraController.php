@@ -24,15 +24,6 @@ class CarreraController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -45,24 +36,6 @@ class CarreraController extends Controller
         Carrera::create($datosvalidados);
 
         return CarreraResource::collection(Carrera::paginate(10));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Carrera $carrera)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Carrera $carrera)
-    {
     }
 
     /**

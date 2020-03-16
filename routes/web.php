@@ -83,6 +83,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('grupos/actualizar', 'GrupoController@update')->name('grupos.update');
     Route::delete('grupos/eliminar', 'GrupoController@eliminar')->name('grupos.eliminar');
 
+    Route::get('materias', 'MateriaController@index')->name('materias.index');
+    Route::post('materias/agregar', 'MateriaController@store')->name('materias.store');
+    Route::post('materias/encontrar', 'MateriaController@encontrar')->name('materias.encontrar');
+    Route::patch('materias/actualizar', 'MateriaController@update')->name('materias.update');
+    Route::delete('materias/eliminar', 'MateriaController@eliminar')->name('materias.eliminar');
+    Route::post('materias/busqueda', 'MateriaController@busqueda')->name('materias.busqueda');
+
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
