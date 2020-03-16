@@ -20,7 +20,7 @@ class MateriaController extends Controller
         //el index donde se muestra la lista de todos los materiaes
         $materias = Materia::paginate(15);
 
-        return view('Admin.materia.index', compact('materias'));
+        return view('Admin.Materias.index', compact('materias'));
     }
 
     /**

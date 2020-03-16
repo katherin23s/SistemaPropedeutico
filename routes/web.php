@@ -32,7 +32,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('inscripcionDocentes', 'DocenteController');
 
     Route::get('/plantel', 'UserController@plantel')->name('Plantel');
-    Route::get('/materia', 'UserController@materia')->name('Materia');
     Route::get('/grupo', 'UserController@grupo')->name('Grupo');
     Route::get('/gestionAlumnos', 'UserController@gestionAlumnos')->name('GestionAlumnos');
     Route::get('/gestionDocentes', 'UserController@gestionDocentes')->name('GestionDocentes');
