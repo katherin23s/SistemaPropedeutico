@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('departamentos', 'DepartamentoController', ['except' => ['update', 'destroy']]); */
     // Route::resource('carreras', 'CarreraController', ['except' => ['update', 'destroy']]);
     // Route::resource('semestres', 'SemestreController');
-    Route::resource('grupos', 'GrupoController');
+    // Route::resource('grupos', 'GrupoController');
     Route::resource('materias', 'MateriaController');
     Route::resource('alumnos', 'AlumnoController');
     Route::resource('docentes', 'DocenteController');
@@ -78,12 +78,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('carreras/encontrar', 'CarreraController@encontrar')->name('carreras.encontrar');
     Route::patch('carreras/actualizar', 'CarreraController@update')->name('carreras.update');
     Route::delete('carreras/eliminar', 'CarreraController@eliminar')->name('carreras.eliminar');
+    Route::post('carreras/busqueda', 'CarreraController@busqueda')->name('carreras.busqueda');
 
     Route::get('semestres', 'SemestreController@index')->name('semestres.index');
     Route::post('semestres/agregar', 'SemestreController@store')->name('semestres.store');
     Route::post('semestres/encontrar', 'SemestreController@encontrar')->name('semestres.encontrar');
     Route::patch('semestres/actualizar', 'SemestreController@update')->name('semestres.update');
     Route::delete('semestres/eliminar', 'SemestreController@eliminar')->name('semestres.eliminar');
+    Route::post('semestres/busqueda', 'SemestreController@busqueda')->name('semestres.busqueda');
+
+    Route::get('grupos', 'GrupoController@index')->name('grupos.index');
+    Route::post('grupos/agregar', 'GrupoController@store')->name('grupos.store');
+    Route::post('grupos/encontrar', 'GrupoController@encontrar')->name('grupos.encontrar');
+    Route::patch('grupos/actualizar', 'GrupoController@update')->name('grupos.update');
+    Route::delete('grupos/eliminar', 'GrupoController@eliminar')->name('grupos.eliminar');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

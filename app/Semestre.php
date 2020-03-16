@@ -23,8 +23,13 @@ class Semestre extends Model
     //Es para que Carbon tambien trata a las siguientes propiedades como fechas
     protected $dates = [
         'fecha_inicio',
-        'fecha_final'
+        'fecha_final',
     ];
+
+    public function periodo()
+    {
+        return $this->fecha_inicio->format('F').' - '.$this->fecha_final->format('F').' '.$this->fecha_final->year;
+    }
 
     //Un semestre tiene muchos grupos
     public function grupos()

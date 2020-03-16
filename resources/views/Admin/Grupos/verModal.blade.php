@@ -19,15 +19,7 @@
                         <th scope="col">{{ __('Departamento') }}</th>
                     </thead>
                     <tbody style="background: whitesmoke; border: Gray 2px solid;">
-                        @foreach ($users as $user)
-                            <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>
-                                    <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
-                                </td>           
-                            </td>
-                            </tr>
-                        @endforeach
+                        
                     </tbody>
                 </table>
               </form>

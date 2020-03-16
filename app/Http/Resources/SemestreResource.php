@@ -18,6 +18,7 @@ class SemestreResource extends JsonResource
         return [
             'id' => $this->id,
             'numero' => $this->numero,
+            'periodo' => $this->periodo(),
             'fecha_inicio' => $this->fecha_inicio->format('Y-m-d'),
             'fecha_final' => $this->fecha_final->format('Y-m-d'),
         ];

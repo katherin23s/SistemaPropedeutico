@@ -106,4 +106,21 @@ class CarreraController extends Controller
 
         return CarreraResource::collection(Carrera::paginate(10));
     }
+
+    public function busqueda(Request $request)
+    {
+        $search = $request->search;
+        $carreras = Carrera::query()
+            ->whereLike(['nombre', 'numero_serie'], $search)
+            ->get()->take(4);
+        $response = [];
+        foreach ($carreras as $carrera) {
+            $response[] = [
+                'id' => $carrera->id,
+                'text' => $carrera->nombre.' '.$carrera->numero_serie,
+            ];
+        }
+        echo json_encode($response);
+        exit;
+    }
 }

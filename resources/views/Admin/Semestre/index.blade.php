@@ -39,7 +39,8 @@
                 <table class="table" id="tabla-semestres" >
                     <thead>
                         <th scope="col">{{ __('ID') }}</th>
-                        <th scope="col">{{ __('Numero') }}</th>
+                        <th scope="col">{{ __('Número') }}</th>
+                        <th scope="col">{{ __('Periodo') }}</th>
                         <th scope="col">{{ __('Fecha de inicio') }}</th>
                         <th scope="col">{{ __('Fecha final') }}</th>
                         <th class="text-right" scope="col">{{ __('Acciones') }}</th>
@@ -49,6 +50,7 @@
                             <tr>
                                 <td>{{ $semestre->id }}</td>
                                 <td>{{ $semestre->numero }}</td>
+                                <td>{{ $semestre->periodo() }}</td>
                                 <td>{{ $semestre->fecha_inicio->toDateString()}}</td>
                                 <td>{{ $semestre->fecha_final->toDateString() }}</td>
                                                                
@@ -104,6 +106,7 @@
             output += "<tr value="+semestres[i].id+">"
                 + "<td>" + semestres[i].id + "</td>"
                 + "<td>" + semestres[i].numero + "</td>" 
+                + "<td>" + semestres[i].periodo + "</td>" 
                 + "<td>" + semestres[i].fecha_inicio + "</td>" 
                 + "<td>" + semestres[i].fecha_final + "</td>"
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + semestres[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 

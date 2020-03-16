@@ -99,6 +99,23 @@ class SemestreController extends Controller
         return new SemestreResource($semestre);
     }
 
+    public function busqueda(Request $request)
+    {
+        $search = $request->search;
+        $semestres = Semestre::query()
+            ->whereLike(['numero'], $search)
+            ->get()->take(4);
+        $response = [];
+        foreach ($semestres as $semestre) {
+            $response[] = [
+                'id' => $semestre->id,
+                'text' => $semestre->numero.' '.$semestre->periodo(),
+            ];
+        }
+        echo json_encode($response);
+        exit;
+    }
+
     /**
      * Remove the specified resource from storage.
      *
