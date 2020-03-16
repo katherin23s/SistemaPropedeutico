@@ -8,8 +8,6 @@ class CreateMateriasTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -18,20 +16,15 @@ class CreateMateriasTable extends Migration
             $table->string('nombre');
             $table->string('clave');
             $table->integer('creditos');
-
-            //Materia pertenece a... carrera o departamentooooko, le ponemos carrera?
-            //ya veoo , hummm se supone que los grupos ya tienen asignado los paquetes de las materias
-            //pero desconozco si todas las carreras de propedeutico llevan las mismas materias xD
-            //okok, vamos a dejarlas libres por ahora jejeookkkayy xD
-
+            $table->integer('unidades');
+            $table->unsignedBigInteger('carrera_id');
+            $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

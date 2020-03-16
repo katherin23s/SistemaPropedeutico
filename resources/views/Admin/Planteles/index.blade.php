@@ -36,7 +36,7 @@
 
                 @include('alerts.success')
                 
-                <table class="table" id="" >
+                <table class="table" id="tabla-planteles" >
                     <thead>
                         <th scope="col">{{ __('ID') }}</th>
                         <th scope="col">{{ __('Nombre') }}</th>
@@ -70,7 +70,7 @@
                                           <i class="fa fa-eye "></i>
                                   </button>
                                   <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $plantel->id }})">
-                                          <i class="fas fa-edit"></i>
+                                          <i class="fa fa-trash"></i>
                                   </button>
                                 </td>
                             </tr>
@@ -99,21 +99,42 @@
 
 @push('js')
 <script>
+    function mostrarPlanteles(data){
+        var planteles = data;
+        var output = "";
+
+        for(var i = 0; i < planteles.length; i++){
+            output += "<tr value="+planteles[i].id+">"
+                + "<td>" + planteles[i].id + "</td>"
+                + "<td>" + planteles[i].nombre + "</td>" 
+                + "<td>" + planteles[i].direccion + "</td>" 
+                + "<td>" + planteles[i].telefono+ "</td>"
+                +"<td><a href="+"mailto:"+planteles[i].correo+">" + planteles[i].correo+ "</a></td>"
+                +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + planteles[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
+                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalDepartamentos(\'' + planteles[i].id + '\',\'' + planteles[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + planteles[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
+                +  "</tr>";
+        }
+
+        $('#tabla-planteles tbody').html(output);
+    }
     function Eliminar(id){
-        $.ajax({
-            url: "{{route('planteles.eliminar')}}",
-            dataType: 'json',
-            type:"delete",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                "plantel_id" : id
-            },
-        success: function (data) {          
-                          
-            }
-        });
+        var r = confirm("Confirme la eliminación:");
+        if(r){
+            $.ajax({
+                url: "{{route('planteles.eliminar')}}",
+                dataType: 'json',
+                type:"delete",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "plantel_id" : id
+                },
+            success: function (response) {          
+                mostrarPlanteles(response.data);            
+                }
+            });
             return false;
     }
+    }
 </script>
-
 @endpush

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ActualizarSemestreRequest;
 use App\Http\Requests\SemestreRequest;
+use App\Http\Resources\SemestreResource;
 use App\Semestre;
 use Illuminate\Http\Request;
 
@@ -15,8 +17,9 @@ class SemestreController extends Controller
      */
     public function index()
     {
-        //el index donde se muestra la lista de todos los planteles
+        //el index donde se muestra la lista de todos los semestrees
         $semestres = Semestre::paginate(15);
+
         return view('Admin.Semestre.index', compact('semestres'));
     }
 
@@ -27,65 +30,98 @@ class SemestreController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(SemestreRequest $request)
     {
         $datosvalidados = $request->validated();
-        $semestre = Semestre::create($datosvalidados);
+        Semestre::create($datosvalidados);
 
-        return json_encode($semestre);
+        return SemestreResource::collection(Semestre::paginate(10));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Semestre  $semestre
      * @return \Illuminate\Http\Response
      */
     public function show(Semestre $semestre)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Semestre  $semestre
      * @return \Illuminate\Http\Response
      */
     public function edit(Semestre $semestre)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Semestre  $semestre
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Semestre $semestre)
+    public function update(ActualizarSemestreRequest $request)
     {
-        //
+        $datos_validados = $request->validated();
+        $id = $request->semestre_id;
+        $semestre = Semestre::findOrFail($id);
+
+        $semestre->fill($datos_validados);
+        $semestre->save();
+
+        return SemestreResource::collection(Semestre::paginate(10));
+    }
+
+    public function eliminar(Request $request)
+    {
+        $id = $request->semestre_id;
+        $semestre = Semestre::findOrFail($id);
+        $semestre->delete();
+
+        return SemestreResource::collection(Semestre::paginate(10));
+    }
+
+    public function encontrar(Request $request)
+    {
+        $id = $request->semestre_id;
+        $semestre = Semestre::findOrFail($id);
+
+        return new SemestreResource($semestre);
+    }
+
+    public function busqueda(Request $request)
+    {
+        $search = $request->search;
+        $semestres = Semestre::query()
+            ->whereLike(['numero'], $search)
+            ->get()->take(4);
+        $response = [];
+        foreach ($semestres as $semestre) {
+            $response[] = [
+                'id' => $semestre->id,
+                'text' => $semestre->numero.' '.$semestre->periodo(),
+            ];
+        }
+        echo json_encode($response);
+        exit;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Semestre  $semestre
      * @return \Illuminate\Http\Response
      */
     public function destroy(Semestre $semestre)
     {
-        //
     }
 }

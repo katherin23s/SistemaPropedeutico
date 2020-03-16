@@ -10,16 +10,20 @@ class Materia extends Model
         'nombre',
         'clave',
         'creditos',
-    ];
-    public static $rules = [
-        'nombre' => 'required|max:255|min:5',
-        'clave' => 'required|max:255|min:1',
-        'creditos' => 'required|integer',
+        'unidades',
+        'carrera_id',
     ];
     protected $casts = [
         'id' => 'integer',
         'nombre' => 'string',
         'clave' => 'string',
         'creditos' => 'integer',
+        'unidades' => 'integer',
+        'carrera_id' => 'integer',
     ];
+
+    public function carrera()
+    {
+        return $this->belongsTo('App\Carrera');
+    }
 }

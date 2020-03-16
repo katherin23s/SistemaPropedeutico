@@ -11,18 +11,14 @@
         <div class="modal-body" style="padding-bottom: 60px; padding-top: 30px;">
               {{--  numero  --}}
             <div class="form-group {{ $errors->has('numero') ? ' has-danger' : '' }}">
-                <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                    </div>
-                    <input type="text" name="numero" id="input-numero" class="form-control {{ $errors->has('numero') ? ' is-invalid' : '' }}" 
-                    value="{{ old('numero') }}" required>
-                    @if ($errors->has('numero'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('numero') }}</strong>
-                        </span>
-                    @endif
-                </div>
+                <label for="input-numero">Número</label>
+                <input type="text" name="numero" id="input-numero" class="form-control {{ $errors->has('numero') ? ' is-invalid' : '' }}" 
+                value="{{ old('numero') }}" required>
+                @if ($errors->has('numero'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('numero') }}</strong>
+                    </span>
+                @endif
             </div>
               {{--  fecha_inicio  --}}
             <div class="form-group {{ $errors->has('fecha_inicio') ? ' has-danger' : '' }}">
@@ -76,7 +72,8 @@
                 "fecha_inicio": fecha_inicio,
                 "fecha_final": fecha_final
             },
-        success: function () {                       
+        success: function (response) {   
+            mostrarSemestres(response.data);                     
             $('#AgregarModal').modal('hide')
             }
         });

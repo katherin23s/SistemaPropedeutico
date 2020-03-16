@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Carrera;
+use App\Http\Requests\ActualizarCarreraRequest;
 use App\Http\Requests\CarreraRequest;
+use App\Http\Resources\CarreraResource;
 use Illuminate\Http\Request;
 
 class CarreraController extends Controller
@@ -15,77 +17,83 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        //el index donde se muestra la lista de todos los planteles
+        //el index donde se muestra la lista de todos los carreraes
         $carreras = Carrera::paginate(15);
-        return view('Admin.Carrera.index', compact('carreras'));
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('Admin.Carrera.index', compact('carreras'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CarreraRequest $request)
     {
         $datosvalidados = $request->validated();
-        $carrera = Carrera::create($datosvalidados);
+        Carrera::create($datosvalidados);
 
-        return json_encode($carrera);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Carrera  $carrera
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Carrera $carrera)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Carrera  $carrera
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Carrera $carrera)
-    {
-        //
+        return CarreraResource::collection(Carrera::paginate(10));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Carrera $carrera)
+    public function update(ActualizarCarreraRequest $request)
     {
-        //
+        $datos_validados = $request->validated();
+        $id = $request->carrera_id;
+        $carrera = Carrera::findOrFail($id);
+
+        $carrera->fill($datos_validados);
+        $carrera->save();
+
+        return CarreraResource::collection(Carrera::paginate(10));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Carrera  $carrera
      * @return \Illuminate\Http\Response
      */
     public function destroy(Carrera $carrera)
     {
-        //
+    }
+
+    public function encontrar(Request $request)
+    {
+        $carrera = Carrera::findOrFail($request->carrera_id);
+
+        return new CarreraResource($carrera);
+    }
+
+    public function eliminar(Request $request)
+    {
+        $carrera = Carrera::findOrFail($request->carrera_id);
+
+        $carrera->delete();
+
+        return CarreraResource::collection(Carrera::paginate(10));
+    }
+
+    public function busqueda(Request $request)
+    {
+        $search = $request->search;
+        $carreras = Carrera::query()
+            ->whereLike(['nombre', 'numero_serie'], $search)
+            ->get()->take(4);
+        $response = [];
+        foreach ($carreras as $carrera) {
+            $response[] = [
+                'id' => $carrera->id,
+                'text' => $carrera->nombre.' '.$carrera->numero_serie,
+            ];
+        }
+        echo json_encode($response);
+        exit;
     }
 }

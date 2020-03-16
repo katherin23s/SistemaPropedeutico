@@ -1,4 +1,4 @@
-<!-- MODAL AGREGAR PLANTEL -->
+<!-- MODAL AGREGAR MATERIA -->
 <div class="modal fade" id="AgregarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -9,7 +9,7 @@
             </button>
         </div>
         <div class="modal-body" style="padding-bottom: 60px; padding-top: 30px;">
-             {{--  nombre  --}}
+            {{-- nombre --}}
             <div class="form-group {{ $errors->has('nombre') ? ' has-danger' : '' }}">               
                 <label for="input-nombre">Nombre</label>
                 <input type="text" name="nombre" id="input-nombre" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : '' }}" 
@@ -20,20 +20,42 @@
                     </span>
                 @endif
             </div>
-              {{--  numero-serie  --}}
-            <div class="form-group {{ $errors->has('numero-serie') ? ' has-danger' : '' }}">
-                <label for="input-numero_serie">Número de serie</label>
-                <input type="text" name="numero-serie" id="input-numero_serie" class="form-control {{ $errors->has('numero-serie') ? ' is-invalid' : '' }}" 
-                value="{{ old('numero-serie') }}" required>
-                @if ($errors->has('numero-serie'))
+            {{--  clave  --}}
+            <div class="form-group {{ $errors->has('clave') ? ' has-danger' : '' }}">
+                <label for="input-clave">Clave</label>
+                <input type="text" name="clave" id="input-clave" class="form-control {{ $errors->has('clave') ? ' is-invalid' : '' }}" 
+                value="{{ old('clave') }}" required>
+                @if ($errors->has('clave'))
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('numero-serie') }}</strong>
+                        <strong>{{ $errors->first('clave') }}</strong>
+                    </span>
+                @endif
+            </div>
+            {{--  creditos  --}}
+            <div class="form-group {{ $errors->has('creditos') ? ' has-danger' : '' }}">
+                <label for="input-creditos">Creditos</label>
+                <input type="number" min="1" max="8" name="creditos" id="input-creditos" class="form-control {{ $errors->has('creditos') ? ' is-invalid' : '' }}" 
+                value="{{ old('creditos') }}" required>
+                @if ($errors->has('creditos'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('creditos') }}</strong>
+                    </span>
+                @endif
+            </div>
+            {{--  unidades  --}}
+            <div class="form-group {{ $errors->has('unidades') ? ' has-danger' : '' }}">
+                <label for="input-unidades">Unidades</label>
+                <input type="number" min="1" max="8" name="unidades" id="input-unidades" class="form-control {{ $errors->has('unidades') ? ' is-invalid' : '' }}" 
+                value="{{ old('unidades') }}" required>
+                @if ($errors->has('unidades'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('unidades') }}</strong>
                     </span>
                 @endif
             </div>
             <div class="col-auto">
-                <select id='departamento_id' class="custom-select form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id"> 
-                    <option value='0'>{{ __('Seleccionar departamento') }}</option>
+                <select id='carrera_id' class="custom-select form-control{{ $errors->has('carrera_id') ? ' is-invalid' : '' }}" name="carrera_id"> 
+                    <option value='0'>{{ __('Seleccionar carrera') }}</option>
                 </select>
             </div>
         </div>
@@ -49,19 +71,21 @@
 <script>
     // CSRF Token
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    function agregarCarrera(nombre, numero_serie, departamento_id){
+    function agregarMateria(nombre, clave, carrera_id, creditos, unidades){
         $.ajax({
-            url: "{{route('carreras.store')}}",
+            url: "{{route('materias.store')}}",
             dataType: 'json',
             type:"post",
             data: {
                 "_token": "{{ csrf_token() }}",
-                'departamento_id': departamento_id,
+                'carrera_id': carrera_id,
                 "nombre": nombre,
-                "numero_serie": numero_serie
+                "clave": clave,
+                "creditos": creditos,
+                "unidades": unidades
             },
         success: function (response) {  
-            mostrarCarreras(response.data);                       
+            mostrarMaterias(response.data);                       
             $('#AgregarModal').modal('hide')
             }
         });
@@ -74,16 +98,18 @@
         $("#agregar_carrera").click(function(){
           //obtener valores de los inputs
             var nombre = document.getElementById("input-nombre").value;
-            var numero_serie = document.getElementById("input-numero_serie").value;
-            var departamento_id = document.getElementById("departamento_id").value;
+            var clave = document.getElementById("input-clave").value;
+            var carrera_id = document.getElementById("carrera_id").value;
+            var creditos = document.getElementById("input-creditos").value;
+            var unidades = document.getElementById("input-unidades").value;
 
-            agregarCarrera(nombre, numero_serie, departamento_id);
+            agregarMateria(nombre, clave, carrera_id, creditos, unidades);
             
         }); 
-          $("#departamento_id").select2({
+          $("#carrera_id").select2({
             minimumInputLength: 3,
             ajax: { 
-            url: "{{route('departamentos.busqueda')}}",
+            url: "{{route('carreras.busqueda')}}",
             type:'post',
             dataType: 'json',
             delay: 250,

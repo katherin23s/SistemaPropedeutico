@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Departamento;
+use App\Http\Resources\DepartamentoResource;
 use App\Plantel;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,7 @@ class DepartamentoController extends Controller
         //el index donde se muestra la lista de todos los planteles
         $departamentos = Departamento::paginate(15);
         $planteles = Plantel::get();
+
         return view('Admin.Departamento.index', compact('departamentos', 'planteles'));
     }
 
@@ -28,13 +30,13 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        //
     }
 
     public function encontrar(Request $request)
     {
         $id = $request->departamento_id;
         $departamento = Departamento::find($id);
+
         return json_encode($departamento);
     }
 
@@ -49,7 +51,6 @@ class DepartamentoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -57,36 +58,32 @@ class DepartamentoController extends Controller
         $datos_validados = $this->validar();
         Departamento::create($datos_validados);
 
-        return response()->json(['status' => 'xd'], 200);
+        return DepartamentoResource::collection(Departamento::paginate(10));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
     public function show(Departamento $departamento)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
     public function edit(Departamento $departamento)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Departamento  $departamento
+     * @param \App\Departamento $departamento
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -98,7 +95,7 @@ class DepartamentoController extends Controller
         $departamento->nombre = $nombre;
         $departamento->save();
 
-        return json_encode('OK', 200);
+        return DepartamentoResource::collection(Departamento::paginate(10));
     }
 
     public function eliminar(Request $request)
@@ -108,13 +105,14 @@ class DepartamentoController extends Controller
         $departamento = Departamento::find($id);
         $departamento->delete();
 
-        return json_encode('OK', 200);
+        return DepartamentoResource::collection(Departamento::paginate(10));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Departamento  $departamento
+     * @param \App\Departamento $departamento
+     *
      * @return \Illuminate\Http\Response
      */
     public function busqueda(Request $request)

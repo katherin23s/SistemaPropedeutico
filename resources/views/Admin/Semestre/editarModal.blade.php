@@ -3,40 +3,59 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5  align="center" class="modal-title" id="exampleModalLabel">EDITAR PLANTEL</h5>
+              <h5  align="center" class="modal-title" id="exampleModalLabel">Editar Semestre</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body" style="padding-bottom: 60px; padding-top: 30px;">
-              <form>
-                <div class="row form-group col-auto col-12" style="height: 25px;">
-                  <label for="recipient-name" class="col-form-label col-6 "style="padding-left: 0px ">No.Plantel</label>
-                  <label for="recipient-name" class="col-form-label col-6" style="padding-left: 25px">Nombre</label>
-                </div>
-                <div class="row col-12">
-                  <input type="text" class=" col-6 form-control" id="update-plantel_id" readonly>
-                  <input required type="text" class="col-6 form-control" id="update-nombre" style="left: 25px;">
-                </div>
-                <div class="row col-12">
-                  <label for="recipient-name" class="col-form-label "style="padding-left: 0px ">Direccion</label>
-                </div>
-                <div class="row col-12">
-                  <input required type="text" class="form-control" id="update-direccion">
-                </div>
-
-                <div class="row form-group col-auto col-12" style="height: 25px;">
-                  <label for="recipient-name" class="col-form-label col-6 "style="padding-left: 0px ">Telefono</label>
-                  <label for="recipient-name" class="col-form-label col-6" style="padding-left: 25px">Correo</label>
-                </div>
-                <div class="row col-12">
-                  <input type="text" class=" col-6 form-control" id="update-telefono">
-                  <input required type="text" class="col-6 form-control" id="update-correo" style="left: 25px;">
-                </div>               
-              </form>
+              <input type="hidden" id="actualizar-semestre_id">
+                {{--  numero  --}}
+              <div class="form-group {{ $errors->has('numero') ? ' has-danger' : '' }}">
+                  <div class="input-group input-group-alternative">
+                      <label for="actualizar-numero">Número</label>
+                      <input type="text" name="numero" id="actualizar-numero" class="form-control {{ $errors->has('numero') ? ' is-invalid' : '' }}" 
+                      value="{{ old('numero') }}" required>
+                      @if ($errors->has('numero'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('numero') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+              </div>
+                {{--  fecha_inicio  --}}
+              <div class="form-group {{ $errors->has('fecha_inicio') ? ' has-danger' : '' }}">
+                  <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                      </div>
+                      <input type="date" name="fecha_inicio" id="actualizar-fecha_inicio" class="form-control {{ $errors->has('fecha_inicio') ? ' is-invalid' : '' }}" 
+                      value="{{ old('fecha_inicio') }}" required>
+                      @if ($errors->has('fecha_inicio'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('fecha_inicio') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+              </div> 
+              {{--  fecha_final  --}}
+              <div class="form-group {{ $errors->has('fecha_final') ? ' has-danger' : '' }}">
+                  <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                      </div>
+                      <input type="date" name="fecha_final" id="actualizar-fecha_final" class="form-control {{ $errors->has('fecha_final') ? ' is-invalid' : '' }}" 
+                      value="{{ old('fecha_final') }}" required>
+                      @if ($errors->has('fecha_final'))
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $errors->first('fecha_final') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+              </div>  
             </div>
             <div class="modal-footer">
-              <button id="actualizar-plantel" type="button" class="btn btn-primary " style="left: 355px;" >Guardar</button>
+              <button id="actualizar-semestre" type="button" class="btn btn-primary " style="left: 355px;" >Guardar</button>
             </div>
           </div>
         </div>
@@ -45,64 +64,60 @@
 
 <script>
     function mostrarModalEditar(id){
-        obtenerPlantel(id); 
+        obtenerSemestre(id); 
         $('#ModalEditar').modal('show')
     }
-    function actualizarPlantel(id, nombre, direccion, correo, 
-    telefono){
+    function actualizarSemestre(id, numero, fecha_inicio, fecha_final){
         $.ajax({
-            url: "{{route('planteles.update')}}",
+            url: "{{route('semestres.update')}}",
             dataType: 'json',
             type:"patch",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "id": id,
-                "nombre": nombre,
-                "direccion": direccion,
-                "correo": correo,
-                "telefono": telefono,
+                "semestre_id": id,
+                "numero": numero,
+                "fecha_inicio": fecha_inicio,
+                "fecha_final": fecha_final,
             },
-        success: function (response) {                       
+        success: function (response) {   
+          mostrarSemestres(response.data);                     
             $('#ModalEditar').modal('hide')
             }
         });
             return false;
     }
-    function mostrarDatosEnModal(plantel_id, nombre, direccion, correo, 
-        telefono){
-            document.getElementById("update-plantel_id").value = plantel_id;
-            document.getElementById("update-nombre").value = nombre;
-            document.getElementById("update-direccion").value = direccion;
-            document.getElementById("update-correo").value = correo;
-            document.getElementById("update-telefono").value = telefono;
+    function mostrarDatosEnModal(semestre_id, numero, fecha_inicio, fecha_final){
+            document.getElementById("actualizar-semestre_id").value = semestre_id;
+            document.getElementById("actualizar-numero").value = numero;
+            document.getElementById("actualizar-fecha_inicio").value = fecha_inicio;
+            document.getElementById("actualizar-fecha_final").value = fecha_final;
             
     }
-    function obtenerPlantel(id){
+    function obtenerSemestre(id){
         $.ajax({
-            url: "{{route('planteles.encontrar')}}",
+            url: "{{route('semestres.encontrar')}}",
             dataType: 'json',
             type:"post",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "plantel_id" : id
+                "semestre_id" : id
             },
-        success: function (data) {          
-                mostrarDatosEnModal(data.id, data.nombre, 
-                data.direccion, data.correo, data.telefono);            
+        success: function (response) {          
+                mostrarDatosEnModal(response.data.id, response.data.numero, 
+                response.data.fecha_inicio, response.data.fecha_final);            
             }
         });
             return false;
     }
     $(document).ready(function(){
-        $("#actualizar-plantel").click(function(){
+        $("#actualizar-semestre").click(function(){
           //obtener valores de los inputs
-            var plantel_id = document.getElementById("update-plantel_id").value;
-            var nombre = document.getElementById("update-nombre").value;
-            var direccion = document.getElementById("update-direccion").value;
-            var correo = document.getElementById("update-correo").value;
-            var telefono = document.getElementById("update-telefono").value;
+            var semestre_id = document.getElementById("actualizar-semestre_id").value;
+            var numero = document.getElementById("actualizar-numero").value;
+            var fecha_inicio = document.getElementById("actualizar-fecha_inicio").value;
+            var fecha_final = document.getElementById("actualizar-fecha_final").value;
 
-            actualizarPlantel(plantel_id, nombre, direccion, correo, telefono);
+            actualizarSemestre(semestre_id, numero, fecha_inicio, fecha_final);
             
         }); 
     });

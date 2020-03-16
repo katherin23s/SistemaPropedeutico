@@ -60,7 +60,7 @@
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users') class="active " @endif>
-                            <a href="{{ route('Materia')  }}">
+                            <a href="{{ route('materias.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('Materias') }}</p>
                             </a>

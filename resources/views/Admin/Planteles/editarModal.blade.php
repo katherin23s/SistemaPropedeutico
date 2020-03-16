@@ -62,8 +62,9 @@
                 "correo": correo,
                 "telefono": telefono,
             },
-        success: function (response) {                       
-            $('#ModalEditar').modal('hide')
+        success: function (response) {   
+          mostrarPlanteles(response.data);                      
+          $('#ModalEditar').modal('hide')
             }
         });
             return false;
@@ -101,6 +102,8 @@
             var direccion = document.getElementById("update-direccion").value;
             var correo = document.getElementById("update-correo").value;
             var telefono = document.getElementById("update-telefono").value;
+
+            console.log("valores obetnidos");
 
             actualizarPlantel(plantel_id, nombre, direccion, correo, telefono);
             
