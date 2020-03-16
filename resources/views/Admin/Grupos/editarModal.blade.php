@@ -23,15 +23,15 @@
               </div>  
               {{-- Hora inicio --}}
               <div class="form-group row">
-                <label for="actualizar-hora_inicio" class="col-3 col-form-label">Hora de inicio</label>
-                <div class="col-3">
+                <label for="actualizar-hora_inicio" class="col-4 col-form-label">Hora de inicio</label>
+                <div class="col-6">
                   <input class="form-control" type="time" min="06:00" max="23:00" value="07:00:00" id="actualizar-hora_inicio" required>
                 </div>
               </div>  
               {{-- Hora final --}}
               <div class="form-group row">
-                <label for="actualizar-hora_final" class="col-3 col-form-label">Hora final</label>
-                <div class="col-3">
+                <label for="actualizar-hora_final" class="col-4 col-form-label">Hora final</label>
+                <div class="col-6">
                   <input class="form-control" type="time" min="06:00" max="23:00" value="13:00:00" id="actualizar-hora_final" required>
                 </div>
               </div> 
@@ -87,7 +87,7 @@
             },
         success: function (response) {          
               mostrarDatosEnModal(response.data.id, response.data.numero, 
-              response.data.hora_inicio_fecha, response.data.hora_final_fecha);            
+              response.data.hora_inicio, response.data.hora_final);            
             }
         });
         return false;

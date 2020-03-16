@@ -25,22 +25,12 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
-    //Route::resource('departamento', 'UserController@departamento', ['except' => ['show']]);
-    /* Route::resource('planteles', 'PlantelController', ['except' => ['update', 'destroy']]);
-    Route::resource('departamentos', 'DepartamentoController', ['except' => ['update', 'destroy']]); */
-    // Route::resource('carreras', 'CarreraController', ['except' => ['update', 'destroy']]);
-    // Route::resource('semestres', 'SemestreController');
-    // Route::resource('grupos', 'GrupoController');
-    Route::resource('materias', 'MateriaController');
     Route::resource('alumnos', 'AlumnoController');
     Route::resource('docentes', 'DocenteController');
 
     Route::resource('inscripcionAlumnos', 'AlumnosController');
     Route::resource('inscripcionDocentes', 'DocenteController');
 
-    //	Route::resource('informacionAlumno', 'AlumnosController');
-
-    //  Route::get('/departamento', 'UserController@departamento')->name('Departamento');
     Route::get('/plantel', 'UserController@plantel')->name('Plantel');
     Route::get('/materia', 'UserController@materia')->name('Materia');
     Route::get('/grupo', 'UserController@grupo')->name('Grupo');

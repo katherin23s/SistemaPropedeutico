@@ -39,8 +39,8 @@
                                             <td>{{ $grupo->semestre->numero }}</td>
                                             <td>{{ $grupo->carrera->nombre }}</td>
                                             <td>{{ $grupo->numero }}</td>
-                                            <td>{{ $grupo->hora_inicio->format('H:m')}}</td>
-                                            <td>{{ $grupo->hora_final->format('H:m') }}</td>
+                                            <td>{{ $grupo->hora_inicio->toTimeString()}}</td>
+                                            <td>{{ $grupo->hora_final->toTimeString() }}</td>
                                             <td class="td-actions text-right">
                                             <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $grupo->id }})">
                                                     <i class="fas fa-pencil-alt fa-2 "></i>
