@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IniciarSesionRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -30,11 +32,27 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('guest:docente')->except('logout');
+        $this->middleware('guest:alumno')->except('logout');
+    }
+
+    public function showdocenteLoginForm()
+    {
+        return view('auth.login', ['url' => 'docente']);
+    }
+
+    public function docenteLogin(IniciarSesionRequest $request)
+    {
+        $validados = $request->validate();
+
+        if (Auth::guard('docente')->attempt(['email' => $validados->email, 'password' => $validados->password], $request->get('remember'))) {
+            return redirect()->intended('/docente');
+        }
+
+        return back()->withInput($request->only('email', 'remember'));
     }
 }
