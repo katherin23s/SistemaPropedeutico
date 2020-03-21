@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -40,6 +39,18 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'docente' => [
+            'driver' => 'session',
+            'provider' => 'docentes',
+        ],
+        'alumno' => [
+            'driver' => 'session',
+            'provider' => 'alumnos',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -69,6 +80,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        'docentes' => [
+            'driver' => 'eloquent',
+            'model' => App\Docente::class,
+        ],
+        'alumnos' => [
+            'driver' => 'eloquent',
+            'model' => App\Alumno::class,
         ],
 
         // 'users' => [
@@ -113,5 +132,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];

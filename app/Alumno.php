@@ -2,22 +2,19 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Alumno extends Model
+class Alumno extends Authenticatable
 {
-    //Un alumno pertenece a una carrera
-    public function carrera()
-    {
-        return $this->belongsTo('App\Carrera');
-    }
-
+    use Notifiable;
     public $fillable = [
         'numero_alumno',
         'nombre',
         'direccion',
         'telefono',
-        'correo',
+        'email',
+        'password',
         'escuela_procedencia',
         'carrera_id',
     ];
@@ -26,9 +23,19 @@ class Alumno extends Model
         'nombre' => 'required|max:255|min:1',
         'direccion' => 'max:255',
         'telefono' => 'max:255',
-        'correo' => 'email',
+        'email' => 'email',
+        'password' => 'required|max:255|min:1',
         'escuela_procedencia' => 'max:255',
         'carrera_id' => 'required|integer',
+    ];
+    protected $guard = 'alumno';
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
     ];
     protected $casts = [
         'id' => 'integer',
@@ -36,8 +43,14 @@ class Alumno extends Model
         'nombre' => 'string',
         'direccion' => 'string',
         'telefono' => 'string',
-        'correo' => 'string',
+        'email' => 'string',
         'escuela_procedencia' => 'string',
         'carrera_id' => 'integer',
     ];
+
+    //Un alumno pertenece a una carrera
+    public function carrera()
+    {
+        return $this->belongsTo('App\Carrera');
+    }
 }

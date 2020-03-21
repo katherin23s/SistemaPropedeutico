@@ -2,22 +2,19 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Docente extends Model
+class Docente extends Authenticatable
 {
-    //Un docente pertenece a un departamento
-    public function departamento()
-    {
-        return $this->belongsTo('App\Departamento');
-    }
-
+    use Notifiable;
     public $fillable = [
         'numero_empleado',
         'nombre',
         'direccion',
         'telefono',
-        'correo',
+        'email',
+        'password',
         'departamento_id',
     ];
     public static $rules = [
@@ -25,8 +22,18 @@ class Docente extends Model
         'nombre' => 'required|max:255|min:1',
         'direccion' => 'max:255',
         'telefono' => 'max:255',
-        'correo' => 'email',
+        'email' => 'email',
+        'password' => 'required|max:255|min:1',
         'departamento_id' => 'required|integer',
+    ];
+    protected $guard = 'docente';
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
     ];
     protected $casts = [
         'id' => 'integer',
@@ -34,7 +41,13 @@ class Docente extends Model
         'nombre' => 'string',
         'direccion' => 'string',
         'telefono' => 'string',
-        'correo' => 'string',
+        'email' => 'string',
         'departamento_id' => 'integer',
     ];
+
+    //Un docente pertenece a un departamento
+    public function departamento()
+    {
+        return $this->belongsTo('App\Departamento');
+    }
 }
