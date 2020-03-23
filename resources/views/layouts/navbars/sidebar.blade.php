@@ -99,9 +99,9 @@
                 <div class="collapse show" id="laravel-examples6">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug ?? '' == 'profile') class="active " @endif>
-                            <a href="{{ route('GestionDocentes')  }}">
+                            <a href="{{ route('docentes.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
-                                <p>{{ _('Inscripcion') }}</p>
+                                <p>{{ _('Docentes') }}</p>
                             </a>
                         </li>
 

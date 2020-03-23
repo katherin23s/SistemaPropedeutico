@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Alumno;
+use App\Docente;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegistrarAlumnoRequest;
+use App\Http\Requests\RegistrarDocenteRequest;
+use App\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -32,18 +36,45 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:docente');
+        $this->middleware('guest:alumno');
+    }
+
+    public function formaDocente()
+    {
+        return view('auth.register', ['url' => 'docente']);
+    }
+
+    public function formaAlumno()
+    {
+        return view('auth.register', ['url' => 'alumno']);
+    }
+
+    public function registrarDocente(RegistrarDocenteRequest $request)
+    {
+        $validados = $request->validate();
+        $validados['password'] = Hash::make($validados['password']);
+        Docente::create($validados);
+
+        return redirect()->intended('login/docente');
+    }
+
+    public function registrarAlumno(RegistrarAlumnoRequest $request)
+    {
+        $validados = $request->validate();
+        $validados['password'] = Hash::make($validados['password']);
+        Alumno::create($validados);
+
+        return redirect()->intended('login/alumno');
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -59,7 +90,6 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
      * @return \App\User
      */
     protected function create(array $data)

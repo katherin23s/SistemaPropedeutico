@@ -11,13 +11,19 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param \Illuminate\Http\Request $request
+     * @param null|string              $guard
+     *
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        if ('docente' == $guard && Auth::guard($guard)->check()) {
+            return redirect('/docente');
+        }
+        if ('alumno' == $guard && Auth::guard($guard)->check()) {
+            return redirect('/alumno');
+        }
         if (Auth::guard($guard)->check()) {
             return redirect(RouteServiceProvider::HOME);
         }

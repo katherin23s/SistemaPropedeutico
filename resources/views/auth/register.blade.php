@@ -41,9 +41,13 @@
             <div class="card card-register card-white">
                 <div class="card-header">
                     <img class="card-img" src="{{ asset('white') }}/img/card-primary.png" alt="Card image">
-                    <h4 class="card-title">{{ _('Register') }}</h4>
+                    <h4 class="card-title">{{ _('Registro') }}</h4>
                 </div>
-                <form class="form" method="post" action="{{ route('register') }}">
+                @isset($url)
+                <form method="POST" action='{{ url("register/$url") }}' aria-label="{{ __('Register') }}">
+                @else
+                <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                @endisset
                     @csrf
 
                     <div class="card-body">

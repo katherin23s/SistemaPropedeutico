@@ -15,18 +15,26 @@
 
 Route::get('/dashboard', 'AdminController@admin')->name('Dashboard');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
 Auth::routes();
+
+Route::get('/login/docente', 'Auth\LoginController@inicioSesionDocente');
+Route::get('/login/alumno', 'Auth\LoginController@inicioSesionAlumno');
+Route::get('/register/docente', 'Auth\RegisterController@formaDocente');
+Route::get('/register/alumno', 'Auth\RegisterController@formaAlumno');
+
+Route::post('/login/docente', 'Auth\LoginController@docenteLogin');
+Route::post('/login/alumno', 'Auth\LoginController@alumnoLogin');
+
+Route::view('/docente', 'Docentes.horario');
+Route::view('/alumno', 'Alumnos.InformacionPerfil');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::resource('alumnos', 'AlumnoController');
-    Route::resource('docentes', 'DocenteController');
 
     Route::resource('inscripcionAlumnos', 'AlumnosController');
     Route::resource('inscripcionDocentes', 'DocenteController');
@@ -88,6 +96,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('materias/actualizar', 'MateriaController@update')->name('materias.update');
     Route::delete('materias/eliminar', 'MateriaController@eliminar')->name('materias.eliminar');
     Route::post('materias/busqueda', 'MateriaController@busqueda')->name('materias.busqueda');
+
+    Route::post('/register/docente', 'Auth\RegisterController@registrarDocente')->name('registrar.docente');
+    Route::post('/register/alumno', 'Auth\RegisterController@registrarAlumno')->name('registrar.alumno');
+
+    Route::get('docentes', 'DocenteController@index')->name('docentes.index');
+    Route::post('docentes/encontrar', 'DocenteController@encontrar')->name('docentes.encontrar');
+    Route::patch('docentes/actualizar', 'DocenteController@update')->name('docentes.update');
+    Route::delete('docentes/eliminar', 'DocenteController@eliminar')->name('docentes.eliminar');
+    Route::post('docentes/busqueda', 'DocenteController@busqueda')->name('docentes.busqueda');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

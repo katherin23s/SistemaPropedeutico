@@ -17,15 +17,6 @@ class Docente extends Authenticatable
         'password',
         'departamento_id',
     ];
-    public static $rules = [
-        'numero_empleado' => 'required|max:255|min:1',
-        'nombre' => 'required|max:255|min:1',
-        'direccion' => 'max:255',
-        'telefono' => 'max:255',
-        'email' => 'email',
-        'password' => 'required|max:255|min:1',
-        'departamento_id' => 'required|integer',
-    ];
     protected $guard = 'docente';
     /**
      * The attributes that should be hidden for arrays.

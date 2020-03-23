@@ -17,8 +17,8 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        //el index donde se muestra la lista de todos los carreraes
-        $carreras = Carrera::paginate(15);
+        //el index donde se muestra la lista de todos los carreras con su departamento
+        $carreras = Carrera::with('departamento')->paginate(15);
 
         return view('Admin.Carrera.index', compact('carreras'));
     }
