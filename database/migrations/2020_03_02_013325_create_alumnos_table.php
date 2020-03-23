@@ -23,8 +23,8 @@ class CreateAlumnosTable extends Migration
             $table->rememberToken();
             $table->string('escuela_procedencia')->nullable();
 
-            $table->unsignedBigInteger('carrera_id');
-            $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('cascade');
+            $table->unsignedBigInteger('grupo_id');
+            $table->foreign('grupo_id')->references('id')->on('grupos')->onDelete('cascade');
 
             $table->timestamps();
         });

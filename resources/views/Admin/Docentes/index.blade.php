@@ -39,7 +39,7 @@
                                   <td>{{ $docente->direccion }}</td>
                                   <td>{{ $docente->telefono }}</td>
                                   <td>
-                                    <a href="mailto:{{ $docente->correo }}">{{ $plantel->correo }}</a>
+                                    <a href="mailto:{{ $docente->correo }}">{{ $docente->correo }}</a>
                                   </td>
                                   <td>{{ $docente->departamento->nombre }}</td>
                                   <td class="td-actions text-right">
@@ -69,3 +69,47 @@
 </div>
 @endsection
 @include('Admin.Docentes.agregarModal')
+@push('js')
+<script>
+    function mostrarDocentes(data){
+        var docentes = data;
+        var output = "";
+
+        for(var i = 0; i < docentes.length; i++){
+            output += "<tr value="+docentes[i].id+">"
+                + "<td>" + docentes[i].numero_empleado + "</td>" 
+                + "<td>" + docentes[i].nombre + "</td>" 
+                + "<td>" + docentes[i].direccion + "</td>"
+                + "<td>" + docentes[i].telefono + "</td>"
+                + "<td>" + docentes[i].correo + "</td>"
+                + "<td>" + docentes[i].departamento + "</td>" 
+                +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + docentes[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
+                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModaldocentes(\'' + docentes[i].id + '\',\'' + docentes[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + docentes[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
+                +  "</tr>";
+        }
+
+        $('#tabla-docentes tbody').html(output);
+    }
+    function Eliminar(id){
+        var r = confirm("Confirme la eliminación:");
+        if(r){
+            $.ajax({
+                url: "{{route('docentes.eliminar')}}",
+                dataType: 'json',
+                type:"delete",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "docente_id" : id
+                },
+            success: function (response) {   
+                mostrarDocentes(response.data);       
+                              
+                }
+            });
+            return false;
+        }
+        
+    }
+</script>
+@endpush

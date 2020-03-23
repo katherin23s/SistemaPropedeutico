@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ActualizarDocenteRequest extends FormRequest
+class ActualizarAlumnoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class ActualizarDocenteRequest extends FormRequest
     {
         return [
             'id' => 'required',
-            'numero_empleado' => 'required|max:255|min:1',
+            'numero_alumno' => 'required|max:255|min:1',
             'nombre' => 'required|max:255|min:1',
             'direccion' => 'max:255',
             'telefono' => 'max:255',

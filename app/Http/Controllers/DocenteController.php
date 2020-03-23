@@ -44,7 +44,9 @@ class DocenteController extends Controller
         $docente->fill($datos_validados);
         $docente->save();
 
-        return DocenteResource::collection(Docente::paginate(10));
+        $docentes = Docente::with('departamento')->paginate(10);
+
+        return DocenteResource::collection($docentes);
     }
 
     public function encontrar(Request $request)
@@ -60,7 +62,9 @@ class DocenteController extends Controller
 
         $docente->delete();
 
-        return DocenteResource::collection(Docente::paginate(10));
+        $docentes = Docente::with('departamento')->paginate(10);
+
+        return DocenteResource::collection($docentes);
     }
 
     public function busqueda(Request $request)

@@ -23,15 +23,6 @@ class DepartamentoController extends Controller
         return view('Admin.Departamento.index', compact('departamentos', 'planteles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
     public function encontrar(Request $request)
     {
         $id = $request->departamento_id;
@@ -67,15 +58,6 @@ class DepartamentoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Departamento $departamento)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Departamento $departamento)
     {
     }
 

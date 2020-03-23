@@ -89,6 +89,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('grupos/encontrar', 'GrupoController@encontrar')->name('grupos.encontrar');
     Route::patch('grupos/actualizar', 'GrupoController@update')->name('grupos.update');
     Route::delete('grupos/eliminar', 'GrupoController@eliminar')->name('grupos.eliminar');
+    Route::post('grupos/busqueda', 'GrupoController@busqueda')->name('grupos.busqueda');
 
     Route::get('materias', 'MateriaController@index')->name('materias.index');
     Route::post('materias/agregar', 'MateriaController@store')->name('materias.store');
@@ -105,6 +106,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('docentes/actualizar', 'DocenteController@update')->name('docentes.update');
     Route::delete('docentes/eliminar', 'DocenteController@eliminar')->name('docentes.eliminar');
     Route::post('docentes/busqueda', 'DocenteController@busqueda')->name('docentes.busqueda');
+
+    Route::get('alumnos', 'AlumnoController@index')->name('alumnos.index');
+    Route::post('alumnos/encontrar', 'AlumnoController@encontrar')->name('alumnos.encontrar');
+    Route::patch('alumnos/actualizar', 'AlumnoController@update')->name('alumnos.update');
+    Route::delete('alumnos/eliminar', 'AlumnoController@eliminar')->name('alumnos.eliminar');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
