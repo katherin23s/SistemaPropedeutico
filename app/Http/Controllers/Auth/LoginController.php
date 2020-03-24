@@ -47,9 +47,9 @@ class LoginController extends Controller
 
     public function docenteLogin(IniciarSesionRequest $request)
     {
-        $validados = $request->validate();
+        $validados = $request->validated();
 
-        if (Auth::guard('docente')->attempt(['email' => $validados->email, 'password' => $validados->password], $request->get('remember'))) {
+        if (Auth::guard('docente')->attempt(['email' => $validados['email'], 'password' => $validados['password']], $request->get('remember'))) {
             return redirect()->intended('/docente');
         }
 

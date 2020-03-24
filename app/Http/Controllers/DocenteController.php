@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Docente;
 use App\Http\Requests\ActualizarDocenteRequest;
+use App\Http\Requests\RegistrarDocenteRequest;
 use App\Http\Resources\DocenteResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DocenteController extends Controller
 {
@@ -19,6 +21,17 @@ class DocenteController extends Controller
         $docentes = Docente::with('departamento')->paginate(10);
 
         return view('Admin.Docentes.index', compact('docentes'));
+    }
+
+    public function store(RegistrarDocenteRequest $request)
+    {
+        $validados = $request->validated();
+        $validados['password'] = Hash::make($validados['password']);
+        Docente::create($validados);
+
+        $docentes = Docente::with('departamento')->paginate(10);
+
+        return DocenteResource::collection($docentes);
     }
 
     /**

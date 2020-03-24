@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'users'])
+@extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'grupos'])
 @section('content')
 <div class="row center-block">
 <a class="navbar-brand " href="#"  style="color: #28CA00;">GRUPO</a>

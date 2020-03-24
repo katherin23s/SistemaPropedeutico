@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Alumno;
 use App\Http\Requests\ActualizarAlumnoRequest;
+use App\Http\Requests\RegistrarAlumnoRequest;
 use App\Http\Resources\AlumnoResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AlumnoController extends Controller
 {
@@ -19,6 +21,17 @@ class AlumnoController extends Controller
         $alumnos = Alumno::with('grupo')->paginate(10);
 
         return view('Admin.Alumnos.index', compact('alumnos'));
+    }
+
+    public function store(RegistrarAlumnoRequest $request)
+    {
+        $validados = $request->validated();
+        $validados['password'] = Hash::make($validados['password']);
+        Alumno::create($validados);
+
+        $alumnos = Alumno::with('departamento')->paginate(10);
+
+        return AlumnoResource::collection($alumnos);
     }
 
     /**

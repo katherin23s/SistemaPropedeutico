@@ -4,7 +4,7 @@
 <div class="row">
   <div class="row">
       <div class="col-8">
-          <h4 class="card-title">{{ __('docentes') }}</h4>
+          <h4 class="card-title">{{ __('Docentes') }}</h4>
       </div>
   </div>
   <div class="card">  
@@ -39,7 +39,7 @@
                                   <td>{{ $docente->direccion }}</td>
                                   <td>{{ $docente->telefono }}</td>
                                   <td>
-                                    <a href="mailto:{{ $docente->correo }}">{{ $docente->correo }}</a>
+                                    <a href="mailto:{{ $docente->email }}">{{ $docente->email }}</a>
                                   </td>
                                   <td>{{ $docente->departamento->nombre }}</td>
                                   <td class="td-actions text-right">
@@ -67,8 +67,9 @@
       </div>    
   </div>
 </div>
-@endsection
 @include('Admin.Docentes.agregarModal')
+@endsection
+
 @push('js')
 <script>
     function mostrarDocentes(data){

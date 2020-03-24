@@ -21,8 +21,6 @@ Auth::routes();
 
 Route::get('/login/docente', 'Auth\LoginController@inicioSesionDocente');
 Route::get('/login/alumno', 'Auth\LoginController@inicioSesionAlumno');
-Route::get('/register/docente', 'Auth\RegisterController@formaDocente');
-Route::get('/register/alumno', 'Auth\RegisterController@formaAlumno');
 
 Route::post('/login/docente', 'Auth\LoginController@docenteLogin');
 Route::post('/login/alumno', 'Auth\LoginController@alumnoLogin');
@@ -34,10 +32,9 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
-    Route::resource('alumnos', 'AlumnoController');
 
     Route::resource('inscripcionAlumnos', 'AlumnosController');
-    Route::resource('inscripcionDocentes', 'DocenteController');
+    // Route::resource('inscripcionDocentes', 'DocenteController');
 
     Route::get('/plantel', 'UserController@plantel')->name('Plantel');
     Route::get('/grupo', 'UserController@grupo')->name('Grupo');
@@ -98,8 +95,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('materias/eliminar', 'MateriaController@eliminar')->name('materias.eliminar');
     Route::post('materias/busqueda', 'MateriaController@busqueda')->name('materias.busqueda');
 
-    Route::post('/register/docente', 'Auth\RegisterController@registrarDocente')->name('registrar.docente');
-    Route::post('/register/alumno', 'Auth\RegisterController@registrarAlumno')->name('registrar.alumno');
+    Route::post('docentes/agregar', 'DocenteController@store')->name('registrar.docente');
+    Route::post('alumnos/agregar', 'AlumnoController@store')->name('registrar.alumno');
 
     Route::get('docentes', 'DocenteController@index')->name('docentes.index');
     Route::post('docentes/encontrar', 'DocenteController@encontrar')->name('docentes.encontrar');

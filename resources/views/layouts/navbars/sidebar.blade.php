@@ -23,13 +23,13 @@
                                 <p>{{ _('Planteles') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'users') class="active " @endif>
+                        <li @if ($pageSlug == 'departamentos') class="active " @endif>
                             <a href="{{ route('departamentos.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('Departamento') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'users') class="active " @endif>
+                        <li @if ($pageSlug == 'carreras') class="active " @endif>
                             <a href="{{ route('carreras.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('Carrera') }}</p>
@@ -47,19 +47,19 @@
                 </a>
                 <div class="collapse show" id="laravel-examples3">
                     <ul class="nav pl-4">
-                             <li @if ($pageSlug == 'users') class="active " @endif>
+                        <li @if ($pageSlug == 'semestres') class="active " @endif>
                             <a href="{{ route('semestres.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>{{ _('Semestre') }}</p>
+                                <p>{{ _('Semestres') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'profile') class="active " @endif>
+                        <li @if ($pageSlug == 'grupos') class="active " @endif>
                             <a href="{{ route('grupos.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Grupos') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'users') class="active " @endif>
+                        <li @if ($pageSlug == 'materias') class="active " @endif>
                             <a href="{{ route('materias.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('Materias') }}</p>
@@ -98,7 +98,7 @@
                 </a>
                 <div class="collapse show" id="laravel-examples6">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug ?? '' == 'profile') class="active " @endif>
+                        <li @if ($pageSlug ?? '' == 'docentes') class="active " @endif>
                             <a href="{{ route('docentes.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Docentes') }}</p>

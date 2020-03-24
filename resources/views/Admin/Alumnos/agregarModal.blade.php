@@ -41,7 +41,7 @@
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     function agregarAlumno(nombre, direccion, telefono, email, password, numero_alumno, grupo_id){
         $.ajax({
-            url: "{{route('registrar.docente')}}",
+            url: "{{route('registrar.alumno')}}",
             dataType: 'json',
             type:"post",
             data: {

@@ -16,7 +16,7 @@ class Alumno extends Authenticatable
         'email',
         'password',
         'escuela_procedencia',
-        'carrera_id',
+        'grupo_id',
     ];
     public static $rules = [
         'numero_alumno' => 'required|max:255|min:1',
@@ -26,7 +26,7 @@ class Alumno extends Authenticatable
         'email' => 'email',
         'password' => 'required|max:255|min:1',
         'escuela_procedencia' => 'max:255',
-        'carrera_id' => 'required|integer',
+        'grupo_id' => 'required|integer',
     ];
     protected $guard = 'alumno';
     /**
@@ -45,12 +45,12 @@ class Alumno extends Authenticatable
         'telefono' => 'string',
         'email' => 'string',
         'escuela_procedencia' => 'string',
-        'carrera_id' => 'integer',
+        'grupo_id' => 'integer',
     ];
 
-    //Un alumno pertenece a una carrera
-    public function carrera()
+    //Un alumno pertenece a un grupo
+    public function grupo()
     {
-        return $this->belongsTo('App\Carrera');
+        return $this->belongsTo('App\Grupo');
     }
 }

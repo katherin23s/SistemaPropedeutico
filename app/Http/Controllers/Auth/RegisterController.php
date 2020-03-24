@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Alumno;
-use App\Docente;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegistrarAlumnoRequest;
-use App\Http\Requests\RegistrarDocenteRequest;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -44,34 +40,6 @@ class RegisterController extends Controller
         $this->middleware('guest:alumno');
     }
 
-    public function formaDocente()
-    {
-        return view('auth.register', ['url' => 'docente']);
-    }
-
-    public function formaAlumno()
-    {
-        return view('auth.register', ['url' => 'alumno']);
-    }
-
-    public function registrarDocente(RegistrarDocenteRequest $request)
-    {
-        $validados = $request->validate();
-        $validados['password'] = Hash::make($validados['password']);
-        Docente::create($validados);
-
-        return redirect()->intended('login/docente');
-    }
-
-    public function registrarAlumno(RegistrarAlumnoRequest $request)
-    {
-        $validados = $request->validate();
-        $validados['password'] = Hash::make($validados['password']);
-        Alumno::create($validados);
-
-        return redirect()->intended('login/alumno');
-    }
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -83,7 +51,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'agree_terms_and_conditions' => ['required'],
         ]);
     }
 

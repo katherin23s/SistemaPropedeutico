@@ -28,7 +28,7 @@ class RegistrarDocenteRequest extends FormRequest
             'nombre' => 'required|max:255|min:1',
             'direccion' => 'max:255',
             'telefono' => 'max:255',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:docentes'],
+            'email' => 'required|string|email|max:255|unique:docentes',
             'password' => 'required|max:255|min:1',
             'departamento_id' => 'required|integer',
         ];

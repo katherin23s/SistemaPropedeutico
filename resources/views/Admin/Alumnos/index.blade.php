@@ -67,8 +67,8 @@
       </div>    
   </div>
 </div>
-@endsection
 @include('Admin.Alumnos.agregarModal')
+@endsection
 @push('js')
 <script>
     function mostrarAlumnos(data){

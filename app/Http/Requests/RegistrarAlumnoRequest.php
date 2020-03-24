@@ -13,7 +13,7 @@ class RegistrarAlumnoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -31,7 +31,7 @@ class RegistrarAlumnoRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', 'unique:alumnos'],
             'password' => 'required|max:255|min:1',
             'escuela_procedencia' => 'max:255',
-            'carrera_id' => 'required|integer',
+            'grupo_id' => 'required|integer',
         ];
     }
 }
