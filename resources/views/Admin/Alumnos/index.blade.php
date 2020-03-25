@@ -1,71 +1,73 @@
 @extends('layouts.app', ['page' => __('Alumnos'), 'pageSlug' => 'Alumnos'])
 
 @section('content')
-<div class="row">
-  <div class="row">
-      <div class="col-8">
-          <h4 class="card-title">{{ __('Alumnos') }}</h4>
-      </div>
-  </div>
-  <div class="card">  
-      <div class="card-body">
-          <div class="row">
-              <div class="col-lg-4 " style="padding-left: 0px;">   
-                  <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo" style="background: #28CA00;">Agregar</button>   
-              </div>  
-              <div class="col-lg-8">
-                  <!-- Search form -->
-                  <input class="form-control" type="text" placeholder="Search" aria-label="Search">   
-              </div>
-          </div>
-          @include('alerts.success')               
-          <div class="row">    
-              <div class="col-lg-12">
-                  <table class="table" id="tabla-alumnos">
-                      <thead class=" text-primary" >
-                        <th scope="col">{{ __('No. Alumno') }}</th>
-                        <th scope="col">{{ __('Nombre') }}</th>
-                        <th scope="col">{{ __('Dirección') }}</th>
-                        <th scope="col">{{ __('Teléfono') }}</th>
-                        <th scope="col">{{ __('Correo') }}</th>
-                        <th scope="col">{{ __('Grupo') }}</th>
-                        <th scope="col">{{ __('Acciones') }}</th>
-                      </thead>
-                      <tbody>
-                          @foreach ($alumnos as $alumno)
-                              <tr>
-                                  <td>{{ $alumno->numero_alumno }}</td>
-                                  <td>{{ $alumno->nombre }}</td>
-                                  <td>{{ $alumno->direccion }}</td>
-                                  <td>{{ $alumno->telefono }}</td>
-                                  <td>
-                                    <a href="mailto:{{ $alumno->correo }}">{{ $alumno->correo }}</a>
-                                  </td>
-                                  <td>{{ $alumno->grupo->numero }}</td>
-                                  <td class="td-actions text-right">
-                                      <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $alumno->id }})">
-                                              <i class="fas fa-pencil-alt fa-2 "></i>
-                                      </button>
-                                      <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalalumnos({{ $alumno->id }}, '{{ $alumno->nombre }}')">
-                                              <i class="fa fa-eye "></i>
-                                      </button>
-                                      <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $alumno->id }})">
-                                              <i class="fa fa-trash"></i>
-                                      </button>
-                                  </td>
-                              </tr>
-                          @endforeach
-                      </tbody>
-                  </table>
-                  <div class="card-footer py-4">
-                      <nav class="d-flex justify-content-end" aria-label="...">
-                          {{ $alumnos->links() }}
-                      </nav>
-                  </div>
-              </div>     
-          </div>             
-      </div>    
-  </div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">  
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Alumnos</h4>
+                        <div class="row">
+                            <div class="col-3">   
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo">Agregar</button>   
+                            </div>  
+                            <div class="col-9">
+                                <!-- Search form -->
+                                <input class="form-control" type="text" placeholder="Buscar" aria-label="Search">   
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @include('alerts.success')               
+                        <div class="table-responsive">
+                            <table class="table" id="tabla-alumnos">
+                                <thead class=" text-primary" >
+                                <th scope="col">{{ __('No. Alumno') }}</th>
+                                <th scope="col">{{ __('Nombre') }}</th>
+                                <th scope="col">{{ __('Dirección') }}</th>
+                                <th scope="col">{{ __('Teléfono') }}</th>
+                                <th scope="col">{{ __('Correo') }}</th>
+                                <th scope="col">{{ __('Grupo') }}</th>
+                                <th scope="col">{{ __('Acciones') }}</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($alumnos as $alumno)
+                                        <tr>
+                                            <td>{{ $alumno->numero_alumno }}</td>
+                                            <td>{{ $alumno->nombre }}</td>
+                                            <td>{{ $alumno->direccion }}</td>
+                                            <td>{{ $alumno->telefono }}</td>
+                                            <td>
+                                            <a href="mailto:{{ $alumno->correo }}">{{ $alumno->correo }}</a>
+                                            </td>
+                                            <td>{{ $alumno->grupo->numero }}</td>
+                                            <td class="td-actions text-right">
+                                                <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $alumno->id }})">
+                                                        <i class="fas fa-pencil-alt fa-2 "></i>
+                                                </button>
+                                                <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalalumnos({{ $alumno->id }}, '{{ $alumno->nombre }}')">
+                                                        <i class="fa fa-eye "></i>
+                                                </button>
+                                                <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $alumno->id }})">
+                                                        <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>                
+                    </div>  
+                    <div class="card-footer py-4">
+                        <nav class="d-flex justify-content-end" aria-label="...">
+                            {{ $alumnos->links() }}
+                        </nav>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @include('Admin.Alumnos.agregarModal')
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Carrera;
+use App\Departamento;
 use App\Http\Requests\ActualizarCarreraRequest;
 use App\Http\Requests\CarreraRequest;
 use App\Http\Resources\CarreraResource;
@@ -20,7 +21,9 @@ class CarreraController extends Controller
         //el index donde se muestra la lista de todos los carreras con su departamento
         $carreras = Carrera::with('departamento')->paginate(15);
 
-        return view('Admin.Carrera.index', compact('carreras'));
+        $departamentos = Departamento::get();
+
+        return view('Admin.Carrera.index', compact('carreras', 'departamentos'));
     }
 
     /**

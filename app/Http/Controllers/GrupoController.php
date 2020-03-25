@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Carrera;
 use App\Grupo;
 use App\Http\Requests\ActualizarGrupoRequest;
 use App\Http\Requests\GrupoRequest;
@@ -20,7 +21,9 @@ class GrupoController extends Controller
         //el index donde se muestra la lista de todos los planteles
         $grupos = Grupo::paginate(15);
 
-        return view('Admin.Grupos.index', compact('grupos'));
+        $carreras = Carrera::get();
+
+        return view('Admin.Grupos.index', compact('grupos', 'carreras'));
     }
 
     /**

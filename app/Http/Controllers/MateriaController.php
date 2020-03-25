@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Carrera;
 use App\Http\Requests\ActualizarMateriaRequest;
 use App\Http\Requests\MateriaRequest;
 use App\Http\Resources\MateriaResource;
@@ -18,9 +19,11 @@ class MateriaController extends Controller
     public function index()
     {
         //el index donde se muestra la lista de todos los materiaes
-        $materias = Materia::paginate(15);
+        $materias = Materia::with('carrera')->paginate(15);
 
-        return view('Admin.Materias.index', compact('materias'));
+        $carreras = Carrera::get();
+
+        return view('Admin.Materias.index', compact('materias', 'carreras'));
     }
 
     /**

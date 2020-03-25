@@ -1,28 +1,35 @@
-@extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'grupos'])
+@extends('layouts.app', ['page' => __('Grupos'), 'pageSlug' => 'grupos'])
 @section('content')
-<div class="row center-block">
-<a class="navbar-brand " href="#"  style="color: #28CA00;">GRUPO</a>
-</div>
-    <div class="row">
-            <div class="row" style="margin-left: 0px;">
-                <div class="col-8">
-                    <h4 class="card-title">{{ __('Grupos') }}</h4>
-                </div>
-            </div>
-            <div class="card">  
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-4">   
-                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo" style="background: #28CA00;">Agregar</button>   
-                        </div>  
-                        <div class="col-lg-8">
-                            <!-- Search form -->
-                            <input class="form-control" type="text" placeholder="Search" aria-label="Search">   
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">  
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Grupos</h4>
+                        <div class="row">
+                            <div class="col-md-1">   
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo">Agregar</button>   
+                            </div>  
+                            <div class="col-md-3">                   
+                                <select>
+                                    <option selected>Carrera</option>
+                                    @foreach ($carreras as $carrera)
+                                        <option value=" {{ $carrera->id }} ">{{ $carrera->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+            
+                            <div class="col-md-8">
+                                <!-- Search form -->
+                                <input class="form-control" type="text" placeholder="Buscar" aria-label="Search">   
+                            </div>
                         </div>
                     </div>
-                    @include('alerts.success')     
-                    <div class="row">
-                        <div class="col-lg-12">                           
+                
+                    <div class="card-body">
+                        @include('alerts.success')     
+                        <div class="table-responsive">                           
                             <table class="table" id="tabla-grupos" >
                                 <thead class=" text-primary" >
                                     <th scope="col">{{ __('ID') }}</th>
@@ -56,16 +63,18 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div> 
-                    </div>                                  
-                </div>
-                <div class="card-footer py-4">
-                    <nav class="d-flex justify-content-end" aria-label="...">
-                         {{ $grupos->links() }}
-                    </nav>
+                        </div>                                  
+                    </div>
+                    <div class="card-footer py-4">
+                        <nav class="d-flex justify-content-end" aria-label="...">
+                            {{ $grupos->links() }}
+                        </nav>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
+</div>
 @include('Admin.Grupos.agregarModal')
 @include('Admin.Grupos.editarModal')
 @include('Admin.Grupos.verModal')

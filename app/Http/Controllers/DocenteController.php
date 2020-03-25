@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Departamento;
 use App\Docente;
 use App\Http\Requests\ActualizarDocenteRequest;
 use App\Http\Requests\RegistrarDocenteRequest;
@@ -20,7 +21,9 @@ class DocenteController extends Controller
     {
         $docentes = Docente::with('departamento')->paginate(10);
 
-        return view('Admin.Docentes.index', compact('docentes'));
+        $departamentos = Departamento::get();
+
+        return view('Admin.Docentes.index', compact('docentes', 'departamentos'));
     }
 
     public function store(RegistrarDocenteRequest $request)
