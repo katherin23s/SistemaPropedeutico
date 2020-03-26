@@ -19,10 +19,6 @@
                                 <h6> Horario {{ $grupo->horarioCompleto() }} </h6>
                             </div>
                         </div>
-                    </div>
-                
-                    <div class="card-body">
-                        @include('alerts.success')
                         <div class="nav-wrapper">
                             <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                                 <li class="nav-item">
@@ -33,6 +29,11 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                
+                    <div class="card-body">
+                        @include('alerts.success')
+                        
 
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tab-clases" role="tabpanel" aria-labelledby="tab-clases-tab">
@@ -42,33 +43,30 @@
                                 <div class="table-responsive">
                                     <table class="table" id="tabla-alumnos" >
                                         <thead class=" text-primary" >
-                                            <th scope="col">Alumno</th>
-                                            <th scope="col">Semestre</th>
-                                            <th scope="col">Carrera</th>
-                                            <th scope="col">Numero</th>
-                                            <th scope="col">Hora inicio</th>
-                                            <th scope="col">Hora final</th>
+                                            <th scope="col">Número</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Correo</th>
+                                            <th scope="col"></th>
                                         </thead>
                                         <tbody>
-                                            {{--  @foreach ($grupos as $grupo)
+                                            @foreach ($grupo->alumnos as $alumno)
                                                 <tr>
-                                                    <td>{{ $grupo->id }}</td>
-                                                    <td>{{ $grupo->semestre->numero }}</td>
-                                                    <td>{{ $grupo->carrera->nombre }}</td>
-                                                    <td>{{ $grupo->numero }}</td>
-                                                    <td>{{ $grupo->hora_inicio->toTimeString()}}</td>
-                                                    <td>{{ $grupo->hora_final->toTimeString() }}</td>
+                                                    <td>{{ $alumno->numero }}</td>
+                                                    <td>{{ $alumno->nombre}}</td>
+                                                    <td>
+                                                        <a href="mailto:{{ $alumno->correo }}">{{ $alumno->correo }}</a>
+                                                    </td>
                                                     <td class="td-actions text-right">
-                                                    <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $grupo->id }})">
+                                                    <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $alumno->id }})">
                                                             <i class="fas fa-pencil-alt fa-2 "></i>
                                                     </button>
                                                     
-                                                    <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $grupo->id }})">
+                                                    <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $alumno->id }})">
                                                             <i class="fas fa-trash"></i>
                                                     </button>
                                                     </td>
                                                 </tr>
-                                            @endforeach  --}}
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
