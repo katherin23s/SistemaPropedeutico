@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Carrera;
+use App\Clase;
 use App\Grupo;
 use App\Http\Requests\ActualizarGrupoRequest;
 use App\Http\Requests\GrupoRequest;
@@ -57,6 +58,14 @@ class GrupoController extends Controller
      */
     public function show(Grupo $grupo)
     {
+        $grupo->load('semestre', 'carrera');
+
+        $clases = Clase::with('materia', 'docente')
+            ->where('grupo_id', $grupo->id)
+            ->get()
+        ;
+
+        return view('Admin.Grupos.ver', compact('grupo', 'clases'));
     }
 
     /**

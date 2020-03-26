@@ -87,6 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('grupos/actualizar', 'GrupoController@update')->name('grupos.update');
     Route::delete('grupos/eliminar', 'GrupoController@eliminar')->name('grupos.eliminar');
     Route::post('grupos/busqueda', 'GrupoController@busqueda')->name('grupos.busqueda');
+    Route::get('grupos/{grupo}', 'GrupoController@show')->name('grupos.show');
 
     Route::get('materias', 'MateriaController@index')->name('materias.index');
     Route::post('materias/agregar', 'MateriaController@store')->name('materias.store');
