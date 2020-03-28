@@ -10,19 +10,32 @@
                         <div class="row">
                             <div class="col-md-1">   
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo">Agregar</button>   
-                            </div>  
-                            <div class="col-md-3">                   
-                                <select>
-                                    <option selected>Carrera</option>
-                                    @foreach ($carreras as $carrera)
-                                        <option value=" {{ $carrera->id }} ">{{ $carrera->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-            
-                            <div class="col-md-8">
+                            </div>          
+                            <div class="col-md-11">
                                 <!-- Search form -->
-                                <input class="form-control" type="text" placeholder="Buscar" aria-label="Search">   
+                                <form  method="post" action="{{ route('grupos.buscar') }}" >
+                                    @csrf                                 
+                                    <div class="form-row">
+                                        <div class="col-md-3">
+                                            <select id='carrera' class="custom-select" name="carrera"> 
+                                                <option value='0'>Carrera</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select id='semestre' class="custom-select" name="semestre"> 
+                                                <option value='0'>Semestre</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-auto">
+                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        </div> 
+                                        <div class="col-md-1">
+                                            <button class="btn btn-primary btn-fab btn-icon">
+                                                <i class="fas fa-search"></i>
+                                              </button>
+                                        </div>                  
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

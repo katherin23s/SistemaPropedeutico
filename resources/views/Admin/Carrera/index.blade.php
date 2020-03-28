@@ -19,7 +19,7 @@
                                     <div class="form-row">
                                         <div class="col-md-3">
                                             <select id='departamento' class="custom-select" name="departamento"> 
-                                                <option value='0'>{{ __('Seleccionar departamento') }}</option>
+                                                <option value='0'>Departamento</option>
                                             </select>
                                         </div>
                                         <div class="col-md-8 col-auto">

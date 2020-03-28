@@ -13,7 +13,19 @@
                             </div>   
                             <div class="col-md-10">
                                 <!-- Search form -->
-                                <input class="form-control" type="text" placeholder="Search" aria-label="Search">   
+                                <form  method="post" action="{{ route('semestres.buscar') }}" >
+                                    @csrf
+                                    <div class="form-row">
+                                        <div class="col-md-10">
+                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary btn-fab btn-icon">
+                                                <i class="fas fa-search"></i>
+                                              </button>
+                                        </div>
+                                    </div>                               
+                                </form> 
                             </div>
                         </div>
                     </div>

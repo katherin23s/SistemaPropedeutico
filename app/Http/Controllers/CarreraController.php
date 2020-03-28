@@ -108,12 +108,14 @@ class CarreraController extends Controller
 
         $departamento_id = $request['departamento'];
         if ($departamento_id > 0) {
-            $carreras = Carrera::whereLike(['nombre', 'numero_serie'], $busqueda)
+            $carreras = Carrera::with('departamento')
+                ->whereLike(['nombre', 'numero_serie'], $busqueda)
                 ->where('departamento_id', $departamento_id)
                 ->paginate(15)
             ;
         } else {
-            $carreras = Carrera::whereLike(['nombre', 'numero_serie'], $busqueda)->paginate(15);
+            $carreras = Carrera::with('departamento')
+                ->whereLike(['nombre', 'numero_serie'], $busqueda)->paginate(15);
         }
 
         return view('Admin.Carrera.index', compact('carreras'));

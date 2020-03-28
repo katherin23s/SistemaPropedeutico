@@ -106,7 +106,28 @@
             agregarMateria(nombre, clave, carrera_id, creditos, unidades);
             
         }); 
-          $("#carrera_id").select2({
+        $("#carrera_id").select2({
+            minimumInputLength: 3,
+            ajax: { 
+            url: "{{route('carreras.busqueda')}}",
+            type:'post',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                _token: CSRF_TOKEN,
+                search: params.term // search term
+                };
+            },
+            processResults: function (response) {
+                return {
+                results: response
+                };
+            },
+            cache: true
+            }
+        });
+        $("#carrera").select2({
             minimumInputLength: 3,
             ajax: { 
             url: "{{route('carreras.busqueda')}}",
