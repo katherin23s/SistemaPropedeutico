@@ -32,18 +32,6 @@
                         <li class="nav-link">
                             <a href="#" class="nav-item dropdown-item">{{ __('Mike John responded to your email') }}</a>
                         </li>
-                        <li class="nav-link">
-                            <a href="#" class="nav-item dropdown-item">{{ __('You have 5 more tasks') }}</a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="#" class="nav-item dropdown-item">{{ __('Your friend Michael is in town') }}</a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="#" class="nav-item dropdown-item">{{ __('Another notification') }}</a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="#" class="nav-item dropdown-item">{{ __('Another one') }}</a>
-                        </li>
                     </ul>
                 </li>
                 <li class="dropdown nav-item">

@@ -11,18 +11,27 @@
                             <div class="col-md-1">   
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo">Agregar</button>   
                             </div>  
-                            <div class="col-md-3">                   
-                                <select>
-                                    <option selected>Departamento</option>
-                                    @foreach ($departamentos as $departamento)
-                                        <option value=" {{ $departamento->id }} ">{{ $departamento->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-            
-                            <div class="col-md-7">
+         
+                            <div class="col-md-11">
                                 <!-- Search form -->
-                                <input class="form-control" type="text" placeholder="Buscar" aria-label="Search">   
+                                <form  method="post" action="{{ route('carreras.buscar') }}" >
+                                    @csrf                                 
+                                    <div class="form-row">
+                                        <div class="col-md-3">
+                                            <select id='departamento' class="custom-select" name="departamento"> 
+                                                <option value='0'>{{ __('Seleccionar departamento') }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8 col-auto">
+                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        </div> 
+                                        <div class="col-md-1">
+                                            <button class="btn btn-primary btn-fab btn-icon">
+                                                <i class="fas fa-search"></i>
+                                              </button>
+                                        </div>                  
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

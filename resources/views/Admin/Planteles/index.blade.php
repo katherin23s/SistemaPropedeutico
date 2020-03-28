@@ -8,12 +8,26 @@
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Planteles</h4>
                         <div class="row">
-                            <div class="col-3">   
+                            <div class="col-lg-2">   
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo">Agregar</button>   
                             </div>  
-                            <div class="col-9">
+                            <div class="col-lg-10">
                                 <!-- Search form -->
-                                <input class="form-control" type="text" placeholder="Buscar" aria-label="Search">   
+                                <form  method="post" action="{{ route('planteles.buscar') }}" >
+                                    @csrf
+                                    <div class="form-row">
+                                        <div class="col-md-10">
+                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary btn-fab btn-icon">
+                                                <i class="fas fa-search"></i>
+                                              </button>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                                  
                             </div>
                         </div>
                     </div>

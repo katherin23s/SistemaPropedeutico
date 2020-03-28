@@ -8,21 +8,32 @@
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Departamentos</h4>
                         <div class="row">
-                            <div class="col-md-1">   
+                            <div class="col-md-2 col-auto">   
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo">Agregar</button>   
-                            </div>  
-                            <div class="col-md-3">                   
-                                <select>
-                                    <option selected>Plantel</option>
-                                    @foreach ($planteles as $plantel)
-                                        <option value=" {{ $plantel->id }} ">{{ $plantel->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-            
-                            <div class="col-md-7">
+                            </div>      
+                            <div class="col-md-10">
                                 <!-- Search form -->
-                                <input class="form-control" type="text" placeholder="Search" aria-label="Search">   
+                                <form  method="post" action="{{ route('departamentos.buscar') }}" >
+                                    @csrf                                 
+                                    <div class="form-row">
+                                        <div class="col-md-2 col-auto">
+                                            <select name="plantel_id">
+                                                <option selected value="0">Plantel</option>
+                                                @foreach ($planteles as $plantel)
+                                                    <option value=" {{ $plantel->id }} ">{{ $plantel->nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8 col-auto">
+                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        </div>   
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary btn-fab btn-icon">
+                                                <i class="fas fa-search"></i>
+                                              </button>
+                                        </div>                
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

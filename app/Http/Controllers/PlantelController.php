@@ -123,4 +123,16 @@ class PlantelController extends Controller
     {
         return request()->validate(Plantel::$rules);
     }
+
+    public function buscar(Request $request)
+    {
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+        $planteles = Plantel::whereLike('nombre', $busqueda)->paginate(15);
+
+        return view('Admin.Planteles.index', compact('planteles'));
+    }
 }

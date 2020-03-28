@@ -21,9 +21,7 @@ class CarreraController extends Controller
         //el index donde se muestra la lista de todos los carreras con su departamento
         $carreras = Carrera::with('departamento')->paginate(15);
 
-        $departamentos = Departamento::get();
-
-        return view('Admin.Carrera.index', compact('carreras', 'departamentos'));
+        return view('Admin.Carrera.index', compact('carreras'));
     }
 
     /**
@@ -98,5 +96,26 @@ class CarreraController extends Controller
         }
         echo json_encode($response);
         exit;
+    }
+
+    public function buscar(Request $request)
+    {
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+
+        $departamento_id = $request['departamento'];
+        if ($departamento_id > 0) {
+            $carreras = Carrera::whereLike(['nombre', 'numero_serie'], $busqueda)
+                ->where('departamento_id', $departamento_id)
+                ->paginate(15)
+            ;
+        } else {
+            $carreras = Carrera::whereLike(['nombre', 'numero_serie'], $busqueda)->paginate(15);
+        }
+
+        return view('Admin.Carrera.index', compact('carreras'));
     }
 }

@@ -80,6 +80,27 @@
             agregarCarrera(nombre, numero_serie, departamento_id);
             
         }); 
+        $("#departamento").select2({
+            minimumInputLength: 3,
+            ajax: { 
+            url: "{{route('departamentos.busqueda')}}",
+            type:'post',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                _token: CSRF_TOKEN,
+                search: params.term // search term
+                };
+            },
+            processResults: function (response) {
+                return {
+                results: response
+                };
+            },
+            cache: true
+            }
+        });
           $("#departamento_id").select2({
             minimumInputLength: 3,
             ajax: { 
