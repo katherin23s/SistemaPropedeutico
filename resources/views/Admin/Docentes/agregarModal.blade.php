@@ -21,11 +21,14 @@
                     </span>
                 @endif
             </div>
-            <div class="col-auto">
-                <select id='departamento_id' class="custom-select form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id"> 
-                    <option value='0'>{{ __('Seleccionar departamento') }}</option>
-                </select>
+            <div class="form-row">
+                <div class="col-md-12">
+                    <select id='departamento_id' class="custom-select" style="width: 100%" name="departamento_id"> 
+                        <option value='0'>{{ __('Seleccionar departamento') }}</option>
+                    </select>
+                </div>
             </div>
+            
         </div>
         <div class="modal-footer">
             <button type="button" id="agregar_docente" class="btn btn-primary " style="left: 355px;" >Guardar</button>

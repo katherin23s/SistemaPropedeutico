@@ -21,8 +21,8 @@
                     </span>
                 @endif
             </div>
-            <div class="col-auto">
-                <select id='grupo_id' class="custom-select form-control{{ $errors->has('grupo_id') ? ' is-invalid' : '' }}" name="grupo_id"> 
+            <div class="form-group">
+                <select id='grupo_id' class="custom-select" name="grupo_id" style="width: 100%"> 
                     <option value='0'>{{ __('Seleccionar grupo') }}</option>
                 </select>
             </div>

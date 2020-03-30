@@ -22,10 +22,10 @@
                                                 <option value='0'>Departamento</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-8 col-auto">
+                                        <div class="col-md-8">
                                             <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
                                         </div> 
-                                        <div class="col-md-1">
+                                        <div class="col-md-1 text-right">
                                             <button class="btn btn-primary btn-fab btn-icon">
                                                 <i class="fas fa-search"></i>
                                               </button>
