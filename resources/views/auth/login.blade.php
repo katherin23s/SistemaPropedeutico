@@ -5,7 +5,11 @@
         <h3 class="mb-5">Inicio de Sesión</h3>
     </div>
     <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-        <form class="form" method="post" action="{{ route('login') }}">
+        @isset($url)
+        <form method="POST" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
+        @else
+        <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+        @endisset
             @csrf
 
             <div class="card card-login card-white">
@@ -13,8 +17,7 @@
                         <i class="tim-icons icon-lock-circle"></i>
                     </div>
             
-                    <div style="
-                    margin-left: 125px;">
+                    <div style="margin-left: 125px;">
                     <span class="fa fa-user fa-6x">
                     </span> 
                     

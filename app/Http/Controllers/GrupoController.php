@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Clase;
 use App\Grupo;
 use App\Http\Requests\ActualizarGrupoRequest;
 use App\Http\Requests\GrupoRequest;
@@ -17,7 +18,7 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        //el index donde se muestra la lista de todos los planteles
+        //el index donde se muestra la lista de todos los grupos
         $grupos = Grupo::paginate(15);
 
         return view('Admin.Grupos.index', compact('grupos'));
@@ -54,6 +55,14 @@ class GrupoController extends Controller
      */
     public function show(Grupo $grupo)
     {
+        $grupo->load('semestre', 'carrera');
+
+        $clases = Clase::with('materia', 'docente')
+            ->where('grupo_id', $grupo->id)
+            ->get()
+        ;
+
+        return view('Admin.Grupos.ver', compact('grupo', 'clases'));
     }
 
     /**
@@ -113,6 +122,38 @@ class GrupoController extends Controller
         }
         echo json_encode($response);
         exit;
+    }
+
+    public function buscar(Request $request)
+    {
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+
+        $carrera_id = $request['carrera'];
+        $semestre_id = $request['semestre'];
+        if ($carrera_id > 0 && $semestre_id > 0) {
+            $grupos = Grupo::whereLike(['numero'], $busqueda)
+                ->where([['carrera_id', $carrera_id], ['semestre_id', $semestre_id]])
+                ->paginate(15)
+            ;
+        } elseif ($carrera_id > 0 && $semestre_id <= 0) {
+            $grupos = Grupo::whereLike(['numero'], $busqueda)
+                ->where('carrera_id', $carrera_id)
+                ->paginate(15)
+            ;
+        } elseif ($carrera_id <= 0 && $semestre_id > 0) {
+            $grupos = Grupo::whereLike(['numero'], $busqueda)
+                ->where('semestre_id', $semestre_id)
+                ->paginate(15)
+            ;
+        } else {
+            $grupos = Grupo::whereLike(['numero'], $busqueda)->paginate(15);
+        }
+
+        return view('Admin.Grupos.index', compact('grupos'));
     }
 
     /**

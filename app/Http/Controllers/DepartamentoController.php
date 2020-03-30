@@ -23,15 +23,6 @@ class DepartamentoController extends Controller
         return view('Admin.Departamento.index', compact('departamentos', 'planteles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
     public function encontrar(Request $request)
     {
         $id = $request->departamento_id;
@@ -67,15 +58,6 @@ class DepartamentoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Departamento $departamento)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Departamento $departamento)
     {
     }
 
@@ -135,5 +117,27 @@ class DepartamentoController extends Controller
     public function validar()
     {
         return request()->validate(Departamento::$rules);
+    }
+
+    public function buscar(Request $request)
+    {
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+        $plantel_id = $request['plantel_id'];
+        if ($plantel_id > 0) {
+            $departamentos = Departamento::whereLike('nombre', $busqueda)
+                ->where('plantel_id', $plantel_id)
+                ->paginate(15)
+            ;
+        } else {
+            $departamentos = Departamento::whereLike('nombre', $busqueda)->paginate(15);
+        }
+
+        $planteles = Plantel::get();
+
+        return view('Admin.Departamento.index', compact('departamentos', 'planteles'));
     }
 }

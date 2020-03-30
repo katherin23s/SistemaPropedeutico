@@ -116,6 +116,18 @@ class SemestreController extends Controller
         exit;
     }
 
+    public function buscar(Request $request)
+    {
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+        $semestres = Semestre::whereLike('numero', $busqueda)->paginate(15);
+
+        return view('Admin.Semestre.index', compact('semestres'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *

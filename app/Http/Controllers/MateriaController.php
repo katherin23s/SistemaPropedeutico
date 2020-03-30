@@ -18,7 +18,7 @@ class MateriaController extends Controller
     public function index()
     {
         //el index donde se muestra la lista de todos los materiaes
-        $materias = Materia::paginate(15);
+        $materias = Materia::with('carrera')->paginate(15);
 
         return view('Admin.Materias.index', compact('materias'));
     }
@@ -84,5 +84,28 @@ class MateriaController extends Controller
         }
         echo json_encode($response);
         exit;
+    }
+
+    public function buscar(Request $request)
+    {
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+
+        $carrera_id = $request['carrera'];
+        if ($carrera_id > 0) {
+            $materias = Materia::with('carrera')
+                ->whereLike(['nombre', 'clave'], $busqueda)
+                ->where('carrera_id', $carrera_id)
+                ->paginate(15)
+            ;
+        } else {
+            $materias = Materia::with('carrera')
+                ->whereLike(['nombre', 'clave'], $busqueda)->paginate(15);
+        }
+
+        return view('Admin.Materias.index', compact('materias'));
     }
 }

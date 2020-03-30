@@ -8,8 +8,6 @@ class CreateDocentesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -19,7 +17,10 @@ class CreateDocentesTable extends Migration
             $table->string('nombre');
             $table->string('direccion')->nullable();
             $table->string('telefono')->nullable();
-            $table->string('correo'); //agregar este a la documentacion
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->unsignedBigInteger('departamento_id');
             $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade');
 
@@ -29,8 +30,6 @@ class CreateDocentesTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

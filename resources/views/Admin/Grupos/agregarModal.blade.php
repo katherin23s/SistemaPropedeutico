@@ -119,6 +119,28 @@
           
             
         }); 
+        $("#semestre").select2({
+          minimumInputLength: 1,
+          ajax: { 
+          url: "{{route('semestres.busqueda')}}",
+          type:'post',
+          dataType: 'json',
+          delay: 250,
+          data: function (params) {
+              return {
+              _token: CSRF_TOKEN,
+              search: params.term // search term
+              };
+          },
+          processResults: function (response) {
+              return {
+              results: response
+              };
+          },
+          cache: true
+          }
+      });
+        
         $("#semestre_id").select2({
             minimumInputLength: 1,
             ajax: { 
@@ -160,7 +182,28 @@
           },
           cache: true
           }
-      });
+        });
+        $("#carrera").select2({
+          minimumInputLength: 3,
+          ajax: { 
+          url: "{{route('carreras.busqueda')}}",
+          type:'post',
+          dataType: 'json',
+          delay: 250,
+          data: function (params) {
+              return {
+              _token: CSRF_TOKEN,
+              search: params.term // search term
+              };
+          },
+          processResults: function (response) {
+              return {
+              results: response
+              };
+          },
+          cache: true
+          }
+        });
     });
 </script>
     

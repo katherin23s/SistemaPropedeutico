@@ -8,8 +8,6 @@ class CreateAlumnosTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -19,11 +17,14 @@ class CreateAlumnosTable extends Migration
             $table->string('nombre');
             $table->string('direccion')->nullable();
             $table->string('telefono')->nullable();
-            $table->string('correo');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->string('escuela_procedencia')->nullable();
 
-            $table->unsignedBigInteger('carrera_id');
-            $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('cascade');
+            $table->unsignedBigInteger('grupo_id');
+            $table->foreign('grupo_id')->references('id')->on('grupos')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -31,8 +32,6 @@ class CreateAlumnosTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

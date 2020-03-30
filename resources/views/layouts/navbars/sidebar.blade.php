@@ -1,5 +1,9 @@
 <div class="sidebar">
-    <div class="sidebar-wrapper" style="background: #0800ff;"> {{-- background: #28CA00; --}}
+    <div class="sidebar-wrapper"> {{-- background: #28CA00; --}}
+        <div class="logo">
+            <a href="#" class="simple-text logo-mini">{{ _('ITT') }}</a>
+            <a href="#" class="simple-text logo-normal">{{ _('Cursos') }}</a>
+        </div>
               <!-- MENU SIDEBAR -->
         <ul class="nav">
             <li @if ($pageSlug ?? '' == 'dashboard') class="active " @endif>
@@ -12,27 +16,27 @@
             <li>
                 <a  href="#laravel-examples" >
                     <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Gestion de oferta Educativa') }}</span>
+                    <span class="nav-link-text" >{{ __('Gestion de Oferta Educativa') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
                 <div class="collapse show" id="laravel-examples">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'profile' ?? '' ) class="active " @endif>
+                        <li @if ($pageSlug == 'planteles' ?? '' ) class="active " @endif>
                             <a href="{{ route('planteles.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Planteles') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'users') class="active " @endif>
+                        <li @if ($pageSlug == 'departamentos') class="active " @endif>
                             <a href="{{ route('departamentos.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>{{ _('Departamento') }}</p>
+                                <p>{{ _('Departamentos') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'users') class="active " @endif>
+                        <li @if ($pageSlug == 'carreras') class="active " @endif>
                             <a href="{{ route('carreras.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>{{ _('Carrera') }}</p>
+                                <p>{{ _('Carreras') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -47,19 +51,19 @@
                 </a>
                 <div class="collapse show" id="laravel-examples3">
                     <ul class="nav pl-4">
-                             <li @if ($pageSlug == 'users') class="active " @endif>
+                        <li @if ($pageSlug == 'semestres') class="active " @endif>
                             <a href="{{ route('semestres.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>{{ _('Semestre') }}</p>
+                                <p>{{ _('Semestres') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'profile') class="active " @endif>
+                        <li @if ($pageSlug == 'grupos') class="active " @endif>
                             <a href="{{ route('grupos.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Grupos') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'users') class="active " @endif>
+                        <li @if ($pageSlug == 'materias') class="active " @endif>
                             <a href="{{ route('materias.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('Materias') }}</p>
@@ -73,15 +77,15 @@
             <li>
                 <a href="#laravel-examples5" >
                     <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Gestion de Estudiantes') }}</span>
+                    <span class="nav-link-text" >{{ __('Gestion de Alumnos') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
                 <div class="collapse show" id="laravel-examples5">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug ?? '' == 'profile') class="active " @endif>
-                            <a href="{{ route('GestionAlumnos')  }}">
+                        <li @if ($pageSlug ?? '' == 'alumnos') class="active " @endif>
+                            <a href="{{ route('alumnos.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
-                                <p>{{ _('Inscripciones') }}</p>
+                                <p>{{ _('Alumnos') }}</p>
                             </a>
                         </li>
 
@@ -98,10 +102,10 @@
                 </a>
                 <div class="collapse show" id="laravel-examples6">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug ?? '' == 'profile') class="active " @endif>
-                            <a href="{{ route('GestionDocentes')  }}">
+                        <li @if ($pageSlug ?? '' == 'docentes') class="active " @endif>
+                            <a href="{{ route('docentes.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
-                                <p>{{ _('Inscripcion') }}</p>
+                                <p>{{ _('Docentes') }}</p>
                             </a>
                         </li>
 

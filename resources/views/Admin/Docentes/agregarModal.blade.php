@@ -1,44 +1,37 @@
-<!-- MODAL AGREGAR PLANTEL -->
+<!-- MODAL AGREGAR DOCENTE -->
 <div class="modal fade" id="AgregarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5  align="center" class="modal-title" id="exampleModalLabel">CARRERA</h5>
+            <h5  align="center" class="modal-title" id="exampleModalLabel">DOCENTE</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body" style="padding-bottom: 60px; padding-top: 30px;">
-             {{--  nombre  --}}
-            <div class="form-group {{ $errors->has('nombre') ? ' has-danger' : '' }}">               
-                <label for="input-nombre">Nombre</label>
-                <input type="text" name="nombre" id="input-nombre" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : '' }}" 
-                value="{{ old('nombre') }}" required>
-                @if ($errors->has('nombre'))
+        <div class="modal-body">
+            @include('components.registrarUsuario')
+              {{--  numero_empleado  --}}
+            <div class="form-group {{ $errors->has('numero_empleado') ? ' has-danger' : '' }}">
+                <label for="input-numero_empleado">Número de empleado</label>
+                <input type="text" name="numero_empleado" id="input-numero_empleado" class="form-control {{ $errors->has('numero_empleado') ? ' is-invalid' : '' }}" 
+                value="{{ old('numero_empleado') }}" required>
+                @if ($errors->has('numero_empleado'))
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('nombre') }}</strong>
+                        <strong>{{ $errors->first('numero_empleado') }}</strong>
                     </span>
                 @endif
             </div>
-              {{--  numero-serie  --}}
-            <div class="form-group {{ $errors->has('numero-serie') ? ' has-danger' : '' }}">
-                <label for="input-numero_serie">Número de serie</label>
-                <input type="text" name="numero-serie" id="input-numero_serie" class="form-control {{ $errors->has('numero-serie') ? ' is-invalid' : '' }}" 
-                value="{{ old('numero-serie') }}" required>
-                @if ($errors->has('numero-serie'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('numero-serie') }}</strong>
-                    </span>
-                @endif
+            <div class="form-row">
+                <div class="col-md-12">
+                    <select id='departamento_id' class="custom-select" style="width: 100%" name="departamento_id"> 
+                        <option value='0'>{{ __('Seleccionar departamento') }}</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-auto">
-                <select id='departamento_id' class="custom-select form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id"> 
-                    <option value='0'>{{ __('Seleccionar departamento') }}</option>
-                </select>
-            </div>
+            
         </div>
         <div class="modal-footer">
-            <button type="button" id="agregar_carrera" class="btn btn-primary " style="left: 355px;" >Guardar</button>
+            <button type="button" id="agregar_docente" class="btn btn-primary " style="left: 355px;" >Guardar</button>
         </div>
         </div>
     </div>
@@ -49,19 +42,23 @@
 <script>
     // CSRF Token
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    function agregarCarrera(nombre, numero_serie, departamento_id){
+    function agregarDocente(nombre, direccion, telefono, email, password, numero_empleado, departamento_id){
         $.ajax({
-            url: "{{route('carreras.store')}}",
+            url: "{{route('registrar.docente')}}",
             dataType: 'json',
             type:"post",
             data: {
-                "_token": "{{ csrf_token() }}",
-                'departamento_id': departamento_id,
+                "_token": "{{ csrf_token() }}",                
                 "nombre": nombre,
-                "numero_serie": numero_serie
+                "direccion": direccion,
+                "telefono": telefono,
+                "email": email,
+                "password": password,
+                "numero_empleado": numero_empleado,
+                'departamento_id': departamento_id
             },
         success: function (response) {  
-            mostrarCarreras(response.data);                       
+            mostrarDocentes(response.data);                       
             $('#AgregarModal').modal('hide')
             }
         });
@@ -71,13 +68,17 @@
 
     $(document).ready(function(){
 
-        $("#agregar_carrera").click(function(){
+        $("#agregar_docente").click(function(){
           //obtener valores de los inputs
             var nombre = document.getElementById("input-nombre").value;
-            var numero_serie = document.getElementById("input-numero_serie").value;
+            var direccion = document.getElementById("input-direccion").value;
+            var telefono = document.getElementById("input-telefono").value;
+            var email = document.getElementById("input-email").value;
+            var password = document.getElementById("input-password").value;
+            var numero_empleado = document.getElementById("input-numero_empleado").value;
             var departamento_id = document.getElementById("departamento_id").value;
 
-            agregarCarrera(nombre, numero_serie, departamento_id);
+            agregarDocente(nombre, direccion, telefono, email, password, numero_empleado, departamento_id);
             
         }); 
         $("#departamento").select2({
@@ -101,7 +102,7 @@
             cache: true
             }
         });
-          $("#departamento_id").select2({
+        $("#departamento_id").select2({
             minimumInputLength: 3,
             ajax: { 
             url: "{{route('departamentos.busqueda')}}",

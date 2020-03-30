@@ -1,28 +1,48 @@
-@extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'users'])
+@extends('layouts.app', ['page' => __('Grupos'), 'pageSlug' => 'grupos'])
 @section('content')
-<div class="row center-block">
-<a class="navbar-brand " href="#"  style="color: #28CA00;">GRUPO</a>
-</div>
-    <div class="row">
-            <div class="row" style="margin-left: 0px;">
-                <div class="col-8">
-                    <h4 class="card-title">{{ __('Grupos') }}</h4>
-                </div>
-            </div>
-            <div class="card">  
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-4">   
-                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo" style="background: #28CA00;">Agregar</button>   
-                        </div>  
-                        <div class="col-lg-8">
-                            <!-- Search form -->
-                            <input class="form-control" type="text" placeholder="Search" aria-label="Search">   
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">  
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Grupos</h4>
+                        <div class="row">
+                            <div class="col-md-1">   
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo">Agregar</button>   
+                            </div>          
+                            <div class="col-md-11">
+                                <!-- Search form -->
+                                <form  method="post" action="{{ route('grupos.buscar') }}" >
+                                    @csrf                                 
+                                    <div class="form-row">
+                                        <div class="col-md-3">
+                                            <select id='carrera' class="custom-select" name="carrera"> 
+                                                <option value='0'>Carrera</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select id='semestre' class="custom-select" name="semestre"> 
+                                                <option value='0'>Semestre</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 col-auto">
+                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        </div> 
+                                        <div class="col-md-1">
+                                            <button class="btn btn-primary btn-fab btn-icon">
+                                                <i class="fas fa-search"></i>
+                                              </button>
+                                        </div>                  
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    @include('alerts.success')     
-                    <div class="row">
-                        <div class="col-lg-12">                           
+                
+                    <div class="card-body">
+                        @include('alerts.success')     
+                        <div class="table-responsive">                           
                             <table class="table" id="tabla-grupos" >
                                 <thead class=" text-primary" >
                                     <th scope="col">{{ __('ID') }}</th>
@@ -45,9 +65,9 @@
                                             <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $grupo->id }})">
                                                     <i class="fas fa-pencil-alt fa-2 "></i>
                                             </button>
-                                            <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalGruposs({{ $grupo->id }}, '{{ $grupo->nombre }}')">
+                                            <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href=" {{ route('grupos.show', $grupo) }} ">
                                                     <i class="fa fa-eye "></i>
-                                            </button>
+                                            </a>
                                             <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $grupo->id }})">
                                                     <i class="fas fa-trash"></i>
                                             </button>
@@ -56,16 +76,18 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div> 
-                    </div>                                  
-                </div>
-                <div class="card-footer py-4">
-                    <nav class="d-flex justify-content-end" aria-label="...">
-                         {{ $grupos->links() }}
-                    </nav>
+                        </div>                                  
+                    </div>
+                    <div class="card-footer py-4">
+                        <nav class="d-flex justify-content-end" aria-label="...">
+                            {{ $grupos->links() }}
+                        </nav>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
+</div>
 @include('Admin.Grupos.agregarModal')
 @include('Admin.Grupos.editarModal')
 @include('Admin.Grupos.verModal')
