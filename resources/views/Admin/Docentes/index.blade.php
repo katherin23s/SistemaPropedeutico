@@ -12,18 +12,26 @@
                             <div class="col-md-1">   
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo">Agregar</button>   
                             </div>  
-                            <div class="col-md-3">                   
-                                <select>
-                                    <option selected>Departamento</option>
-                                    @foreach ($departamentos as $departamento)
-                                        <option value=" {{ $departamento->id }} ">{{ $departamento->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-            
-                            <div class="col-md-7">
+                            <div class="col-md-11">
                                 <!-- Search form -->
-                                <input class="form-control" type="text" placeholder="Buscar" aria-label="Search">   
+                                <form  method="post" action="{{ route('docentes.buscar') }}" >
+                                    @csrf                                 
+                                    <div class="form-row">
+                                        <div class="col-md-3">
+                                            <select id='departamento' class="custom-select" name="departamento"> 
+                                                <option value='0'>Departamento</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8 col-auto">
+                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        </div> 
+                                        <div class="col-md-1">
+                                            <button class="btn btn-primary btn-fab btn-icon">
+                                                <i class="fas fa-search"></i>
+                                              </button>
+                                        </div>                  
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -94,7 +102,7 @@
                 + "<td>" + docentes[i].nombre + "</td>" 
                 + "<td>" + docentes[i].direccion + "</td>"
                 + "<td>" + docentes[i].telefono + "</td>"
-                + "<td>" + docentes[i].correo + "</td>"
+                + "<td>" + docentes[i].email + "</td>"
                 + "<td>" + docentes[i].departamento + "</td>" 
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + docentes[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
                 +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModaldocentes(\'' + docentes[i].id + '\',\'' + docentes[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 

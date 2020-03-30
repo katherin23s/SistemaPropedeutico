@@ -78,7 +78,28 @@
             agregarAlumno(nombre, direccion, telefono, email, password, numero_alumno, grupo_id);
             
         }); 
-          $("#grupo_id").select2({
+        $("#grupo").select2({
+            minimumInputLength: 3,
+            ajax: { 
+            url: "{{route('grupos.busqueda')}}",
+            type:'post',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                _token: CSRF_TOKEN,
+                search: params.term // search term
+                };
+            },
+            processResults: function (response) {
+                return {
+                results: response
+                };
+            },
+            cache: true
+            }
+        });
+        $("#grupo_id").select2({
             minimumInputLength: 3,
             ajax: { 
             url: "{{route('grupos.busqueda')}}",

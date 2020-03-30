@@ -78,7 +78,28 @@
             agregarDocente(nombre, direccion, telefono, email, password, numero_empleado, departamento_id);
             
         }); 
-          $("#departamento_id").select2({
+        $("#departamento").select2({
+            minimumInputLength: 3,
+            ajax: { 
+            url: "{{route('departamentos.busqueda')}}",
+            type:'post',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                _token: CSRF_TOKEN,
+                search: params.term // search term
+                };
+            },
+            processResults: function (response) {
+                return {
+                results: response
+                };
+            },
+            cache: true
+            }
+        });
+        $("#departamento_id").select2({
             minimumInputLength: 3,
             ajax: { 
             url: "{{route('departamentos.busqueda')}}",

@@ -18,7 +18,7 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $alumnos = Alumno::with('grupo')->paginate(10);
+        $alumnos = Alumno::with('grupo')->paginate(15);
 
         return view('Admin.Alumnos.index', compact('alumnos'));
     }
@@ -29,7 +29,7 @@ class AlumnoController extends Controller
         $validados['password'] = Hash::make($validados['password']);
         Alumno::create($validados);
 
-        $alumnos = Alumno::with('departamento')->paginate(10);
+        $alumnos = Alumno::with('departamento')->paginate(15);
 
         return AlumnoResource::collection($alumnos);
     }
@@ -57,7 +57,7 @@ class AlumnoController extends Controller
         $alumno->fill($datos_validados);
         $alumno->save();
 
-        $alumnos = Alumno::with('grupo')->paginate(10);
+        $alumnos = Alumno::with('grupo')->paginate(15);
 
         return AlumnoResource::collection($alumnos);
     }
@@ -75,8 +75,31 @@ class AlumnoController extends Controller
 
         $alumno->delete();
 
-        $alumnos = Alumno::with('grupo')->paginate(10);
+        $alumnos = Alumno::with('grupo')->paginate(15);
 
         return AlumnoResource::collection($alumnos);
+    }
+
+    public function buscar(Request $request)
+    {
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+
+        $grupo_id = $request['grupo'];
+        if ($grupo_id > 0) {
+            $alumnos = Alumno::with('grupo')
+                ->whereLike(['nombre', 'numero_alumno', 'email'], $busqueda)
+                ->where('grupo_id', $grupo_id)
+                ->paginate(15)
+            ;
+        } else {
+            $alumnos = Alumno::with('grupo')
+                ->whereLike(['nombre', 'numero_alumno', 'email'], $busqueda)->paginate(15);
+        }
+
+        return view('Admin.Alumnos.index', compact('alumnos'));
     }
 }

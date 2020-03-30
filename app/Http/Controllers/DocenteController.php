@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Departamento;
 use App\Docente;
 use App\Http\Requests\ActualizarDocenteRequest;
 use App\Http\Requests\RegistrarDocenteRequest;
@@ -19,11 +18,9 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $docentes = Docente::with('departamento')->paginate(10);
+        $docentes = Docente::with('departamento')->paginate(15);
 
-        $departamentos = Departamento::get();
-
-        return view('Admin.Docentes.index', compact('docentes', 'departamentos'));
+        return view('Admin.Docentes.index', compact('docentes'));
     }
 
     public function store(RegistrarDocenteRequest $request)
@@ -32,7 +29,7 @@ class DocenteController extends Controller
         $validados['password'] = Hash::make($validados['password']);
         Docente::create($validados);
 
-        $docentes = Docente::with('departamento')->paginate(10);
+        $docentes = Docente::with('departamento')->paginate(15);
 
         return DocenteResource::collection($docentes);
     }
@@ -60,7 +57,7 @@ class DocenteController extends Controller
         $docente->fill($datos_validados);
         $docente->save();
 
-        $docentes = Docente::with('departamento')->paginate(10);
+        $docentes = Docente::with('departamento')->paginate(15);
 
         return DocenteResource::collection($docentes);
     }
@@ -78,7 +75,7 @@ class DocenteController extends Controller
 
         $docente->delete();
 
-        $docentes = Docente::with('departamento')->paginate(10);
+        $docentes = Docente::with('departamento')->paginate(15);
 
         return DocenteResource::collection($docentes);
     }
@@ -98,5 +95,28 @@ class DocenteController extends Controller
         }
         echo json_encode($response);
         exit;
+    }
+
+    public function buscar(Request $request)
+    {
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+
+        $departamento_id = $request['departamento'];
+        if ($departamento_id > 0) {
+            $docentes = Docente::with('departamento')
+                ->whereLike(['nombre', 'numero_empleado', 'email'], $busqueda)
+                ->where('departamento_id', $departamento_id)
+                ->paginate(15)
+            ;
+        } else {
+            $docentes = Docente::with('departamento')
+                ->whereLike(['nombre', 'numero_empleado', 'email'], $busqueda)->paginate(15);
+        }
+
+        return view('Admin.Docentes.index', compact('docentes'));
     }
 }
