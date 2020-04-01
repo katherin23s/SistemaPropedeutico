@@ -13,7 +13,7 @@
 
 //Route::resource('/dashboard', 'AdminController@admin')->name('Dashboard');
 
-Route::get('/dashboard', 'AdminController@admin')->name('Dashboard');
+// Route::get('/dashboard', 'AdminController@admin')->name('Dashboard');
 
 Route::view('/', 'welcome');
 
@@ -22,14 +22,24 @@ Auth::routes();
 Route::get('/login/docente', 'Auth\LoginController@inicioSesionDocente');
 Route::get('/login/alumno', 'Auth\LoginController@inicioSesionAlumno');
 
-Route::post('/login/docente', 'Auth\LoginController@docenteLogin');
-Route::post('/login/alumno', 'Auth\LoginController@alumnoLogin');
-
-Route::view('/docente', 'Docentes.horario');
-Route::view('/alumno', 'Alumnos.InformacionPerfil');
+Route::post('/login/docente', 'Auth\LoginController@docenteLogin')->name('login.docente');
+Route::post('/login/alumno', 'Auth\LoginController@alumnoLogin')->name('login.alumno');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
+//Alumno
+Route::group(['middleware' => ['auth.alumno']], function () {
+    // login protected routes.
+    Route::view('/alumno', 'Alumnos.InformacionPerfil');
+});
+
+//DOCENTE
+Route::group(['middleware' => ['auth.docente']], function () {
+    // login protected routes.
+    Route::view('/docente', 'Docentes.horario');
+});
+
+//ADMIN
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
 
