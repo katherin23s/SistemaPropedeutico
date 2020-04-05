@@ -42,8 +42,13 @@ class UserAlumnoController extends Controller
 
     public function home(Alumno $alumno)
     {
+        return view('Alumnos.home', compact('alumno'));
+    }
+
+    public function horario(Alumno $alumno)
+    {
         $alumno->load('grupo.clases');
 
-        return view('Alumnos.home', compact('alumno'));
+        return view('Alumnos.horario', compact('alumno'));
     }
 }

@@ -31,6 +31,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::group(['middleware' => ['auth.alumno']], function () {
     // login protected routes.
     Route::get('/alumno/home', 'UserAlumnoController@home')->name('alumno.home');
+    Route::get('/alumno/horario', 'UserAlumnoController@horario')->name('alumno.horario');
 });
 
 //DOCENTE
