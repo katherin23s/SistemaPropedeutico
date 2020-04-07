@@ -113,6 +113,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('materias/busqueda', 'MateriaController@busqueda')->name('materias.busqueda');
     Route::post('materias/buscar', 'MateriaController@buscar')->name('materias.buscar');
 
+    Route::get('clases', 'ClaseController@index')->name('clases.index');
+    Route::post('clases/agregar', 'ClaseController@store')->name('clases.store');
+    Route::post('clases/encontrar', 'ClaseController@encontrar')->name('clases.encontrar');
+    Route::patch('clases/actualizar', 'ClaseController@update')->name('clases.update');
+    Route::delete('clases/eliminar', 'ClaseController@eliminar')->name('clases.eliminar');
+    Route::post('clases/busqueda', 'ClaseController@busqueda')->name('clases.busqueda');
+    Route::get('clases/{Clase}', 'ClaseController@show')->name('clases.show');
+    Route::post('clases/buscar', 'ClaseController@buscar')->name('clases.buscar');
+
     Route::post('docentes/agregar', 'DocenteController@store')->name('registrar.docente');
     Route::post('alumnos/agregar', 'AlumnoController@store')->name('registrar.alumno');
 

@@ -8,8 +8,6 @@ class CreateClasesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -18,10 +16,7 @@ class CreateClasesTable extends Migration
             $table->unsignedBigInteger('materia_id');
             $table->unsignedBigInteger('docente_id');
             $table->unsignedBigInteger('grupo_id');
-            $table->string('materia'); //esta es por si se requiere
-            //cambiar como la clave o algo de la
-            //materiaokko al momento de asignarla, por default
-            //seria el nombre/clave de la materia
+            $table->string('materia');
 
             $table->datetime('hora_inicio');
             $table->datetime('hora_final');
@@ -38,8 +33,6 @@ class CreateClasesTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

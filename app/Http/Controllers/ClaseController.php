@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Clase;
+use App\Http\Requests\ActualizarClaseRequest;
+use App\Http\Requests\ClaseRequest;
+use App\Http\Resources\ClaseResource;
 use Illuminate\Http\Request;
 
 class ClaseController extends Controller
@@ -14,7 +17,12 @@ class ClaseController extends Controller
      */
     public function index()
     {
-        //
+        //el index donde se muestra la lista de todos los clases
+        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+            ->paginate(15)
+        ;
+
+        return view('Admin.Clases.index', compact('clases'));
     }
 
     /**
@@ -24,62 +32,121 @@ class ClaseController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClaseRequest $request)
     {
-        //
+        $datosvalidados = $request->validated();
+        Clase::create($datosvalidados);
+        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
+
+        return ClaseResource::collection($clases);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Clase  $clase
      * @return \Illuminate\Http\Response
      */
     public function show(Clase $clase)
     {
-        //
+        $clase->load('materia', 'docente', 'grupo.alumnos');
+
+        return view('Admin.Clases.ver', compact('clase'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Clase  $clase
      * @return \Illuminate\Http\Response
      */
     public function edit(Clase $clase)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Clase  $clase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clase $clase)
+    public function update(ActualizarClaseRequest $request)
     {
-        //
+        $datos_validados = $request->validated();
+        $id = $request->clase_id;
+        $clase = Clase::findOrFail($id);
+
+        $clase->fill($datos_validados);
+        $clase->save();
+
+        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
+
+        return ClaseResource::collection($clases);
+    }
+
+    public function encontrar(Request $request)
+    {
+        $clase = Clase::findOrFail($request->clase_id);
+
+        return new ClaseResource($clase);
+    }
+
+    public function eliminar(Request $request)
+    {
+        $clase = Clase::findOrFail($request->clase_id);
+
+        $clase->delete();
+
+        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
+
+        return ClaseResource::collection($clases);
+    }
+
+    public function buscar(Request $request)
+    {
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+        $grupo_id = $request['grupo'];
+        $carrera_id = $request['carrera'];
+        $semestre_id = $request['semestre'];
+        if ($carrera_id > 0 && $semestre_id > 0) {
+            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+                ->whereLike(['numero'], $busqueda)
+                ->where([['carrera_id', $carrera_id], ['semestre_id', $semestre_id]])
+                ->paginate(15)
+            ;
+        } elseif ($carrera_id > 0 && $semestre_id <= 0) {
+            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+                ->whereLike(['numero'], $busqueda)
+                ->where('carrera_id', $carrera_id)
+                ->paginate(15)
+            ;
+        } elseif ($carrera_id <= 0 && $semestre_id > 0) {
+            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+                ->whereLike(['numero'], $busqueda)
+                ->where('semestre_id', $semestre_id)
+                ->paginate(15)
+            ;
+        } else {
+            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
+        }
+
+        return view('Admin.clases.index', compact('clases'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Clase  $clase
      * @return \Illuminate\Http\Response
      */
     public function destroy(Clase $clase)
     {
-        //
     }
 }

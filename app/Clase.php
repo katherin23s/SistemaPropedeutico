@@ -17,17 +17,6 @@ class Clase extends Model
         'materia_id',
         'docente_id',
     ];
-    public static $rules = [
-        'materia' => 'required|max:255|min:1',
-        'hora_inicio' => 'required',
-        'hora_final' => 'required',
-        'dias' => 'required|max:255|min:1',
-        'salon' => 'required|max:255|min:1',
-        'capacidad' => 'required|integer|min:1',
-        'grupo_id' => 'required|integer',
-        'materia_id' => 'required|integer',
-        'docente_id' => 'required|integer',
-    ];
     protected $casts = [
         'id' => 'integer',
         'materia' => 'string',
