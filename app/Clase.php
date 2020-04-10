@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Clase extends Model
 {
     public $fillable = [
-        'materia',
+        'clave',
         'hora_inicio',
         'hora_final',
         'dias',
@@ -19,7 +19,7 @@ class Clase extends Model
     ];
     protected $casts = [
         'id' => 'integer',
-        'materia' => 'string',
+        'clave' => 'string',
         'salon' => 'string',
         'dias' => 'string',
         'capacidad' => 'integer',
