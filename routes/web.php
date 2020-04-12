@@ -13,7 +13,7 @@
 
 //Route::resource('/dashboard', 'AdminController@admin')->name('Dashboard');
 
-Route::get('/dashboard', 'AdminController@admin')->name('Dashboard');
+// Route::get('/dashboard', 'AdminController@admin')->name('Dashboard');
 
 Route::view('/', 'welcome');
 
@@ -22,14 +22,25 @@ Auth::routes();
 Route::get('/login/docente', 'Auth\LoginController@inicioSesionDocente');
 Route::get('/login/alumno', 'Auth\LoginController@inicioSesionAlumno');
 
-Route::post('/login/docente', 'Auth\LoginController@docenteLogin');
-Route::post('/login/alumno', 'Auth\LoginController@alumnoLogin');
-
-Route::view('/docente', 'Docentes.horario');
-Route::view('/alumno', 'Alumnos.InformacionPerfil');
+Route::post('/login/docente', 'Auth\LoginController@docenteLogin')->name('login.docente');
+Route::post('/login/alumno', 'Auth\LoginController@alumnoLogin')->name('login.alumno');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
+//Alumno
+Route::group(['middleware' => ['auth.alumno']], function () {
+    // login protected routes.
+    Route::get('/alumno/home', 'UserAlumnoController@home')->name('alumno.home');
+    Route::get('/alumno/horario', 'UserAlumnoController@horario')->name('alumno.horario');
+});
+
+//DOCENTE
+Route::group(['middleware' => ['auth.docente']], function () {
+    // login protected routes.
+    Route::view('/docente', 'Docentes.horario');
+});
+
+//ADMIN
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
 
@@ -101,6 +112,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('materias/eliminar', 'MateriaController@eliminar')->name('materias.eliminar');
     Route::post('materias/busqueda', 'MateriaController@busqueda')->name('materias.busqueda');
     Route::post('materias/buscar', 'MateriaController@buscar')->name('materias.buscar');
+
+    Route::get('clases', 'ClaseController@index')->name('clases.index');
+    Route::post('clases/agregar', 'ClaseController@store')->name('clases.store');
+    Route::post('clases/encontrar', 'ClaseController@encontrar')->name('clases.encontrar');
+    Route::patch('clases/actualizar', 'ClaseController@update')->name('clases.update');
+    Route::delete('clases/eliminar', 'ClaseController@eliminar')->name('clases.eliminar');
+    Route::post('clases/busqueda', 'ClaseController@busqueda')->name('clases.busqueda');
+    Route::get('clases/{Clase}', 'ClaseController@show')->name('clases.show');
+    Route::post('clases/buscar', 'ClaseController@buscar')->name('clases.buscar');
 
     Route::post('docentes/agregar', 'DocenteController@store')->name('registrar.docente');
     Route::post('alumnos/agregar', 'AlumnoController@store')->name('registrar.alumno');

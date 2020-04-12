@@ -29,7 +29,7 @@ class AlumnoController extends Controller
         $validados['password'] = Hash::make($validados['password']);
         Alumno::create($validados);
 
-        $alumnos = Alumno::with('departamento')->paginate(15);
+        $alumnos = Alumno::with('grupo')->paginate(15);
 
         return AlumnoResource::collection($alumnos);
     }
@@ -41,6 +41,9 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno)
     {
+        $alumno::load('grupo.clases');
+
+        return view('');
     }
 
     /**
@@ -50,7 +53,7 @@ class AlumnoController extends Controller
      */
     public function update(ActualizarAlumnoRequest $request)
     {
-        $datos_validados = $request->validated();
+        $datos_validados = $request->validate();
         $id = $request->alumno_id;
         $alumno = Alumno::findOrFail($id);
 
