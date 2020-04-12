@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Alumno;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IniciarSesionRequest;
 use App\Providers\RouteServiceProvider;
@@ -63,10 +64,12 @@ class LoginController extends Controller
 
     public function alumnoLogin(IniciarSesionRequest $request)
     {
-        $validados = $request->validate();
+        $validados = $request->validated();
 
-        if (Auth::guard('alumno')->attempt(['email' => $validados->email, 'password' => $validados->password], $request->get('remember'))) {
-            return redirect()->intended('/alumno');
+        if (Auth::guard('alumno')->attempt(['email' => $validados['email'], 'password' => $validados['password']], $request->get('remember'))) {
+            $alumno = Alumno::where('email', $validados['email'])->first();
+
+            return redirect()->action('UserAlumnoController@home', ['alumno' => $alumno]);
         }
 
         return back()->withInput($request->only('email', 'remember'));

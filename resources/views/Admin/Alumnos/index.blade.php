@@ -56,7 +56,7 @@
                                             <td>{{ $alumno->direccion }}</td>
                                             <td>{{ $alumno->telefono }}</td>
                                             <td>
-                                                <a href="mailto:{{ $alumno->correo }}">{{ $alumno->correo }}</a>
+                                                <a href="mailto:{{ $alumno->email }}">{{ $alumno->email }}</a>
                                             </td>
                                             <td>{{ $alumno->grupo->numero }}</td>
                                             <td class="td-actions text-right">

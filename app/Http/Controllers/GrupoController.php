@@ -19,7 +19,7 @@ class GrupoController extends Controller
     public function index()
     {
         //el index donde se muestra la lista de todos los grupos
-        $grupos = Grupo::paginate(15);
+        $grupos = Grupo::with('carrera', 'semestre')->paginate(15);
 
         return view('Admin.Grupos.index', compact('grupos'));
     }
@@ -45,7 +45,7 @@ class GrupoController extends Controller
         $datosvalidados = $request->validated();
         Grupo::create($datosvalidados);
 
-        return GrupoResource::collection(Grupo::paginate(10));
+        return GrupoResource::collection(Grupo::with('carrera', 'semestre')->paginate(15));
     }
 
     /**
@@ -88,7 +88,7 @@ class GrupoController extends Controller
         $grupo->fill($datos_validados);
         $grupo->save();
 
-        return GrupoResource::collection(Grupo::paginate(10));
+        return GrupoResource::collection(Grupo::with('carrera', 'semestre')->paginate(15));
     }
 
     public function encontrar(Request $request)
@@ -135,22 +135,25 @@ class GrupoController extends Controller
         $carrera_id = $request['carrera'];
         $semestre_id = $request['semestre'];
         if ($carrera_id > 0 && $semestre_id > 0) {
-            $grupos = Grupo::whereLike(['numero'], $busqueda)
+            $grupos = Grupo::with('carrera', 'semestre')
+                ->whereLike(['numero'], $busqueda)
                 ->where([['carrera_id', $carrera_id], ['semestre_id', $semestre_id]])
                 ->paginate(15)
             ;
         } elseif ($carrera_id > 0 && $semestre_id <= 0) {
-            $grupos = Grupo::whereLike(['numero'], $busqueda)
+            $grupos = Grupo::with('carrera', 'semestre')
+                ->whereLike(['numero'], $busqueda)
                 ->where('carrera_id', $carrera_id)
                 ->paginate(15)
             ;
         } elseif ($carrera_id <= 0 && $semestre_id > 0) {
-            $grupos = Grupo::whereLike(['numero'], $busqueda)
+            $grupos = Grupo::with('carrera', 'semestre')
+                ->whereLike(['numero'], $busqueda)
                 ->where('semestre_id', $semestre_id)
                 ->paginate(15)
             ;
         } else {
-            $grupos = Grupo::whereLike(['numero'], $busqueda)->paginate(15);
+            $grupos = Grupo::with('carrera', 'semestre')->whereLike(['numero'], $busqueda)->paginate(15);
         }
 
         return view('Admin.Grupos.index', compact('grupos'));
