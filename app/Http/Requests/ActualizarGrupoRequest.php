@@ -13,7 +13,7 @@ class ActualizarGrupoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,9 +27,7 @@ class ActualizarGrupoRequest extends FormRequest
             'grupo_id' => 'required',
             'numero' => 'required|max:255|min:1',
             'hora_inicio' => 'required',
-            'hora_final' => 'required',
-            'semestre_id' => 'required|integer',
-            'carrera_id' => 'required|integer',
+            'hora_final' => 'required'
         ];
     }
 }

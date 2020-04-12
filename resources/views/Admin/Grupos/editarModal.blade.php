@@ -57,7 +57,7 @@
             type:"patch",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "id": id,
+                "grupo_id": id,
                 "numero": numero,
                 "hora_inicio": hora_inicio_fecha,
                 "hora_final": hora_final_fecha
@@ -95,8 +95,8 @@
     $(document).ready(function(){
         $("#actualizar-grupo").click(function(){
           //obtener valores de los inputs
-          var hora_inicio = document.getElementById("input-hora_inicio").value;
-          var hora_final= document.getElementById("input-hora_final").value;
+          var hora_inicio = document.getElementById("actualizar-hora_inicio").value;
+          var hora_final= document.getElementById("actualizar-hora_final").value;
 
           var hora_inicio_fecha = tiempoAFecha(hora_inicio);
           var hora_final_fecha = tiempoAFecha(hora_final);
@@ -107,7 +107,7 @@
               hora_inicio_fecha = hora_inicio_fecha.toISOString().split('T')[0]+' '+hora_inicio_fecha.toTimeString().split(' ')[0];
               hora_final_fecha = hora_final_fecha.toISOString().split('T')[0]+' '+hora_final_fecha.toTimeString().split(' ')[0];
 
-              actualizarGrupo(grupo_id, numero, hora_inicio_fecha, hora_inicio_fecha);
+              actualizarGrupo(grupo_id, numero, hora_inicio_fecha, hora_final_fecha);
           }
           else {
             alert("Horario invalido.");

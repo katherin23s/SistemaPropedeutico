@@ -13,7 +13,7 @@
           <div class="row form-group col-auto col-12" style="height: 25px;">
             <label id="ver-plantel-nombre" for="recipient-name" class="col-form-label col-6 "style="padding-left: 0px "></label>
           </div>
-          <table class="table" id="tabla-departamentos">
+          <table class="table" id="tabla-departamentos2">
               <thead class=" text-primary">
                   <th scope="col">{{ __('Departamento') }}</th>
               </thead>
@@ -58,7 +58,7 @@
                 + "<td>" + departamentos[i].nombre + "</td>"
                 +  "</td></tr>";
         }
-        $('#tabla-departamentos tbody').html(output);
+        $('#tabla-departamentos2 tbody').html(output);
     }
 </script>
 @endpush

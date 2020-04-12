@@ -29,7 +29,7 @@ class AlumnoController extends Controller
         $validados['password'] = Hash::make($validados['password']);
         Alumno::create($validados);
 
-        $alumnos = Alumno::with('departamento')->paginate(15);
+        $alumnos = Alumno::with('grupo')->paginate(15);
 
         return AlumnoResource::collection($alumnos);
     }
@@ -93,8 +93,7 @@ class AlumnoController extends Controller
             $alumnos = Alumno::with('grupo')
                 ->whereLike(['nombre', 'numero_alumno', 'email'], $busqueda)
                 ->where('grupo_id', $grupo_id)
-                ->paginate(15)
-            ;
+                ->paginate(15);
         } else {
             $alumnos = Alumno::with('grupo')
                 ->whereLike(['nombre', 'numero_alumno', 'email'], $busqueda)->paginate(15);
