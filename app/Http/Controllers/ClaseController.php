@@ -113,24 +113,23 @@ class ClaseController extends Controller
         } else {
             $busqueda = $request['buscar'];
         }
-        $grupo_id = $request['grupo'];
         $carrera_id = $request['carrera'];
         $semestre_id = $request['semestre'];
         if ($carrera_id > 0 && $semestre_id > 0) {
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-                ->whereLike(['numero'], $busqueda)
+                ->whereLike(['numero', 'grupo.numero'], $busqueda)
                 ->where([['carrera_id', $carrera_id], ['semestre_id', $semestre_id]])
                 ->paginate(15)
             ;
         } elseif ($carrera_id > 0 && $semestre_id <= 0) {
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-                ->whereLike(['numero'], $busqueda)
+                ->whereLike(['numero', 'grupo.numero'], $busqueda)
                 ->where('carrera_id', $carrera_id)
                 ->paginate(15)
             ;
         } elseif ($carrera_id <= 0 && $semestre_id > 0) {
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-                ->whereLike(['numero'], $busqueda)
+                ->whereLike(['numero', 'grupo.numero'], $busqueda)
                 ->where('semestre_id', $semestre_id)
                 ->paginate(15)
             ;
