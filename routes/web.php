@@ -115,6 +115,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('materias/eliminar', 'MateriaController@eliminar')->name('materias.eliminar');
     Route::post('materias/busqueda', 'MateriaController@busqueda')->name('materias.busqueda');
     Route::post('materias/buscar', 'MateriaController@buscar')->name('materias.buscar');
+    Route::get('materias/{materia}', 'MateriaController@show')->name('materias.ver');
+
 
     Route::get('clases', 'ClaseController@index')->name('clases.index');
     Route::post('clases/agregar', 'ClaseController@store')->name('clases.store');

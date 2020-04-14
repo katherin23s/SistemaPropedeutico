@@ -60,9 +60,9 @@
                                             <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $materia->id }})"> 
                                                     <i class="fas fa-pencil-alt fa-2 "></i>
                                             </button>
-                                            <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="href="{{ route('materia.ver', $materia) }}>
-                                                    <i class="fa fa-eye "></i>
-                                            </button>
+                                            <a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href=" {{ route('materias.ver', $materia) }} ">
+                                                    <i class="fa fa-eye "></i> 
+                                            </a>
                                             <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $materia->id }})">
                                                     <i class="fa fa-trash"></i>
                                             </button>

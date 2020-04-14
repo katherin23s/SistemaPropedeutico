@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Carrera;
 use App\Http\Requests\ActualizarMateriaRequest;
 use App\Http\Requests\MateriaRequest;
 use App\Http\Resources\MateriaResource;
@@ -34,6 +35,21 @@ class MateriaController extends Controller
         Materia::create($datosvalidados);
 
         return MateriaResource::collection(Materia::paginate(10));
+    }
+
+       /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Materia $materia)
+    {
+       // $materia->load('carrera');
+        $carreras = Carrera::with('materia', 'grupo')
+            ->where('materia_id', $materia->id)
+            ->get() 
+        ;
+        return view('Admin.Materias.ver', compact('materia'));
     }
 
     /**
