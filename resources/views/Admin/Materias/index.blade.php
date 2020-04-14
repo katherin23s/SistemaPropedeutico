@@ -57,10 +57,10 @@
                                         <td>{{ $materia->unidades }}</td>
                                         <td>{{ $materia->carrera->nombre }}</td>
                                         <td class="td-actions text-right">
-                                            <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $materia->id }})">
+                                            <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $materia->id }})"> 
                                                     <i class="fas fa-pencil-alt fa-2 "></i>
                                             </button>
-                                            <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalMaterias({{ $materia->id }}, '{{ $materia->nombre }}')">
+                                            <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="href="{{ route('materia.ver', $materia) }}>
                                                     <i class="fa fa-eye "></i>
                                             </button>
                                             <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $materia->id }})">

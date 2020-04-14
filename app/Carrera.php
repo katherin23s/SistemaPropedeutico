@@ -18,6 +18,12 @@ class Carrera extends Model
         return $this->hasMany('App\Grupo');
     }
 
+     //Una carrera tiene muchos materias
+    public function materias()
+    {
+        return $this->hasMany('App\Materia');
+    }
+
     public $fillable = [
         'nombre',
         'numero_serie',

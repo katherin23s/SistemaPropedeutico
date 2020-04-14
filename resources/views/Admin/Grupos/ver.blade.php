@@ -54,7 +54,7 @@
                                                     <td>{{ $alumno->numero }}</td>
                                                     <td>{{ $alumno->nombre}}</td>
                                                     <td>
-                                                        <a href="mailto:{{ $alumno->correo }}">{{ $alumno->correo }}</a>
+                                                        <a href="mailto:{{ $alumno->email }}">{{ $alumno->email }}</a>
                                                     </td>
                                                     <td class="td-actions text-right">
                                                     <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $alumno->id }})">

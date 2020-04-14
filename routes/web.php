@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('planteles/buscar', 'PlantelController@buscar')->name('planteles.buscar');
     Route::patch('planteles/actualizar', 'PlantelController@update')->name('planteles.update');
     Route::post('planteles/departamentos', 'PlantelController@obtenerDepartamentos')->name('planteles.departamentos');
+   
     Route::delete('planteles/eliminar', 'PlantelController@eliminar')->name('planteles.eliminar');
 
     Route::get('departamentos', 'DepartamentoController@index')->name('departamentos.index');
@@ -79,6 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('departamentos/actualizar', 'DepartamentoController@update')->name('departamentos.update');
     Route::delete('departamentos/eliminar', 'DepartamentoController@eliminar')->name('departamentos.eliminar');
     Route::post('departamentos/buscar', 'DepartamentoController@buscar')->name('departamentos.buscar');
+    Route::get('departamentos/{departamento}', 'DepartamentoController@show')->name('departamentos.ver');
 
     Route::get('carreras', 'CarreraController@index')->name('carreras.index');
     Route::post('carreras/agregar', 'CarreraController@store')->name('carreras.store');
@@ -87,6 +89,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('carreras/eliminar', 'CarreraController@eliminar')->name('carreras.eliminar');
     Route::post('carreras/busqueda', 'CarreraController@busqueda')->name('carreras.busqueda');
     Route::post('carreras/buscar', 'CarreraController@buscar')->name('carreras.buscar');
+    Route::post('carreras/materias', 'CarreraController@obtenerMaterias')->name('carreras.materias');
 
     Route::get('semestres', 'SemestreController@index')->name('semestres.index');
     Route::post('semestres/agregar', 'SemestreController@store')->name('semestres.store');
@@ -102,7 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('grupos/actualizar', 'GrupoController@update')->name('grupos.update');
     Route::delete('grupos/eliminar', 'GrupoController@eliminar')->name('grupos.eliminar');
     Route::post('grupos/busqueda', 'GrupoController@busqueda')->name('grupos.busqueda');
-    Route::get('grupos/{grupo}', 'GrupoController@show')->name('grupos.show');
+    Route::get('grupos/{grupo}', 'GrupoController@show')->name('grupos.ver');
     Route::post('grupos/buscar', 'GrupoController@buscar')->name('grupos.buscar');
 
     Route::get('materias', 'MateriaController@index')->name('materias.index');

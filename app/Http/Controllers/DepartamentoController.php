@@ -59,6 +59,8 @@ class DepartamentoController extends Controller
      */
     public function show(Departamento $departamento)
     {
+        $departamento->load('docentes', 'carreras');
+        return view('Admin.Departamento.ver', compact('departamento'));
     }
 
     /**

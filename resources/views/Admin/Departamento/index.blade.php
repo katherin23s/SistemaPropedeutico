@@ -64,9 +64,9 @@
                                                 <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $departamento->id }})">
                                                         <i class="fas fa-pencil-alt fa-2 "></i>
                                                 </button>
-                                                <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalDepartamentos({{ $departamento->id }}, '{{ $departamento->nombre }}')">
+                                                <a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href="{{ route('departamentos.ver', $departamento) }}">
                                                         <i class="fa fa-eye "></i>
-                                                </button>
+                                                </a>
                                                 <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $departamento->id }})">
                                                         <i class="fa fa-trash"></i>
                                                 </button>

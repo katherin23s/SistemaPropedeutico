@@ -65,7 +65,7 @@
                                             <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $grupo->id }})">
                                                     <i class="fas fa-pencil-alt fa-2 "></i>
                                             </button>
-                                            <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href=" {{ route('grupos.show', $grupo) }} ">
+                                            <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href=" {{ route('grupos.ver', $grupo) }} ">
                                                     <i class="fa fa-eye "></i>
                                             </a>
                                             <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $grupo->id }})">

@@ -7,6 +7,7 @@ use App\Departamento;
 use App\Http\Requests\ActualizarCarreraRequest;
 use App\Http\Requests\CarreraRequest;
 use App\Http\Resources\CarreraResource;
+use App\Materia;
 use Illuminate\Http\Request;
 
 class CarreraController extends Controller
@@ -120,4 +121,13 @@ class CarreraController extends Controller
 
         return view('Admin.Carrera.index', compact('carreras'));
     }
+
+     public function obtenerMaterias(Request $request)
+    {
+        $id = $request->carreras_id;
+        $materias = Materia::where('carreras_id', $id)->get();
+
+        return json_encode($materias);
+    }
+
 }
