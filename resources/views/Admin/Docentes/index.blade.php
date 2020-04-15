@@ -25,7 +25,7 @@
                                         <div class="col-md-8">
                                             <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
                                         </div> 
-                                        <div class="col-md-1 text-right">
+                                        <div class="col-md-1">
                                             <button class="btn btn-primary btn-fab btn-icon">
                                                 <i class="fas fa-search"></i>
                                               </button>
@@ -56,7 +56,7 @@
                                             <td>{{ $docente->direccion }}</td>
                                             <td>{{ $docente->telefono }}</td>
                                             <td>
-                                            <a href="mailto:{{ $docente->email }}">{{ $docente->email }}</a>
+                                                <a href="mailto:{{ $docente->email }}">{{ $docente->email }}</a>
                                             </td>
                                             <td>{{ $docente->departamento->nombre }}</td>
                                             <td class="td-actions text-right">

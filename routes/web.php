@@ -124,8 +124,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('clases/actualizar', 'ClaseController@update')->name('clases.update');
     Route::delete('clases/eliminar', 'ClaseController@eliminar')->name('clases.eliminar');
     Route::post('clases/busqueda', 'ClaseController@busqueda')->name('clases.busqueda');
-    Route::get('clases/{Clase}', 'ClaseController@show')->name('clases.show');
     Route::post('clases/buscar', 'ClaseController@buscar')->name('clases.buscar');
+    Route::get('clases/{clase}', 'ClaseController@show')->name('clases.ver');
 
     Route::post('docentes/agregar', 'DocenteController@store')->name('registrar.docente');
     Route::post('alumnos/agregar', 'AlumnoController@store')->name('registrar.alumno');

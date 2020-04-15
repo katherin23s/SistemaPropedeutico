@@ -26,4 +26,10 @@ class Materia extends Model
     {
         return $this->belongsTo('App\Carrera');
     }
+    
+    public function clases()
+    {
+        return $this->hasMany('App\Clase');
+    }
+    
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Carrera;
+use App\Clase;
 use App\Http\Requests\ActualizarMateriaRequest;
 use App\Http\Requests\MateriaRequest;
 use App\Http\Resources\MateriaResource;
@@ -44,12 +44,11 @@ class MateriaController extends Controller
      */
     public function show(Materia $materia)
     {
-       // $materia->load('carrera');
-        $carreras = Carrera::with('materia', 'grupo')
-            ->where('materia_id', $materia->id)
-            ->get() 
-        ;
-        return view('Admin.Materias.ver', compact('materia'));
+       $materia->load('carrera');
+
+       $clases = Clase::with('grupo', 'docente', 'materia')->paginate();
+        
+        return view('Admin.Materias.ver', compact('materia', 'clases'));
     }
 
     /**
