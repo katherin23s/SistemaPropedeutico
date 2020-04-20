@@ -54,13 +54,13 @@
                                             <td>{{ $carrera->numero_serie }}</td>
                                             <td>{{ $carrera->departamento->nombre }}</td>
                                             <td class="td-actions text-right">
-                                                <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $carrera->id }})">
+                                                <button class="btn btn-info btn-sm btn-icon" rel="tooltip" type="button" onClick="mostrarModalEditar({{ $carrera->id }})">
                                                         <i class="fas fa-pencil-alt fa-2 "></i>
                                                 </button>
-                                                <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalcarreras({{ $carrera->id }}, '{{ $carrera->nombre }}')">
+                                                <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href="{{ route('carreras.ver', $carrera) }}">
                                                         <i class="fa fa-eye "></i>
-                                                </button>
-                                                <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $carrera->id }})">
+                                                </a>
+                                                <button rel="tooltip" class="btn btn-danger btn-sm btn-icon" type="button" onClick="Eliminar({{ $carrera->id }})">
                                                         <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>

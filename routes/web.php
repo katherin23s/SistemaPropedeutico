@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('planteles/buscar', 'PlantelController@buscar')->name('planteles.buscar');
     Route::patch('planteles/actualizar', 'PlantelController@update')->name('planteles.update');
     Route::post('planteles/departamentos', 'PlantelController@obtenerDepartamentos')->name('planteles.departamentos');
-   
+
     Route::delete('planteles/eliminar', 'PlantelController@eliminar')->name('planteles.eliminar');
 
     Route::get('departamentos', 'DepartamentoController@index')->name('departamentos.index');
@@ -90,6 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('carreras/busqueda', 'CarreraController@busqueda')->name('carreras.busqueda');
     Route::post('carreras/buscar', 'CarreraController@buscar')->name('carreras.buscar');
     Route::post('carreras/materias', 'CarreraController@obtenerMaterias')->name('carreras.materias');
+    Route::get('carreras/{carrera}', 'CarreraController@show')->name('carreras.ver');
 
     Route::get('semestres', 'SemestreController@index')->name('semestres.index');
     Route::post('semestres/agregar', 'SemestreController@store')->name('semestres.store');
@@ -116,7 +117,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('materias/busqueda', 'MateriaController@busqueda')->name('materias.busqueda');
     Route::post('materias/buscar', 'MateriaController@buscar')->name('materias.buscar');
     Route::get('materias/{materia}', 'MateriaController@show')->name('materias.ver');
-
 
     Route::get('clases', 'ClaseController@index')->name('clases.index');
     Route::post('clases/agregar', 'ClaseController@store')->name('clases.store');

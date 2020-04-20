@@ -26,6 +26,18 @@ class CarreraController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Carrera $carrera)
+    {
+        $carrera->load('materias', 'grupos.semestre', 'departamento');
+
+        return view('Admin.Carrera.ver', compact('carrera'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -122,12 +134,11 @@ class CarreraController extends Controller
         return view('Admin.Carrera.index', compact('carreras'));
     }
 
-     public function obtenerMaterias(Request $request)
+    public function obtenerMaterias(Request $request)
     {
         $id = $request->carreras_id;
         $materias = Materia::where('carreras_id', $id)->get();
 
         return json_encode($materias);
     }
-
 }
