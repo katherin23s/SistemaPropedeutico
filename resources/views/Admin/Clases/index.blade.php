@@ -115,7 +115,7 @@
                 + "<td>" + clases[i].salon + "</td>" 
                 + "<td>" + clases[i].horario + "</td>"
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + clases[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
-                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalclases(\'' + clases[i].id + '\',\'' + clases[i].numero + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                    +'<a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href="clases/' + clases[i].id + '"><i class="fa fa-eye "></i></a>' 
                 +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + clases[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
                 +  "</tr>";
         }

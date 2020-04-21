@@ -107,7 +107,7 @@
                 + "<td>" + grupos[i].hora_inicio + "</td>" 
                 + "<td>" + grupos[i].hora_final + "</td>" 
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + grupos[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
-                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalgrupos(\'' + grupos[i].id + '\',\'' + grupos[i].numero + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href="grupos/' + grupos[i].id + '"><i class="fa fa-eye "></i></a>' 
                 +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + grupos[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
                 +  "</tr>";
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Grupo;
 use App\Http\Requests\ActualizarSemestreRequest;
 use App\Http\Requests\SemestreRequest;
 use App\Http\Resources\SemestreResource;
@@ -54,6 +55,9 @@ class SemestreController extends Controller
      */
     public function show(Semestre $semestre)
     {
+        $grupos = Grupo::with('carrera')->where('semestre_id', $semestre->id)->paginate();
+
+        return view('Admin.Semestre.ver', compact('semestre', 'grupos'));
     }
 
     /**

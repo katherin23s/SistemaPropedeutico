@@ -99,6 +99,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('semestres/eliminar', 'SemestreController@eliminar')->name('semestres.eliminar');
     Route::post('semestres/busqueda', 'SemestreController@busqueda')->name('semestres.busqueda');
     Route::post('semestres/buscar', 'SemestreController@buscar')->name('semestres.buscar');
+    Route::get('semestres/{semestre}', 'SemestreController@show')->name('semestres.ver');
 
     Route::get('grupos', 'GrupoController@index')->name('grupos.index');
     Route::post('grupos/agregar', 'GrupoController@store')->name('grupos.store');

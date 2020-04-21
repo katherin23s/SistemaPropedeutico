@@ -97,7 +97,7 @@
                 + "<td>" + carreras[i].numero_serie + "</td>" 
                 + "<td>" + carreras[i].departamento + "</td>" 
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + carreras[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
-                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalcarreras(\'' + carreras[i].id + '\',\'' + carreras[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href="carreras/' + carreras[i].id + '"><i class="fa fa-eye "></i></a>' 
                 +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + carreras[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
                 +  "</tr>";
         }
