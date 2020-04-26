@@ -17,18 +17,13 @@
                                     @csrf                                 
                                     <div class="form-row">
                                         <div class="col-md-2">
-                                            <select id='carrera' class="custom-select" name="carrera"> 
-                                                <option value='0'>Carrera</option>
+                                            <select id='grupo' class="custom-select" name="grupo"> 
+                                                <option value='0'>Grupo</option>
                                             </select>
                                         </div>
                                         <div class="col-md-2">
-                                            <select id='clase' class="custom-select" name="clase"> 
-                                                <option value='0'>clase</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <select id='semestre' class="custom-select" name="semestre"> 
-                                                <option value='0'>Semestre</option>
+                                            <select id='materia' class="custom-select" name="materia"> 
+                                                <option value='0'>Materia</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-auto">
@@ -50,10 +45,10 @@
                         <div class="table-responsive">                           
                             <table class="table" id="tabla-clases" >
                                 <thead class=" text-primary" >
-                                    <th scope="col">ID</th>
+                                    <th scope="col">Clave</th>
                                     <th scope="col">Materia</th>
+                                    <th scope="col">Docente</th>
                                     <th scope="col">Grupo</th>
-                                    <th scope="col">Semestre</th>
                                     <th scope="col">Carrera</th>
                                     <th scope="col">Salon</th>
                                     <th scope="col">Horario</th>
@@ -61,10 +56,10 @@
                                 <tbody>
                                     @foreach ($clases as $clase)
                                         <tr>
-                                            <td>{{ $clase->id }}</td>
-                                            <td>{{ $clase->materia }}</td>
-                                            <td>{{ $clase->grupo->nombre }}</td>
-                                            <td>{{ $clase->grupo->semestre->numero }}</td>
+                                            <td>{{ $clase->clave }}</td>
+                                            <td>{{ $clase->materia->nombre }}</td>
+                                            <td>{{ $clase->docente->nombre }}</td>
+                                            <td>{{ $clase->grupo->numero }}</td>
                                             <td>{{ $clase->grupo->carrera->nombre }}</td>
                                             <td>{{ $clase->salon }}</td>
                                             <td>{{ $clase->horarioCompleto()}}</td>
@@ -72,7 +67,7 @@
                                             <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $clase->id }})">
                                                     <i class="fas fa-pencil-alt fa-2 "></i>
                                             </button>
-                                            <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href=" {{ route('clases.show', $clase) }} ">
+                                            <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href=" {{ route('clases.ver', $clase) }} ">
                                                     <i class="fa fa-eye "></i>
                                             </a>
                                             <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $clase->id }})">
@@ -97,7 +92,6 @@
 </div>
 @include('Admin.Clases.agregarModal')
 @include('Admin.Clases.editarModal')
-@include('Admin.Clases.verModal')
 @endsection
 @push('js')
 <script>

@@ -18,7 +18,7 @@ class ClaseController extends Controller
     public function index()
     {
         //el index donde se muestra la lista de todos los clases
-        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+        $clases = Clase::with('grupo.carrera', 'materia', 'docente')
             ->paginate(15)
         ;
 
@@ -113,31 +113,32 @@ class ClaseController extends Controller
         } else {
             $busqueda = $request['buscar'];
         }
-        $carrera_id = $request['carrera'];
-        $semestre_id = $request['semestre'];
-        if ($carrera_id > 0 && $semestre_id > 0) {
+
+        $grupo_id = $request['grupo'];
+        $materia_id = $request['materia'];
+        if ($grupo_id > 0 && $materia_id > 0) {
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-                ->whereLike(['numero', 'grupo.numero'], $busqueda)
-                ->where([['carrera_id', $carrera_id], ['semestre_id', $semestre_id]])
+                ->whereLike(['numero'], $busqueda)
+                ->where([['grupo_id', $grupo_id], ['materia_id', $materia_id]])
                 ->paginate(15)
             ;
-        } elseif ($carrera_id > 0 && $semestre_id <= 0) {
+        } elseif ($grupo_id > 0 && $materia_id <= 0) {
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-                ->whereLike(['numero', 'grupo.numero'], $busqueda)
-                ->where('carrera_id', $carrera_id)
+                ->whereLike(['numero'], $busqueda)
+                ->where('grupo_id', $grupo_id)
                 ->paginate(15)
             ;
-        } elseif ($carrera_id <= 0 && $semestre_id > 0) {
+        } elseif ($grupo_id <= 0 && $materia_id > 0) {
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-                ->whereLike(['numero', 'grupo.numero'], $busqueda)
-                ->where('semestre_id', $semestre_id)
+                ->whereLike(['numero'], $busqueda)
+                ->where('materia_id', $materia_id)
                 ->paginate(15)
             ;
         } else {
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
         }
 
-        return view('Admin.clases.index', compact('clases'));
+        return view('Admin.Clases.index', compact('clases'));
     }
 
     /**
