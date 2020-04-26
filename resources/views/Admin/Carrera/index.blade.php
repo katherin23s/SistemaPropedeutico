@@ -14,16 +14,25 @@
          
                             <div class="col-md-11">
                                 <!-- Search form -->
-                                <form  method="post" action="{{ route('carreras.buscar') }}" >
-                                    @csrf                                 
+                                <form method="get" action="{{ route('carreras.index') }}" >                              
                                     <div class="form-row">
+                                        <div class="col-md-2">
+                                            <select name="cantidad"> 
+                                                <option value='10' {{ $cantidad == 10 ? 'selected' : '' }} >10</option>
+                                                <option value='15' {{ $cantidad == 15 ? 'selected' : '' }}>15</option>
+                                                <option value='20' {{ $cantidad == 20 ? 'selected' : '' }}>20</option>
+                                                <option value='50' {{ $cantidad == 50 ? 'selected' : '' }}>50</option>
+                                                <option value='100' {{ $cantidad == 100 ? 'selected' : '' }}>100</option>
+                                                <option value='5000' {{ $cantidad == 5000 ? 'selected' : '' }}>Todos</option>
+                                            </select>
+                                        </div>
                                         <div class="col-md-3">
                                             <select id='departamento' class="custom-select" name="departamento"> 
                                                 <option value='0'>Departamento</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-8 col-auto">
-                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        <div class="col-md-6 col-auto">
+                                            <input name="busqueda" value="{{ $busqueda }}" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
                                         </div> 
                                         <div class="col-md-1">
                                             <button class="btn btn-primary btn-fab btn-icon">
@@ -40,11 +49,11 @@
                         <div class="table-responsive">    
                             <table class="table" id="tabla-carreras">
                                 <thead class=" text-primary" >
-                                    <th scope="col">{{ __('ID') }}</th>
-                                    <th scope="col">{{ __('Nombre') }}</th>
-                                    <th scope="col">{{ __('Serie') }}</th>
-                                    <th scope="col">{{ __('Departamento') }}</th>
-                                    <th scope="col">{{ __('Acciones') }}</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Serie</th>
+                                    <th scope="col">Departamento</th>
+                                    <th scope="col">Acciones</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($carreras as $carrera)
@@ -70,7 +79,7 @@
                             </table>
                             <div class="card-footer py-4">
                                 <nav class="d-flex justify-content-end" aria-label="...">
-                                    {{ $carreras->links() }}
+                                    {{ $carreras->appends(['busqueda'=>$busqueda, 'cantidad'=>$cantidad])->links() }}
                                 </nav>
                             </div>  
                         </div>             

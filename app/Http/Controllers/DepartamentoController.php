@@ -14,13 +14,44 @@ class DepartamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //el index donde se muestra la lista de todos los planteles
-        $departamentos = Departamento::paginate(15);
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
+
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        if (is_null($request->plantel_id)) {
+            $plantel_id = 0;
+        } else {
+            $plantel_id = $request->plantel_id;
+        }
+
+        if ($plantel_id > 0) {
+            $departamentos = Departamento::whereLike('nombre', $busqueda)
+                ->where('plantel_id', $plantel_id)
+                ->paginate($cantidad)
+            ;
+        } else {
+            $departamentos = Departamento::whereLike('nombre', $busqueda)->paginate($cantidad);
+        }
+
         $planteles = Plantel::get();
 
-        return view('Admin.Departamento.index', compact('departamentos', 'planteles'));
+        return view('Admin.Departamento.index', compact(
+            'departamentos',
+            'planteles',
+            'cantidad',
+            'busqueda',
+            'plantel_id'
+        ));
     }
 
     public function encontrar(Request $request)
@@ -60,6 +91,7 @@ class DepartamentoController extends Controller
     public function show(Departamento $departamento)
     {
         $departamento->load('docentes', 'carreras');
+
         return view('Admin.Departamento.ver', compact('departamento'));
     }
 
@@ -119,27 +151,5 @@ class DepartamentoController extends Controller
     public function validar()
     {
         return request()->validate(Departamento::$rules);
-    }
-
-    public function buscar(Request $request)
-    {
-        if (is_null($request['buscar'])) {
-            $busqueda = '';
-        } else {
-            $busqueda = $request['buscar'];
-        }
-        $plantel_id = $request['plantel_id'];
-        if ($plantel_id > 0) {
-            $departamentos = Departamento::whereLike('nombre', $busqueda)
-                ->where('plantel_id', $plantel_id)
-                ->paginate(15)
-            ;
-        } else {
-            $departamentos = Departamento::whereLike('nombre', $busqueda)->paginate(15);
-        }
-
-        $planteles = Plantel::get();
-
-        return view('Admin.Departamento.index', compact('departamentos', 'planteles'));
     }
 }

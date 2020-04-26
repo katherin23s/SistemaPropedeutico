@@ -67,7 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('planteles', 'PlantelController@index')->name('planteles.index');
     Route::post('planteles/agregar', 'PlantelController@store')->name('planteles.store');
     Route::post('planteles/encontrar', 'PlantelController@encontrar')->name('planteles.encontrar');
-    Route::post('planteles/buscar', 'PlantelController@buscar')->name('planteles.buscar');
+    //Route::post('planteles/buscar', 'PlantelController@buscar')->name('planteles.buscar');
     Route::patch('planteles/actualizar', 'PlantelController@update')->name('planteles.update');
     Route::post('planteles/departamentos', 'PlantelController@obtenerDepartamentos')->name('planteles.departamentos');
 

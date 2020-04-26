@@ -16,11 +16,38 @@ class DocenteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $docentes = Docente::with('departamento')->paginate(15);
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
 
-        return view('Admin.Docentes.index', compact('docentes'));
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        if (is_null($request->departamento)) {
+            $departamento = 0;
+        } else {
+            $departamento = $request->departamento;
+        }
+
+        if ($departamento > 0) {
+            $docentes = Docente::with('departamento')
+                ->whereLike(['nombre', 'numero_empleado', 'email'], $busqueda)
+                ->where('departamento_id', $departamento)
+                ->paginate($cantidad)
+            ;
+        } else {
+            $docentes = Docente::with('departamento')
+                ->whereLike(['nombre', 'numero_empleado', 'email'], $busqueda)->paginate($cantidad);
+        }
+
+        return view('Admin.Docentes.index', compact('docentes', 'cantidad', 'busqueda'));
     }
 
     public function store(RegistrarDocenteRequest $request)

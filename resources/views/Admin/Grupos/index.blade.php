@@ -13,9 +13,19 @@
                             </div>          
                             <div class="col-md-11">
                                 <!-- Search form -->
-                                <form  method="post" action="{{ route('grupos.buscar') }}" >
-                                    @csrf                                 
+                                <form method="get" action="{{ route('grupos.index') }}" >
+                                                                   
                                     <div class="form-row">
+                                        <div class="col-md-2">
+                                            <select name="cantidad"> 
+                                                <option value='10' {{ $cantidad == 10 ? 'selected' : '' }} >10</option>
+                                                <option value='15' {{ $cantidad == 15 ? 'selected' : '' }}>15</option>
+                                                <option value='20' {{ $cantidad == 20 ? 'selected' : '' }}>20</option>
+                                                <option value='50' {{ $cantidad == 50 ? 'selected' : '' }}>50</option>
+                                                <option value='100' {{ $cantidad == 100 ? 'selected' : '' }}>100</option>
+                                                <option value='5000' {{ $cantidad == 5000 ? 'selected' : '' }}>Todos</option>
+                                            </select>
+                                        </div>
                                         <div class="col-md-3">
                                             <select id='carrera' class="custom-select" name="carrera"> 
                                                 <option value='0'>Carrera</option>
@@ -26,9 +36,9 @@
                                                 <option value='0'>Semestre</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-6 col-auto">
-                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
-                                        </div> 
+                                        <div class="col-md-4 col-auto">
+                                            <input name="busqueda" class="form-control" type="text" value="{{ $busqueda }}" placeholder="Buscar" aria-label="Search"> 
+                                        </div>  
                                         <div class="col-md-1">
                                             <button class="btn btn-primary btn-fab btn-icon">
                                                 <i class="fas fa-search"></i>
@@ -44,13 +54,13 @@
                         @include('alerts.success')     
                         <div class="table-responsive">                           
                             <table class="table" id="tabla-grupos" >
-                                <thead class=" text-primary" >
-                                    <th scope="col">{{ __('ID') }}</th>
-                                    <th scope="col">{{ __('Semestre') }}</th>
-                                    <th scope="col">{{ __('Carrera') }}</th>
-                                    <th scope="col">{{ __('Numero') }}</th>
-                                    <th scope="col">{{ __('Hora inicio') }}</th>
-                                    <th scope="col">{{ __('Hora final') }}</th>
+                                <thead class="text-primary" >
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Semestre</th>
+                                    <th scope="col">Carrera</th>
+                                    <th scope="col">Numero</th>
+                                    <th scope="col">Hora inicio</th>
+                                    <th scope="col">Hora final</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($grupos as $grupo)
@@ -80,7 +90,7 @@
                     </div>
                     <div class="card-footer py-4">
                         <nav class="d-flex justify-content-end" aria-label="...">
-                            {{ $grupos->links() }}
+                            {{ $grupos->appends(['busqueda'=>$busqueda, 'cantidad'=>$cantidad])->links() }}
                         </nav>
                     </div>
                 </div>

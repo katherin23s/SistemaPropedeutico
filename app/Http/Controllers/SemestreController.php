@@ -16,12 +16,24 @@ class SemestreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //el index donde se muestra la lista de todos los semestrees
-        $semestres = Semestre::paginate(15);
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
 
-        return view('Admin.Semestre.index', compact('semestres'));
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        //el index donde se muestra la lista de todos los semestrees
+        $semestres = Semestre::whereLike('numero', $busqueda)->paginate($cantidad);
+
+        return view('Admin.Semestre.index', compact('semestres', 'cantidad', 'busqueda'));
     }
 
     /**
