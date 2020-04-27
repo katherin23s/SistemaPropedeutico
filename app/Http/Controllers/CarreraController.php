@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Carrera;
-use App\Departamento;
 use App\Http\Requests\ActualizarCarreraRequest;
 use App\Http\Requests\CarreraRequest;
 use App\Http\Resources\CarreraResource;
@@ -17,12 +16,50 @@ class CarreraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //el index donde se muestra la lista de todos los carreras con su departamento
-        $carreras = Carrera::with('departamento')->paginate(15);
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
 
-        return view('Admin.Carrera.index', compact('carreras'));
+        if (is_null($request['buscar'])) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request['buscar'];
+        }
+
+        if (is_null($request->departamento)) {
+            $departamento = 0;
+        } else {
+            $departamento = $request->departamento;
+        }
+
+        if ($departamento > 0) {
+            $carreras = Carrera::with('departamento')
+                ->whereLike(['nombre', 'numero_serie'], $busqueda)
+                ->where('departamento_id', $departamento)
+                ->paginate($cantidad)
+            ;
+        } else {
+            $carreras = Carrera::with('departamento')
+                ->whereLike(['nombre', 'numero_serie'], $busqueda)->paginate($cantidad);
+        }
+
+        return view('Admin.Carrera.index', compact('carreras', 'cantidad', 'busqueda', 'departamento'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Carrera $carrera)
+    {
+        $carrera->load('materias', 'grupos.semestre', 'departamento');
+
+        return view('Admin.Carrera.ver', compact('carrera'));
     }
 
     /**
@@ -101,33 +138,14 @@ class CarreraController extends Controller
 
     public function buscar(Request $request)
     {
-        if (is_null($request['buscar'])) {
-            $busqueda = '';
-        } else {
-            $busqueda = $request['buscar'];
-        }
-
-        $departamento_id = $request['departamento'];
-        if ($departamento_id > 0) {
-            $carreras = Carrera::with('departamento')
-                ->whereLike(['nombre', 'numero_serie'], $busqueda)
-                ->where('departamento_id', $departamento_id)
-                ->paginate(15)
-            ;
-        } else {
-            $carreras = Carrera::with('departamento')
-                ->whereLike(['nombre', 'numero_serie'], $busqueda)->paginate(15);
-        }
-
         return view('Admin.Carrera.index', compact('carreras'));
     }
 
-     public function obtenerMaterias(Request $request)
+    public function obtenerMaterias(Request $request)
     {
         $id = $request->carreras_id;
         $materias = Materia::where('carreras_id', $id)->get();
 
         return json_encode($materias);
     }
-
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Carrera;
+use App\Clase;
 use App\Http\Requests\ActualizarMateriaRequest;
 use App\Http\Requests\MateriaRequest;
 use App\Http\Resources\MateriaResource;
@@ -16,12 +16,37 @@ class MateriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //el index donde se muestra la lista de todos los materiaes
-        $materias = Materia::with('carrera')->paginate(15);
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
 
-        return view('Admin.Materias.index', compact('materias'));
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        if (is_null($request->carrera)) {
+            $carrera = 0;
+        } else {
+            $carrera = $request->carrera;
+        }
+        if ($carrera > 0) {
+            $materias = Materia::with('carrera')
+                ->whereLike(['nombre', 'clave'], $busqueda)
+                ->where('carrera_id', $carrera)
+                ->paginate($cantidad)
+            ;
+        } else {
+            $materias = Materia::with('carrera')
+                ->whereLike(['nombre', 'clave'], $busqueda)->paginate($cantidad);
+        }
+
+        return view('Admin.Materias.index', compact('materias', 'cantidad', 'busqueda'));
     }
 
     /**
@@ -37,19 +62,18 @@ class MateriaController extends Controller
         return MateriaResource::collection(Materia::paginate(10));
     }
 
-       /**
+    /**
      * Display the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function show(Materia $materia)
     {
-       // $materia->load('carrera');
-        $carreras = Carrera::with('materia', 'grupo')
-            ->where('materia_id', $materia->id)
-            ->get() 
-        ;
-        return view('Admin.Materias.ver', compact('materia'));
+        $materia->load('carrera');
+
+        $clases = Clase::with('grupo', 'docente', 'materia')->paginate();
+
+        return view('Admin.Materias.ver', compact('materia', 'clases'));
     }
 
     /**

@@ -15,14 +15,55 @@ class ClaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //el index donde se muestra la lista de todos los clases
-        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-            ->paginate(15)
-        ;
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
 
-        return view('Admin.Clases.index', compact('clases'));
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        if (is_null($request->grupo)) {
+            $grupo = 0;
+        } else {
+            $grupo = $request->grupo;
+        }
+
+        if (is_null($request->materia)) {
+            $materia = 0;
+        } else {
+            $materia = $request->materia;
+        }
+
+        if ($grupo > 0 && $materia > 0) {
+            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+                ->whereLike(['numero'], $busqueda)
+                ->where([['grupo_id', $grupo], ['materia_id', $materia]])
+                ->paginate($cantidad)
+            ;
+        } elseif ($grupo > 0 && $materia <= 0) {
+            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+                ->whereLike(['numero'], $busqueda)
+                ->where('grupo_id', $grupo)
+                ->paginate($cantidad)
+            ;
+        } elseif ($grupo <= 0 && $materia > 0) {
+            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+                ->whereLike(['numero'], $busqueda)
+                ->where('materia_id', $materia)
+                ->paginate($cantidad)
+            ;
+        } else {
+            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate($cantidad);
+        }
+
+        return view('Admin.Clases.index', compact('clases', 'cantidad', 'busqueda'));
     }
 
     /**
@@ -104,40 +145,6 @@ class ClaseController extends Controller
         $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
 
         return ClaseResource::collection($clases);
-    }
-
-    public function buscar(Request $request)
-    {
-        if (is_null($request['buscar'])) {
-            $busqueda = '';
-        } else {
-            $busqueda = $request['buscar'];
-        }
-        $carrera_id = $request['carrera'];
-        $semestre_id = $request['semestre'];
-        if ($carrera_id > 0 && $semestre_id > 0) {
-            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-                ->whereLike(['numero', 'grupo.numero'], $busqueda)
-                ->where([['carrera_id', $carrera_id], ['semestre_id', $semestre_id]])
-                ->paginate(15)
-            ;
-        } elseif ($carrera_id > 0 && $semestre_id <= 0) {
-            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-                ->whereLike(['numero', 'grupo.numero'], $busqueda)
-                ->where('carrera_id', $carrera_id)
-                ->paginate(15)
-            ;
-        } elseif ($carrera_id <= 0 && $semestre_id > 0) {
-            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-                ->whereLike(['numero', 'grupo.numero'], $busqueda)
-                ->where('semestre_id', $semestre_id)
-                ->paginate(15)
-            ;
-        } else {
-            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
-        }
-
-        return view('Admin.clases.index', compact('clases'));
     }
 
     /**

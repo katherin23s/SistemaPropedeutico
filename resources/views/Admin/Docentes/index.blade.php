@@ -14,18 +14,28 @@
                             </div>  
                             <div class="col-md-11">
                                 <!-- Search form -->
-                                <form  method="post" action="{{ route('docentes.buscar') }}" >
-                                    @csrf                                 
+                                <form  method="get" action="{{ route('docentes.index') }}" >
+                                                                   
                                     <div class="form-row">
+                                        <div class="col-md-2">
+                                            <select name="cantidad"> 
+                                                <option value='10' {{ $cantidad == 10 ? 'selected' : '' }} >10</option>
+                                                <option value='15' {{ $cantidad == 15 ? 'selected' : '' }}>15</option>
+                                                <option value='20' {{ $cantidad == 20 ? 'selected' : '' }}>20</option>
+                                                <option value='50' {{ $cantidad == 50 ? 'selected' : '' }}>50</option>
+                                                <option value='100' {{ $cantidad == 100 ? 'selected' : '' }}>100</option>
+                                                <option value='5000' {{ $cantidad == 5000 ? 'selected' : '' }}>Todos</option>
+                                            </select>
+                                        </div>
                                         <div class="col-md-3">
                                             <select id='departamento' class="custom-select" name="departamento"> 
                                                 <option value='0'>Departamento</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-8">
-                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        <div class="col-md-6 col-auto">
+                                            <input name="busqueda" class="form-control" type="text" value="{{ $busqueda }}" placeholder="Buscar" aria-label="Search"> 
                                         </div> 
-                                        <div class="col-md-1 text-right">
+                                        <div class="col-md-1">
                                             <button class="btn btn-primary btn-fab btn-icon">
                                                 <i class="fas fa-search"></i>
                                               </button>
@@ -40,13 +50,13 @@
                         <div class="table-responsive">
                             <table class="table" id="tabla-docentes">
                                 <thead class=" text-primary" >
-                                <th scope="col">{{ __('No. Empleado') }}</th>
-                                <th scope="col">{{ __('Nombre') }}</th>
-                                <th scope="col">{{ __('Dirección') }}</th>
-                                <th scope="col">{{ __('Teléfono') }}</th>
-                                <th scope="col">{{ __('Correo') }}</th>
-                                <th scope="col">{{ __('Departamento') }}</th>
-                                <th scope="col">{{ __('Acciones') }}</th>
+                                <th scope="col">No. Empleado</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Dirección</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Acciones</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($docentes as $docente)
@@ -56,7 +66,7 @@
                                             <td>{{ $docente->direccion }}</td>
                                             <td>{{ $docente->telefono }}</td>
                                             <td>
-                                            <a href="mailto:{{ $docente->email }}">{{ $docente->email }}</a>
+                                                <a href="mailto:{{ $docente->email }}">{{ $docente->email }}</a>
                                             </td>
                                             <td>{{ $docente->departamento->nombre }}</td>
                                             <td class="td-actions text-right">
@@ -79,7 +89,7 @@
                     </div>    
                     <div class="card-footer py-4">
                         <nav class="d-flex justify-content-end" aria-label="...">
-                            {{ $docentes->links() }}
+                            {{ $docentes->appends(['busqueda'=>$busqueda, 'cantidad'=>$cantidad])->links() }}
                         </nav>
                     </div>
                 </div>

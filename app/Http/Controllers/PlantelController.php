@@ -15,12 +15,23 @@ class PlantelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //el index donde se muestra la lista de todos los planteles
-        $planteles = Plantel::paginate(15);
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
 
-        return view('Admin.Planteles.index', compact('planteles'));
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        $planteles = Plantel::whereLike('nombre', $busqueda)->paginate($cantidad);
+
+        return view('Admin.Planteles.index', compact('planteles', 'cantidad', 'busqueda'));
     }
 
     /**
@@ -124,15 +135,8 @@ class PlantelController extends Controller
         return request()->validate(Plantel::$rules);
     }
 
-    public function buscar(Request $request)
+    public function busqueda(Request $request)
     {
-        if (is_null($request['buscar'])) {
-            $busqueda = '';
-        } else {
-            $busqueda = $request['buscar'];
-        }
-        $planteles = Plantel::whereLike('nombre', $busqueda)->paginate(15);
-
         return view('Admin.Planteles.index', compact('planteles'));
     }
 }

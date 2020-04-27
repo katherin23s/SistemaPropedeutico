@@ -17,12 +17,16 @@ class ClaseResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'clave' => $this->clave,
             'grupo' => $this->grupo->numero,
-            'semestre' => $this->grupo->semestre->materia,
             'carrera' => $this->grupo->carrera->nombre,
-            'materia' => $this->materia,
+            'materia' => $this->materia->nombre,
             'salon' => $this->salon,
+            'dias' => $this->dias,
+            'capacidad' => $this->capacidad,
             'horario' => $this->horarioCompleto(),
+            'hora_inicio' => $this->hora_inicio->format('Y-m-d'),
+            'hora_final' => $this->hora_final->format('Y-m-d'),
         ];
     }
 }

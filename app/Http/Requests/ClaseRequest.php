@@ -13,7 +13,7 @@ class ClaseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,6 @@ class ClaseRequest extends FormRequest
     public function rules()
     {
         return [
-            'materia' => 'required|max:255|min:1',
             'hora_inicio' => 'required',
             'hora_final' => 'required',
             'dias' => 'required|max:255|min:1',

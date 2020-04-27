@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Planteles'), 'pageSlug' => 'planteles'])
+@extends('layouts.app', ['page' => 'Planteles', 'pageSlug' => 'planteles'])
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -12,12 +12,21 @@
                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AgregarModal" data-whatever="@mdo">Agregar</button>   
                             </div>  
                             <div class="col-lg-10">
-                                <!-- Search form -->
-                                <form  method="post" action="{{ route('planteles.buscar') }}" >
-                                    @csrf
+                                <!-- buscar form -->
+                                <form method="get" action="{{ route('planteles.index')}}" >
                                     <div class="form-row">
-                                        <div class="col-md-10">
-                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        <div class="col-md-2">
+                                            <select  name="cantidad"> 
+                                                <option value='10' {{ $cantidad == 10 ? 'selected' : '' }} >10</option>
+                                                <option value='15' {{ $cantidad == 15 ? 'selected' : '' }}>15</option>
+                                                <option value='20' {{ $cantidad == 20 ? 'selected' : '' }}>20</option>
+                                                <option value='50' {{ $cantidad == 50 ? 'selected' : '' }}>50</option>
+                                                <option value='100' {{ $cantidad == 100 ? 'selected' : '' }}>100</option>
+                                                <option value='5000' {{ $cantidad == 5000 ? 'selected' : '' }}>Todos</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input name="busqueda" class="form-control" type="text" value="{{ $busqueda }}" placeholder="Buscar" aria-label="busqueda"> 
                                         </div>
                                         <div class="col-md-2">
                                             <button class="btn btn-primary btn-fab btn-icon">
@@ -38,12 +47,12 @@
                         <div class="table-responsive">
                             <table class="table" id="tabla-planteles" >
                                 <thead>
-                                    <th scope="col">{{ __('ID') }}</th>
-                                    <th scope="col">{{ __('Nombre') }}</th>
-                                    <th scope="col">{{ __('Direccion') }}</th>
-                                    <th scope="col">{{ __('Telefono') }}</th>
-                                    <th scope="col">{{ __('Correo') }}</th>
-                                    <th class="text-right" scope="col">{{ __('Acciones') }}</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Direccion</th>
+                                    <th scope="col">Telefono</th>
+                                    <th scope="col">Correo</th>
+                                    <th class="text-right" scope="col">Acciones</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($planteles as $plantel)
@@ -58,7 +67,7 @@
                                             {{-- <td style="background: whitesmoke; border: Gray 2px solid;">
                                                 <div style="text-align: center;">
                                                 <i class="fas fa-pencil-alt fa-2 " style="font-size: 20px; color:orange"  data-placement="top" title="Editar" data-toggle="modal" data-target="#ModalEditar" data-whatever="@mdo"></i></i>
-                                                <i class="fa fa-eye " aria-hidden="true" style="font-size: 20px; width: 30px; color:#048ab7" data-placement="top" title="Ver" data-toggle="modal" data-target="#ModalDepartamentos" data-whatever="@mdo"></i>
+                                                <i class="fa fa-eye " aria-hidden="true" style="font-size: 20px; width: 15px; color:#048ab7" data-placement="top" title="Ver" data-toggle="modal" data-target="#ModalDepartamentos" data-whatever="@mdo"></i>
                                                 <i class="fa fa-trash" aria-hidden="true" data-placement="top" title="Eliminar" style="font-size: 20px; color:red "></i>
                                                 </div>
                                             </td> --}}
@@ -78,12 +87,11 @@
                                 </tbody>
                             </table>  
                         </div>
-                                
-                    </div>
-                    <div class="card-footer py-4">
-                        <nav class="d-flex justify-content-end" aria-label="...">
-                            
-                        </nav>
+                        <div class="card-footer py-4">
+                            <nav class="d-flex justify-content-end" aria-label="...">
+                                {{ $planteles->appends(['busqueda'=>$busqueda, 'cantidad'=>$cantidad])->links() }}
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>

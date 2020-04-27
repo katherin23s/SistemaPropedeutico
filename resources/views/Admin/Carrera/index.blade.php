@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Carreras'), 'pageSlug' => 'carreras'])
+@extends('layouts.app', ['page' => 'Carreras', 'pageSlug' => 'carreras'])
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -14,16 +14,25 @@
          
                             <div class="col-md-11">
                                 <!-- Search form -->
-                                <form  method="post" action="{{ route('carreras.buscar') }}" >
-                                    @csrf                                 
+                                <form method="get" action="{{ route('carreras.index') }}" >                              
                                     <div class="form-row">
+                                        <div class="col-md-2">
+                                            <select name="cantidad"> 
+                                                <option value='10' {{ $cantidad == 10 ? 'selected' : '' }} >10</option>
+                                                <option value='15' {{ $cantidad == 15 ? 'selected' : '' }}>15</option>
+                                                <option value='20' {{ $cantidad == 20 ? 'selected' : '' }}>20</option>
+                                                <option value='50' {{ $cantidad == 50 ? 'selected' : '' }}>50</option>
+                                                <option value='100' {{ $cantidad == 100 ? 'selected' : '' }}>100</option>
+                                                <option value='5000' {{ $cantidad == 5000 ? 'selected' : '' }}>Todos</option>
+                                            </select>
+                                        </div>
                                         <div class="col-md-3">
                                             <select id='departamento' class="custom-select" name="departamento"> 
                                                 <option value='0'>Departamento</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-8 col-auto">
-                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        <div class="col-md-6 col-auto">
+                                            <input name="busqueda" value="{{ $busqueda }}" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
                                         </div> 
                                         <div class="col-md-1">
                                             <button class="btn btn-primary btn-fab btn-icon">
@@ -40,11 +49,11 @@
                         <div class="table-responsive">    
                             <table class="table" id="tabla-carreras">
                                 <thead class=" text-primary" >
-                                    <th scope="col">{{ __('ID') }}</th>
-                                    <th scope="col">{{ __('Nombre') }}</th>
-                                    <th scope="col">{{ __('Serie') }}</th>
-                                    <th scope="col">{{ __('Departamento') }}</th>
-                                    <th scope="col">{{ __('Acciones') }}</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Serie</th>
+                                    <th scope="col">Departamento</th>
+                                    <th scope="col">Acciones</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($carreras as $carrera)
@@ -54,13 +63,13 @@
                                             <td>{{ $carrera->numero_serie }}</td>
                                             <td>{{ $carrera->departamento->nombre }}</td>
                                             <td class="td-actions text-right">
-                                                <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $carrera->id }})">
+                                                <button class="btn btn-info btn-sm btn-icon" rel="tooltip" type="button" onClick="mostrarModalEditar({{ $carrera->id }})">
                                                         <i class="fas fa-pencil-alt fa-2 "></i>
                                                 </button>
-                                                <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalcarreras({{ $carrera->id }}, '{{ $carrera->nombre }}')">
+                                                <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href="{{ route('carreras.ver', $carrera) }}">
                                                         <i class="fa fa-eye "></i>
-                                                </button>
-                                                <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $carrera->id }})">
+                                                </a>
+                                                <button rel="tooltip" class="btn btn-danger btn-sm btn-icon" type="button" onClick="Eliminar({{ $carrera->id }})">
                                                         <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>
@@ -70,7 +79,7 @@
                             </table>
                             <div class="card-footer py-4">
                                 <nav class="d-flex justify-content-end" aria-label="...">
-                                    {{ $carreras->links() }}
+                                    {{ $carreras->appends(['busqueda'=>$busqueda, 'cantidad'=>$cantidad])->links() }}
                                 </nav>
                             </div>  
                         </div>             
@@ -97,7 +106,7 @@
                 + "<td>" + carreras[i].numero_serie + "</td>" 
                 + "<td>" + carreras[i].departamento + "</td>" 
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + carreras[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
-                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalcarreras(\'' + carreras[i].id + '\',\'' + carreras[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href="carreras/' + carreras[i].id + '"><i class="fa fa-eye "></i></a>' 
                 +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + carreras[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
                 +  "</tr>";
         }

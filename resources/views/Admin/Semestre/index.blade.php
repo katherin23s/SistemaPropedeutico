@@ -13,11 +13,21 @@
                             </div>   
                             <div class="col-md-10">
                                 <!-- Search form -->
-                                <form  method="post" action="{{ route('semestres.buscar') }}" >
-                                    @csrf
+                                <form  method="get" action="{{ route('semestres.index') }}" >
+                                    
                                     <div class="form-row">
-                                        <div class="col-md-10">
-                                            <input name="buscar" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
+                                        <div class="col-md-2">
+                                            <select name="cantidad"> 
+                                                <option value='10' {{ $cantidad == 10 ? 'selected' : '' }} >10</option>
+                                                <option value='15' {{ $cantidad == 15 ? 'selected' : '' }}>15</option>
+                                                <option value='20' {{ $cantidad == 20 ? 'selected' : '' }}>20</option>
+                                                <option value='50' {{ $cantidad == 50 ? 'selected' : '' }}>50</option>
+                                                <option value='100' {{ $cantidad == 100 ? 'selected' : '' }}>100</option>
+                                                <option value='5000' {{ $cantidad == 5000 ? 'selected' : '' }}>Todos</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input name="busqueda" value="{{ $busqueda }}" class="form-control" type="text" placeholder="Buscar" aria-label="Search"> 
                                         </div>
                                         <div class="col-md-2">
                                             <button class="btn btn-primary btn-fab btn-icon">
@@ -34,12 +44,12 @@
                         <div class="table-responsive">
                             <table class="table" id="tabla-semestres" >
                                 <thead>
-                                    <th scope="col">{{ __('ID') }}</th>
-                                    <th scope="col">{{ __('Número') }}</th>
-                                    <th scope="col">{{ __('Periodo') }}</th>
-                                    <th scope="col">{{ __('Fecha de inicio') }}</th>
-                                    <th scope="col">{{ __('Fecha final') }}</th>
-                                    <th class="text-right" scope="col">{{ __('Acciones') }}</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Número</th>
+                                    <th scope="col">Periodo</th>
+                                    <th scope="col">Fecha de inicio</th>
+                                    <th scope="col">Fecha final</th>
+                                    <th class="text-right" scope="col">Acciones</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($semestres as $semestre)
@@ -62,9 +72,9 @@
                                             <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $semestre->id }})">
                                                     <i class="fas fa-pencil-alt fa-2 "></i>
                                             </button>
-                                            <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalDepartamentos({{ $semestre->id }}, '{{ $semestre->numero }}')">
-                                                    <i class="fa fa-eye "></i>
-                                            </button>
+                                            <a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href=" {{ route('semestres.ver', $semestre) }} ">
+                                                    <i class="fa fa-eye "></i> 
+                                            </a>
                                             <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $semestre->id }})">
                                                     <i class="fas fa-trash"></i>
                                             </button>
@@ -77,7 +87,7 @@
                     </div>
                     <div class="card-footer py-4">
                         <nav class="d-flex justify-content-end" aria-label="...">
-                            {{ $semestres->links() }}
+                            {{ $semestres->appends(['busqueda'=>$busqueda, 'cantidad'=>$cantidad])->links() }}
                         </nav>
                     </div>
                 </div>
@@ -90,7 +100,6 @@
 
 @include('Admin.Semestre.editarModal')
 
-@include('Admin.Semestre.verModal')
 
 @endsection
 @push('js')
@@ -107,7 +116,7 @@
                 + "<td>" + semestres[i].fecha_inicio + "</td>" 
                 + "<td>" + semestres[i].fecha_final + "</td>"
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + semestres[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
-                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalDepartamentos(\'' + semestres[i].id + '\',\'' + semestres[i].numero + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href="' + semestres[i].id + '"><i class="fa fa-eye "></i></a>' 
                 +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + semestres[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
                 +  "</tr>";
         }

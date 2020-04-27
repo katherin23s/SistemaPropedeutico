@@ -69,6 +69,12 @@
                                 <p>{{ _('Materias') }}</p>
                             </a>
                         </li>
+                        <li @if ($pageSlug == 'clases') class="active " @endif>
+                            <a href="{{ route('clases.index')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>Clases</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

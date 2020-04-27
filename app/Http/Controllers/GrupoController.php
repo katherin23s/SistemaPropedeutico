@@ -16,12 +16,54 @@ class GrupoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //el index donde se muestra la lista de todos los grupos
-        $grupos = Grupo::with('carrera', 'semestre')->paginate(15);
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
 
-        return view('Admin.Grupos.index', compact('grupos'));
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        if (is_null($request->carrera)) {
+            $carrera = 0;
+        } else {
+            $carrera = $request->carrera;
+        }
+
+        if (is_null($request->semestre)) {
+            $semestre = 0;
+        } else {
+            $semestre = $request->semestre;
+        }
+        if ($carrera > 0 && $semestre > 0) {
+            $grupos = Grupo::with('carrera', 'semestre')
+                ->whereLike(['numero'], $busqueda)
+                ->where([['carrera_id', $carrera], ['semestre_id', $semestre]])
+                ->paginate($cantidad)
+            ;
+        } elseif ($carrera > 0 && $semestre <= 0) {
+            $grupos = Grupo::with('carrera', 'semestre')
+                ->whereLike(['numero'], $busqueda)
+                ->where('carrera_id', $carrera)
+                ->paginate($cantidad)
+            ;
+        } elseif ($carrera <= 0 && $semestre > 0) {
+            $grupos = Grupo::with('carrera', 'semestre')
+                ->whereLike(['numero'], $busqueda)
+                ->where('semestre_id', $semestre)
+                ->paginate($cantidad)
+            ;
+        } else {
+            $grupos = Grupo::with('carrera', 'semestre')->whereLike(['numero'], $busqueda)->paginate($cantidad);
+        }
+
+        return view('Admin.Grupos.index', compact('grupos', 'cantidad', 'busqueda'));
     }
 
     /**
@@ -122,41 +164,6 @@ class GrupoController extends Controller
         }
         echo json_encode($response);
         exit;
-    }
-
-    public function buscar(Request $request)
-    {
-        if (is_null($request['buscar'])) {
-            $busqueda = '';
-        } else {
-            $busqueda = $request['buscar'];
-        }
-
-        $carrera_id = $request['carrera'];
-        $semestre_id = $request['semestre'];
-        if ($carrera_id > 0 && $semestre_id > 0) {
-            $grupos = Grupo::with('carrera', 'semestre')
-                ->whereLike(['numero'], $busqueda)
-                ->where([['carrera_id', $carrera_id], ['semestre_id', $semestre_id]])
-                ->paginate(15)
-            ;
-        } elseif ($carrera_id > 0 && $semestre_id <= 0) {
-            $grupos = Grupo::with('carrera', 'semestre')
-                ->whereLike(['numero'], $busqueda)
-                ->where('carrera_id', $carrera_id)
-                ->paginate(15)
-            ;
-        } elseif ($carrera_id <= 0 && $semestre_id > 0) {
-            $grupos = Grupo::with('carrera', 'semestre')
-                ->whereLike(['numero'], $busqueda)
-                ->where('semestre_id', $semestre_id)
-                ->paginate(15)
-            ;
-        } else {
-            $grupos = Grupo::with('carrera', 'semestre')->whereLike(['numero'], $busqueda)->paginate(15);
-        }
-
-        return view('Admin.Grupos.index', compact('grupos'));
     }
 
     /**

@@ -16,11 +16,38 @@ class AlumnoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $alumnos = Alumno::with('grupo')->paginate(15);
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
 
-        return view('Admin.Alumnos.index', compact('alumnos'));
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        if (is_null($request->grupo)) {
+            $grupo = 0;
+        } else {
+            $grupo = $request->grupo;
+        }
+
+        if ($grupo > 0) {
+            $alumnos = Alumno::with('grupo')
+                ->whereLike(['nombre', 'numero_alumno', 'email'], $busqueda)
+                ->where('grupo_id', $grupo)
+                ->paginate($cantidad)
+            ;
+        } else {
+            $alumnos = Alumno::with('grupo')
+                ->whereLike(['nombre', 'numero_alumno', 'email'], $busqueda)->paginate($cantidad);
+        }
+
+        return view('Admin.Alumnos.index', compact('alumnos', 'cantidad', 'busqueda'));
     }
 
     public function store(RegistrarAlumnoRequest $request)
@@ -96,7 +123,8 @@ class AlumnoController extends Controller
             $alumnos = Alumno::with('grupo')
                 ->whereLike(['nombre', 'numero_alumno', 'email'], $busqueda)
                 ->where('grupo_id', $grupo_id)
-                ->paginate(15);
+                ->paginate(15)
+            ;
         } else {
             $alumnos = Alumno::with('grupo')
                 ->whereLike(['nombre', 'numero_alumno', 'email'], $busqueda)->paginate(15);
