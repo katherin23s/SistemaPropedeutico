@@ -31,8 +31,9 @@
                     </span>
                 @endif
             </div>
-            <div class="col-auto">
-                <select id='departamento_id' class="custom-select form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id"> 
+            <div class="form-group ">
+                <label for="departamento_id">Departamento</label>
+                <select style="width: 100%" id='departamento_id' class="custom-select form-control{{ $errors->has('departamento_id') ? ' is-invalid' : '' }}" name="departamento_id"> 
                     <option value='0'>{{ __('Seleccionar departamento') }}</option>
                 </select>
             </div>

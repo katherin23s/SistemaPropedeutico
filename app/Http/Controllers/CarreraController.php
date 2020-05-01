@@ -24,10 +24,10 @@ class CarreraController extends Controller
             $cantidad = $request->cantidad;
         }
 
-        if (is_null($request['buscar'])) {
+        if (is_null($request['busqueda'])) {
             $busqueda = '';
         } else {
-            $busqueda = $request['buscar'];
+            $busqueda = $request['busqueda'];
         }
 
         if (is_null($request->departamento)) {

@@ -51,19 +51,10 @@
                                         <tbody>
                                             @foreach ($grupo->alumnos as $alumno)
                                                 <tr>
-                                                    <td>{{ $alumno->numero }}</td>
+                                                    <td>{{ $alumno->numero_alumno }}</td>
                                                     <td>{{ $alumno->nombre}}</td>
                                                     <td>
                                                         <a href="mailto:{{ $alumno->email }}">{{ $alumno->email }}</a>
-                                                    </td>
-                                                    <td class="td-actions text-right">
-                                                    <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $alumno->id }})">
-                                                            <i class="fas fa-pencil-alt fa-2 "></i>
-                                                    </button>
-                                                    
-                                                    <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $alumno->id }})">
-                                                            <i class="fas fa-trash"></i>
-                                                    </button>
                                                     </td>
                                                 </tr>
                                             @endforeach

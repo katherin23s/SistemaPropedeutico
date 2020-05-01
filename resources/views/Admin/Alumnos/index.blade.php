@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Alumnos'), 'pageSlug' => 'Alumnos'])
+@extends('layouts.app', ['page' => __('Alumnos'), 'pageSlug' => 'alumnos'])
 
 @section('content')
 <div class="content">
@@ -110,7 +110,7 @@
                 + "<td>" + alumnos[i].nombre + "</td>" 
                 + "<td>" + alumnos[i].direccion + "</td>"
                 + "<td>" + alumnos[i].telefono + "</td>"
-                + "<td>" + alumnos[i].correo + "</td>"
+                + "<td>" + alumnos[i].email + "</td>"
                 + "<td>" + alumnos[i].grupo + "</td>" 
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + alumnos[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
                 +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalalumnos(\'' + alumnos[i].id + '\',\'' + alumnos[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
