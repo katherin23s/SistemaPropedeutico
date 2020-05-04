@@ -140,9 +140,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('alumnos', 'AlumnoController@index')->name('alumnos.index');
     Route::post('alumnos/encontrar', 'AlumnoController@encontrar')->name('alumnos.encontrar');
-    Route::patch('alumnos/actualizar', 'AlumnoController@update')->name('alumnos.update');
+    Route::get('alumnos/{alumno}/actualizar', 'AlumnoController@edit')->name('alumnos.actualizar');
+    Route::patch('alumnos/{alumno}/actualizar', 'AlumnoController@update')->name('alumnos.update');
     Route::delete('alumnos/eliminar', 'AlumnoController@eliminar')->name('alumnos.eliminar');
     Route::post('alumnos/buscar', 'AlumnoController@buscar')->name('alumnos.buscar');
+    Route::get('alumnos/{alumno}', 'AlumnoController@show')->name('alumnos.ver');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

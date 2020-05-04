@@ -24,11 +24,12 @@ class ActualizarAlumnoRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required',
             'numero_alumno' => 'required|max:255|min:1',
             'nombre' => 'required|max:255|min:1',
             'direccion' => 'max:255',
             'telefono' => 'max:255',
+            'email' => 'required|max:255',
+            'escuela_procedencia' => 'max:255',
         ];
     }
 }

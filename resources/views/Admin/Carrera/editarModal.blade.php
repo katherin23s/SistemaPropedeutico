@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body" style="padding-bottom: 60px; padding-top: 30px;">
                 <input type="hidden" id="actualizar-carrera_id">
-                  {{--  nombre  --}}
+                {{--  nombre  --}}
                 <div class="form-group {{ $errors->has('nombre') ? ' has-danger' : '' }}">
                     <label for="actualizar-nombre">Nombre</label>
                     <input type="text" name="nombre" id="actualizar-nombre" class="form-control {{ $errors->has('nombre') ? ' is-invalid' : '' }}" 
