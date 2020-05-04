@@ -95,7 +95,9 @@ class AlumnoController extends Controller
         $alumno->fill($datos_validados);
         $alumno->save();
 
-        return redirect()->route('alumnos.actualizar', compact('alumno'))->withStatus(__('Datos de alumno actualizados correctamente.'));
+        return redirect()->route('alumnos.actualizar', compact('alumno'))
+            ->withStatus(__('Datos de alumno actualizados correctamente.'))
+        ;
     }
 
     public function encontrar(Request $request)

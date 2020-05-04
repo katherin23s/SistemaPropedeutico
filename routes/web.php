@@ -134,9 +134,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('docentes', 'DocenteController@index')->name('docentes.index');
     Route::post('docentes/encontrar', 'DocenteController@encontrar')->name('docentes.encontrar');
     Route::patch('docentes/actualizar', 'DocenteController@update')->name('docentes.update');
+    Route::get('docentes/{docente}/actualizar', 'DocenteController@edit')->name('docentes.actualizar');
     Route::delete('docentes/eliminar', 'DocenteController@eliminar')->name('docentes.eliminar');
     Route::post('docentes/busqueda', 'DocenteController@busqueda')->name('docentes.busqueda');
     Route::post('docentes/buscar', 'DocenteController@buscar')->name('docentes.buscar');
+    Route::get('docentes/{docente}', 'DocenteController@show')->name('docentes.ver');
 
     Route::get('alumnos', 'AlumnoController@index')->name('alumnos.index');
     Route::post('alumnos/encontrar', 'AlumnoController@encontrar')->name('alumnos.encontrar');

@@ -41,4 +41,9 @@ class Docente extends Authenticatable
     {
         return $this->belongsTo('App\Departamento');
     }
+
+    public function clases()
+    {
+        return $this->hasMany('App\Clase');
+    }
 }
