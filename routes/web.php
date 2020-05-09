@@ -134,15 +134,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('docentes', 'DocenteController@index')->name('docentes.index');
     Route::post('docentes/encontrar', 'DocenteController@encontrar')->name('docentes.encontrar');
     Route::patch('docentes/actualizar', 'DocenteController@update')->name('docentes.update');
+    Route::get('docentes/{docente}/actualizar', 'DocenteController@edit')->name('docentes.actualizar');
     Route::delete('docentes/eliminar', 'DocenteController@eliminar')->name('docentes.eliminar');
     Route::post('docentes/busqueda', 'DocenteController@busqueda')->name('docentes.busqueda');
     Route::post('docentes/buscar', 'DocenteController@buscar')->name('docentes.buscar');
+    Route::get('docentes/{docente}', 'DocenteController@show')->name('docentes.ver');
 
     Route::get('alumnos', 'AlumnoController@index')->name('alumnos.index');
     Route::post('alumnos/encontrar', 'AlumnoController@encontrar')->name('alumnos.encontrar');
-    Route::patch('alumnos/actualizar', 'AlumnoController@update')->name('alumnos.update');
+    Route::get('alumnos/{alumno}/actualizar', 'AlumnoController@edit')->name('alumnos.actualizar');
+    Route::patch('alumnos/{alumno}/actualizar', 'AlumnoController@update')->name('alumnos.update');
     Route::delete('alumnos/eliminar', 'AlumnoController@eliminar')->name('alumnos.eliminar');
     Route::post('alumnos/buscar', 'AlumnoController@buscar')->name('alumnos.buscar');
+    Route::get('alumnos/{alumno}', 'AlumnoController@show')->name('alumnos.ver');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

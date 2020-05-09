@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5  align="center" class="modal-title" id="exampleModalLabel">CARRERA</h5>
+            <h5  align="center" class="modal-title" id="exampleModalLabel">MATERIA</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -53,8 +53,9 @@
                     </span>
                 @endif
             </div>
-            <div class="col-auto">
-                <select id='carrera_id' class="custom-select form-control{{ $errors->has('carrera_id') ? ' is-invalid' : '' }}" name="carrera_id"> 
+            <div class="form-group">
+                <label for="carrera_id">Carrera</label>
+                <select style="width: 100%" id='carrera_id' class="custom-select form-control{{ $errors->has('carrera_id') ? ' is-invalid' : '' }}" name="carrera_id"> 
                     <option value='0'>{{ __('Seleccionar carrera') }}</option>
                 </select>
             </div>

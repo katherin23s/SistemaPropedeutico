@@ -70,12 +70,12 @@
                                             </td>
                                             <td>{{ $docente->departamento->nombre }}</td>
                                             <td class="td-actions text-right">
-                                                <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $docente->id }})">
-                                                        <i class="fas fa-pencil-alt fa-2 "></i>
-                                                </button>
-                                                <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModaldocentes({{ $docente->id }}, '{{ $docente->nombre }}')">
+                                                <a class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" href="{{ route('docentes.actualizar', $docente) }} ">
+                                                    <i class="fas fa-pencil-alt fa-2 "></i>
+                                                </a>
+                                                <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href="{{ route('docentes.ver', $docente) }} ">
                                                         <i class="fa fa-eye "></i>
-                                                </button>
+                                                </a>
                                                 <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $docente->id }})">
                                                         <i class="fa fa-trash"></i>
                                                 </button>

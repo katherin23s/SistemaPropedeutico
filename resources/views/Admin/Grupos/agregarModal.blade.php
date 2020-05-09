@@ -12,14 +12,14 @@
           {{-- Semestre --}}
           <div class="form-group">
             <label for="semestre-id">Semestre</label>
-            <select id='semestre_id' class="custom-select form-control{{ $errors->has('semestre_id') ? ' is-invalid' : '' }}" name="semestre_id"> 
+            <select style="width: 100%" id='semestre_id' class="custom-select form-control{{ $errors->has('semestre_id') ? ' is-invalid' : '' }}" name="semestre_id"> 
                 <option value='0'>{{ __('Seleccionar semestre') }}</option>
             </select>
           </div>
           {{-- carrera --}}
           <div class="form-group">
             <label for="carrera-id">Carrera</label>
-            <select id='carrera_id' class="custom-select form-control{{ $errors->has('carrera_id') ? ' is-invalid' : '' }}" name="carrera_id"> 
+            <select style="width: 100%" id='carrera_id' class="custom-select form-control{{ $errors->has('carrera_id') ? ' is-invalid' : '' }}" name="carrera_id"> 
                 <option value='0'>{{ __('Seleccionar carrera') }}</option>
             </select>
           </div>
@@ -35,18 +35,14 @@
               @endif
           </div>  
           {{-- Hora inicio --}}
-          <div class="form-group row">
-            <label for="input-hora_inicio" class="col-3 col-form-label">Hora de inicio</label>
-            <div class="col-3">
-              <input class="form-control" type="time" min="06:00" max="23:00" value="07:00:00" id="input-hora_inicio" required>
-            </div>
+          <div class="form-group">
+            <label for="input-hora_inicio">Hora de inicio</label>
+            <input class="form-control" type="time" min="06:00" max="23:00" value="07:00:00" id="input-hora_inicio" required>
           </div>  
           {{-- Hora final --}}
-          <div class="form-group row">
-            <label for="input-hora_final" class="col-3 col-form-label">Hora final</label>
-            <div class="col-3">
-              <input class="form-control" type="time" min="06:00" max="23:00" value="13:00:00" id="input-hora_final" required>
-            </div>
+          <div class="form-group">
+            <label for="input-hora_final">Hora final</label>
+            <input class="form-control" type="time" min="06:00" max="23:00" value="13:00:00" id="input-hora_final" required>
           </div>       
         </div>
         <div class="modal-footer">

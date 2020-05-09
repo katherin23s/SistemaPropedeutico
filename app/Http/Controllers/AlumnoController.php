@@ -68,9 +68,19 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno)
     {
-        $alumno::load('grupo.clases');
+        $alumno->load('grupo.clases.docente', 'grupo.clases.materia');
 
-        return view('');
+        return view('Admin.Alumnos.ver', compact('alumno'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Alumno $alumno)
+    {
+        return view('Admin.Alumnos.editar', compact('alumno'));
     }
 
     /**
@@ -78,18 +88,16 @@ class AlumnoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarAlumnoRequest $request)
+    public function update(ActualizarAlumnoRequest $request, Alumno $alumno)
     {
-        $datos_validados = $request->validate();
-        $id = $request->alumno_id;
-        $alumno = Alumno::findOrFail($id);
+        $datos_validados = $request->validated();
 
         $alumno->fill($datos_validados);
         $alumno->save();
 
-        $alumnos = Alumno::with('grupo')->paginate(15);
-
-        return AlumnoResource::collection($alumnos);
+        return redirect()->route('alumnos.actualizar', compact('alumno'))
+            ->withStatus(__('Datos de alumno actualizados correctamente.'))
+        ;
     }
 
     public function encontrar(Request $request)

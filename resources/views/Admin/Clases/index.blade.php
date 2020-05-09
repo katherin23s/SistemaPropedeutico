@@ -110,10 +110,10 @@
 
         for(var i = 0; i < clases.length; i++){
             output += "<tr value="+clases[i].id+">"
-                + "<td>" + clases[i].id + "</td>"
+                + "<td>" + clases[i].clave + "</td>"
                 + "<td>" + clases[i].materia + "</td>" 
+                + "<td>" + clases[i].docente + "</td>"
                 + "<td>" + clases[i].grupo + "</td>" 
-                + "<td>" + clases[i].semestre + "</td>" 
                 + "<td>" + clases[i].carrera + "</td>" 
                 + "<td>" + clases[i].salon + "</td>" 
                 + "<td>" + clases[i].horario + "</td>"

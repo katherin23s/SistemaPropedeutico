@@ -26,6 +26,7 @@ class ClaseRequest extends FormRequest
         return [
             'hora_inicio' => 'required',
             'hora_final' => 'required',
+            'clave' => 'required|max:255',
             'dias' => 'required|max:255|min:1',
             'salon' => 'required|max:255|min:1',
             'capacidad' => 'required|integer|min:1',

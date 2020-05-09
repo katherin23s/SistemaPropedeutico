@@ -23,37 +23,33 @@
           {{-- grupo --}}
           <div class="form-group">
             <label for="grupo-id">Grupo</label>
-            <select id='grupo_id' class="custom-select form-control{{ $errors->has('grupo_id') ? ' is-invalid' : '' }}" name="grupo_id"> 
+            <select style="width: 100%" id='grupo_id' class="custom-select form-control{{ $errors->has('grupo_id') ? ' is-invalid' : '' }}" name="grupo_id"> 
                 <option value='0'>Seleccionar grupo</option>
             </select>
           </div>
           {{-- materia --}}
           <div class="form-group">
             <label for="materia_id">Materia</label>
-            <select id='materia_id' class="custom-select form-control{{ $errors->has('materia_id') ? ' is-invalid' : '' }}" name="materia_id"> 
+            <select style="width: 100%" id='materia_id' class="custom-select form-control{{ $errors->has('materia_id') ? ' is-invalid' : '' }}" name="materia_id"> 
                 <option value='0'>Seleccionar materia</option>
             </select>
           </div>
           {{-- docente --}}
           <div class="form-group">
             <label for="docente_id">Docente</label>
-            <select id='docente_id' class="custom-select form-control{{ $errors->has('docente_id') ? ' is-invalid' : '' }}" name="docente_id"> 
+            <select style="width: 100%" id='docente_id' class="custom-select form-control{{ $errors->has('docente_id') ? ' is-invalid' : '' }}" name="docente_id"> 
                 <option value='0'>Seleccionar docente</option>
             </select>
           </div>
           {{-- Hora inicio --}}
-          <div class="form-group row">
-            <label for="input-hora_inicio" class="col-3 col-form-label">Hora de inicio</label>
-            <div class="col-3">
-              <input class="form-control" type="time" min="06:00" max="23:00" value="07:00:00" id="input-hora_inicio" required>
-            </div>
+          <div class="form-group">
+            <label for="input-hora_inicio">Hora de inicio</label>
+            <input class="form-control" type="time" min="06:00" max="23:00" value="07:00:00" id="input-hora_inicio" required>
           </div>  
           {{-- Hora final --}}
-          <div class="form-group row">
-            <label for="input-hora_final" class="col-3 col-form-label">Hora final</label>
-            <div class="col-3">
-              <input class="form-control" type="time" min="06:00" max="23:00" value="13:00:00" id="input-hora_final" required>
-            </div>
+          <div class="form-group">
+            <label for="input-hora_final" >Hora final</label>
+            <input class="form-control" type="time" min="06:00" max="23:00" value="13:00:00" id="input-hora_final" required>
           </div>   
           {{--  salon  --}}
           <div class="form-group {{ $errors->has('salon') ? ' has-danger' : '' }}">
@@ -79,7 +75,7 @@
           </div>  
           {{--  capacidad  --}}
           <div class="form-group {{ $errors->has('capacidad') ? ' has-danger' : '' }}">
-            <label for="input-capacidad">capacidad</label>
+            <label for="input-capacidad">Capacidad</label>
             <input type="numeric"  name="capacidad" id="input-capacidad" class="form-control {{ $errors->has('capacidad') ? ' is-invalid' : '' }}" 
             value="{{ old('capacidad') }}" required>
             @if ($errors->has('capacidad'))

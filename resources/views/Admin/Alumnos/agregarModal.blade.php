@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5  align="center" class="modal-title" id="exampleModalLabel">DOCENTE</h5>
+            <h5  align="center" class="modal-title" id="exampleModalLabel">ALUMNO</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -22,6 +22,7 @@
                 @endif
             </div>
             <div class="form-group">
+                <label for="grupo_id">Grupo</label>
                 <select id='grupo_id' class="custom-select" name="grupo_id" style="width: 100%"> 
                     <option value='0'>{{ __('Seleccionar grupo') }}</option>
                 </select>
@@ -79,7 +80,7 @@
             
         }); 
         $("#grupo").select2({
-            minimumInputLength: 3,
+            minimumInputLength: 1,
             ajax: { 
             url: "{{route('grupos.busqueda')}}",
             type:'post',

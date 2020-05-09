@@ -62,12 +62,25 @@ class DocenteController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Docente $docente)
+    {
+        return view('Admin.Docentes.editar', compact('docente'));
+    }
+
+    /**
      * Display the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function show(Docente $docente)
     {
+        $docente->load('clases.materia', 'clases.grupo.semestre');
+
+        return view('Admin.Docentes.ver', compact('docente'));
     }
 
     /**
@@ -75,18 +88,16 @@ class DocenteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarDocenteRequest $request)
+    public function update(ActualizarDocenteRequest $request, Docente $docente)
     {
         $datos_validados = $request->validated();
-        $id = $request->docente_id;
-        $docente = Docente::findOrFail($id);
 
         $docente->fill($datos_validados);
         $docente->save();
 
-        $docentes = Docente::with('departamento')->paginate(15);
-
-        return DocenteResource::collection($docentes);
+        return redirect()->route('docentes.actualizar', compact('docente'))
+            ->withStatus(__('Datos del docente actualizados correctamente.'))
+        ;
     }
 
     public function encontrar(Request $request)

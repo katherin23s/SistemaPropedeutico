@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Alumnos'), 'pageSlug' => 'Alumnos'])
+@extends('layouts.app', ['page' => __('Alumnos'), 'pageSlug' => 'alumnos'])
 
 @section('content')
 <div class="content">
@@ -70,12 +70,12 @@
                                             </td>
                                             <td>{{ $alumno->grupo->numero }}</td>
                                             <td class="td-actions text-right">
-                                                <button class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" onClick="mostrarModalEditar({{ $alumno->id }})">
+                                                <a class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" href="{{ route('alumnos.actualizar', $alumno) }} ">
                                                         <i class="fas fa-pencil-alt fa-2 "></i>
-                                                </button>
-                                                <button rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalalumnos({{ $alumno->id }}, '{{ $alumno->nombre }}')">
+                                                </a>
+                                                <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href="{{ route('alumnos.ver', $alumno) }} ">
                                                         <i class="fa fa-eye "></i>
-                                                </button>
+                                                </a>
                                                 <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $alumno->id }})">
                                                         <i class="fa fa-trash"></i>
                                                 </button>
@@ -110,7 +110,7 @@
                 + "<td>" + alumnos[i].nombre + "</td>" 
                 + "<td>" + alumnos[i].direccion + "</td>"
                 + "<td>" + alumnos[i].telefono + "</td>"
-                + "<td>" + alumnos[i].correo + "</td>"
+                + "<td>" + alumnos[i].email + "</td>"
                 + "<td>" + alumnos[i].grupo + "</td>" 
                 +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + alumnos[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
                 +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalalumnos(\'' + alumnos[i].id + '\',\'' + alumnos[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 

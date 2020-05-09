@@ -22,11 +22,10 @@
                 @endif
             </div>
             <div class="form-row">
-                <div class="col-md-12">
-                    <select id='departamento_id' class="custom-select" style="width: 100%" name="departamento_id"> 
-                        <option value='0'>{{ __('Seleccionar departamento') }}</option>
-                    </select>
-                </div>
+                <label for="departamento_id">Departamento</label>
+                <select id='departamento_id' class="custom-select" style="width: 100%" name="departamento_id"> 
+                    <option value='0'>{{ __('Seleccionar departamento') }}</option>
+                </select>
             </div>
             
         </div>
