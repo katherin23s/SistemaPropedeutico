@@ -84,7 +84,7 @@ class ClaseController extends Controller
     public function store(ClaseRequest $request)
     {
         $datosvalidados = $request->validated();
-        $materia = Materia::findOrFail($datosvalidados->materia_id);
+        $materia = Materia::findOrFail($datosvalidados['materia_id']);
         $datosvalidados['unidades'] = $materia->unidades;
         $datosvalidados['creditos'] = $materia->creditos;
         Clase::create($datosvalidados);
