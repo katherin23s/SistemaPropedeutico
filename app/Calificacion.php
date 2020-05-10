@@ -11,6 +11,7 @@ class Calificacion extends Model
         'clase_id',
         'promedio',
     ];
+    protected $table = 'calificaciones';
     protected $casts = [
         'id' => 'integer',
         'alumno_id' => 'integer',

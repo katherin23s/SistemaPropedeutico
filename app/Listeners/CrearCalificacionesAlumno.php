@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Actions\CrearCalificacionesClaseAlumno;
 use App\Events\AlumnoRegistrado;
 
 class CrearCalificacionesAlumno
@@ -21,5 +22,7 @@ class CrearCalificacionesAlumno
     public function handle(AlumnoRegistrado $event)
     {
         $alumno = $event->alumno;
+        $crear_Calificaciones = new CrearCalificacionesClaseAlumno($alumno);
+        $crear_Calificaciones->crearCalificaciones();
     }
 }

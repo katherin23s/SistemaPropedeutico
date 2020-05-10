@@ -7,7 +7,7 @@ use App\Calificacion;
 use App\CalificacionUnidad;
 use App\Clase;
 
-class VerifyPaymentAmount
+class CrearCalificacionesClaseAlumno
 {
     private $alumno;
     private $clases;
@@ -15,7 +15,7 @@ class VerifyPaymentAmount
     public function __construct(Alumno $alumno)
     {
         $this->alumno = $alumno;
-        $this->clases = Clase::where('grupo_id', $alumno->grupo_id);
+        $this->clases = Clase::where('grupo_id', $alumno->grupo_id)->get();
     }
 
     public function crearCalificaciones()

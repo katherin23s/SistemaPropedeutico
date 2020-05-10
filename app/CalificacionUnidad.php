@@ -12,6 +12,7 @@ class CalificacionUnidad extends Model
         'valor',
         'habilitada',
     ];
+    protected $table = 'calificacion_unidades';
     protected $casts = [
         'id' => 'integer',
         'calificacion_id' => 'integer',
