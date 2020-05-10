@@ -10,9 +10,7 @@
                 
                 <div class="card-body">
                     @include('alerts.success')
-                    <p class="card-text">
-                        {{ $alumno->nombre }}
-                    </p>
+                    @include('components.tablaCalificacionesAlumno', ['calificaciones' => $alumno->calificaciones])
                     
                         
                 </div>

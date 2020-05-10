@@ -62,4 +62,9 @@ class Alumno extends Authenticatable
     {
         return $this->belongsTo('App\Grupo');
     }
+
+    public function calificaciones()
+    {
+        return $this->hasMany('App\Calificacion');
+    }
 }

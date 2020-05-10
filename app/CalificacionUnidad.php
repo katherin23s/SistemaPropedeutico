@@ -25,4 +25,9 @@ class CalificacionUnidad extends Model
     {
         return $this->belongsTo('App\Calificacion');
     }
+
+    public function valor()
+    {
+        return number_format($this->valor, 2);
+    }
 }
