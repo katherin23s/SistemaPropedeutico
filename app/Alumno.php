@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\AlumnoRegistrado;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -27,6 +28,14 @@ class Alumno extends Authenticatable
         'password' => 'required|max:255|min:1',
         'escuela_procedencia' => 'max:255',
         'grupo_id' => 'required|integer',
+    ];
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => AlumnoRegistrado::class,
     ];
     protected $guard = 'alumno';
     /**

@@ -15,7 +15,8 @@ class CreateCalificacionUnidadesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('calificacion_id');
             $table->string('unidad');
-            $table->decimal('valor', 5, 2);
+            $table->boolean('habilitada')->default(false);
+            $table->decimal('valor', 5, 2)->default(0);
             $table->foreign('calificacion_id')->references('id')->on('calificaciones')->onDelete('cascade');
             $table->timestamps();
         });
