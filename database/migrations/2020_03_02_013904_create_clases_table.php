@@ -17,7 +17,8 @@ class CreateClasesTable extends Migration
             $table->unsignedBigInteger('docente_id');
             $table->unsignedBigInteger('grupo_id');
             $table->string('clave')->unique();
-
+            $table->integer('unidades');
+            $table->integer('creditos');
             $table->datetime('hora_inicio');
             $table->datetime('hora_final');
             $table->string('dias');

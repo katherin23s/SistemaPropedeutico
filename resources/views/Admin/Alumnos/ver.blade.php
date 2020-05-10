@@ -13,27 +13,7 @@
                     <p class="card-text">
                         {{ $alumno->nombre }}
                     </p>
-                    <p class="card-text">
-                        {{ $alumno->telefono }}
-                    </p>
-                    <p class="card-text">
-                        {{ $alumno->escuela_procedencia }}
-                    </p>
-                    <p class="card-text">
-                        <a href="{{ route('grupos.ver', $alumno->grupo) }}">
-                            {{ $alumno->grupo->numero }}
-                        </a>
-                    </p>
-                    <p class="card-text">
-                        <a href="{{ route('semestres.ver', $alumno->grupo->semestre) }}">
-                            {{ $alumno->grupo->semestre->numero . ' ' . $alumno->grupo->semestre->periodo() }}
-                        </a>
-                    </p>
-                    <p class="card-text">
-                        <a href="{{ route('carreras.ver', $alumno->grupo->carrera) }}">
-                            {{ $alumno->grupo->carrera->nombre . ' ' . $alumno->grupo->carrera->numero_serie }}
-                        </a>
-                    </p>
+                    
                         
                 </div>
                 <div class="card-footer">
@@ -73,6 +53,27 @@
                     </p>
                     <div class="card-description">
                         <p>{{ $alumno->direccion }}</p>
+                        <p class="card-text">
+                            {{ $alumno->telefono }}
+                        </p>
+                        <p class="card-text">
+                            {{ $alumno->escuela_procedencia }}
+                        </p>
+                        <p class="card-text">
+                            <a href="{{ route('grupos.ver', $alumno->grupo) }}">
+                                {{ $alumno->grupo->numero }}
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <a href="{{ route('semestres.ver', $alumno->grupo->semestre) }}">
+                                {{ $alumno->grupo->semestre->numero . ' ' . $alumno->grupo->semestre->periodo() }}
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <a href="{{ route('carreras.ver', $alumno->grupo->carrera) }}">
+                                {{ $alumno->grupo->carrera->nombre . ' ' . $alumno->grupo->carrera->numero_serie }}
+                            </a>
+                        </p>
                     </div>
                 </div>
                 <div class="card-footer">

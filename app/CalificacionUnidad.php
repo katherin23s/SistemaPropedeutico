@@ -6,5 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class CalificacionUnidad extends Model
 {
-    //
+    public $fillable = [
+        'calificacion_id',
+        'unidad',
+        'valor',
+    ];
+    protected $casts = [
+        'id' => 'integer',
+        'calificacion_id' => 'integer',
+        'unidad' => 'string',
+        'valor' => 'decimal:5',
+    ];
+
+    public function calificacion()
+    {
+        return $this->belongsTo('App\Calificacion');
+    }
 }

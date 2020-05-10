@@ -51,7 +51,11 @@
                                         <tbody>
                                             @foreach ($grupo->alumnos as $alumno)
                                                 <tr>
-                                                    <td>{{ $alumno->numero_alumno }}</td>
+                                                    <td> 
+                                                        <a href="{{ route('alumnos.ver', $alumno) }}">
+                                                            {{  $alumno->numero_alumno  }}
+                                                        </a>
+                                                    </td>
                                                     <td>{{ $alumno->nombre}}</td>
                                                     <td>
                                                         <a href="mailto:{{ $alumno->email }}">{{ $alumno->email }}</a>

@@ -16,6 +16,8 @@ class Clase extends Model
         'grupo_id',
         'materia_id',
         'docente_id',
+        'unidades',
+        'creditos',
     ];
     protected $casts = [
         'id' => 'integer',
@@ -50,5 +52,10 @@ class Clase extends Model
     public function horarioCompleto()
     {
         return $this->hora_inicio->toTimeString().' - '.$this->hora_final->toTimeString();
+    }
+
+    public function calificaciones()
+    {
+        return $this->hasMany('App\Calificacion');
     }
 }

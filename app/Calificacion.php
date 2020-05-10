@@ -28,8 +28,8 @@ class Calificacion extends Model
         return $this->belongsTo('App\Clase');
     }
 
-    public function getPromedioAttribute($value)
+    public function unidades()
     {
-        return number_format($value, 2);
+        return $this->hasMany('App\CalificacionUnidad');
     }
 }
