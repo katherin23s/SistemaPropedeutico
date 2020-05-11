@@ -5,13 +5,13 @@
             <a href="#" class="simple-text logo-normal">CURSOS</a>
         </div>
         <ul class="nav">
-            <li @if ($pageSlug == 'dashboard') class="active " @endif>
-                <a href="{{ route('home') }}">
-                    <i class="tim-icons icon-chart-pie-36"></i>
-                    <p>{{ _('Dashboard') }}</p>
+            <li @if ($pageSlug == 'inicio') class="active " @endif>
+                <a href="{{ route('alumno.home', $alumno) }}">
+                    <i class="fas fa-home"></i>
+                    <p>Inicio</p>
                 </a>
             </li>
-            <li>
+            {{--  <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Laravel Examples') }}</span>
@@ -20,13 +20,13 @@
 
                 <div class="collapse show" id="laravel-examples">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'profile') class="active " @endif>
+                        <li @if ($pageSlug == 'profile') class="active" @endif>
                             <a href="">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('User Profile') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'users') class="active " @endif>
+                        <li @if ($pageSlug == 'users') class="active" @endif>
                             <a href="">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('User Management') }}</p>
@@ -34,47 +34,23 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li>  --}}
             <li @if ($pageSlug == 'horario') class="active " @endif>
-                <a href="">
-                    <i class="tim-icons icon-atom"></i>
+                <a href="{{ route('alumno.horario', $alumno) }}">
+                    <i class="far fa-calendar-alt"></i>
                     <p>Horario</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'maps') class="active " @endif>
-                <a href="">
-                    <i class="tim-icons icon-pin"></i>
-                    <p>{{ _('Maps') }}</p>
+            <li @if ($pageSlug == 'kardex') class="active " @endif>
+                <a href="{{ route('alumno.kardex', $alumno) }}">
+                    <i class="far fa-clipboard"></i>
+                    <p>Kardex</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'notifications') class="active " @endif>
+            <li @if ($pageSlug == 'documentos') class="active " @endif>
                 <a href="">
-                    <i class="tim-icons icon-bell-55"></i>
-                    <p>{{ _('Notifications') }}</p>
-                </a>
-            </li>
-            <li @if ($pageSlug == 'tables') class="active " @endif>
-                <a href="">
-                    <i class="tim-icons icon-puzzle-10"></i>
-                    <p>{{ _('Table List') }}</p>
-                </a>
-            </li>
-            <li @if ($pageSlug == 'typography') class="active " @endif>
-                <a href="">
-                    <i class="tim-icons icon-align-center"></i>
-                    <p>{{ _('Typography') }}</p>
-                </a>
-            </li>
-            <li @if ($pageSlug == 'rtl') class="active " @endif>
-                <a href="">
-                    <i class="tim-icons icon-world"></i>
-                    <p>{{ _('RTL Support') }}</p>
-                </a>
-            </li>
-            <li class=" {{ $pageSlug == 'upgrade' ? 'active' : '' }} bg-info">
-                <a href="">
-                    <i class="tim-icons icon-spaceship"></i>
-                    <p>{{ _('Upgrade to PRO') }}</p>
+                    <i class="far fa-file-alt"></i>
+                    <p>Documentos</p>
                 </a>
             </li>
         </ul>

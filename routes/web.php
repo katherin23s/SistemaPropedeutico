@@ -30,8 +30,9 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 //Alumno
 Route::group(['middleware' => ['auth.alumno']], function () {
     // login protected routes.
-    Route::get('/alumno/home', 'UserAlumnoController@home')->name('alumno.home');
-    Route::get('/alumno/horario', 'UserAlumnoController@horario')->name('alumno.horario');
+    Route::get('/{alumno}/inicio', 'UserAlumnoController@home')->name('alumno.home');
+    Route::get('/{alumno}/horario', 'UserAlumnoController@horario')->name('alumno.horario');
+    Route::get('/{alumno}/kardex', 'UserAlumnoController@kardex')->name('alumno.kardex');
 });
 
 //DOCENTE

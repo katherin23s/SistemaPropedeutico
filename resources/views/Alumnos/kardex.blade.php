@@ -23,7 +23,7 @@
                 
                     <div class="card-body">
                         @include('alerts.success')
-                        @include('Alumnos.tablaClases', ['clases' => $alumno->grupo->clases])
+                        @include('components.tablaCalificacionesAlumno', ['calificaciones' => $alumno->calificaciones])
                                                                              
                     </div>
                     <div class="card-footer py-4">
