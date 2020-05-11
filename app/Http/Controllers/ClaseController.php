@@ -103,7 +103,7 @@ class ClaseController extends Controller
      */
     public function show(Clase $clase)
     {
-        $clase->load('materia', 'docente', 'grupo.alumnos');
+        $clase->load('materia', 'docente', 'grupo', 'calificaciones.alumno');
 
         return view('Admin.Clases.ver', compact('clase'));
     }
