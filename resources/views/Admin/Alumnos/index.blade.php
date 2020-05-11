@@ -71,10 +71,10 @@
                                             <td>{{ $alumno->grupo->numero }}</td>
                                             <td class="td-actions text-right">
                                                 <a class="btn btn-info btn-sm btn-icon" rel="tooltip"  type="button" href="{{ route('alumnos.actualizar', $alumno) }} ">
-                                                        <i class="fas fa-pencil-alt fa-2 "></i>
+                                                        <i class="fas fa-pencil-alt fa-2"></i>
                                                 </a>
                                                 <a rel="tooltip" class="btn btn-success btn-sm btn-icon" type="button" href="{{ route('alumnos.ver', $alumno) }} ">
-                                                        <i class="fa fa-eye "></i>
+                                                        <i class="fa fa-eye"></i>
                                                 </a>
                                                 <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $alumno->id }})">
                                                         <i class="fa fa-trash"></i>
@@ -112,8 +112,8 @@
                 + "<td>" + alumnos[i].telefono + "</td>"
                 + "<td>" + alumnos[i].email + "</td>"
                 + "<td>" + alumnos[i].grupo + "</td>" 
-                +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + alumnos[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
-                +'<button class="btn btn-success btn-sm btn-icon"  type="button" onClick="mostrarModalalumnos(\'' + alumnos[i].id + '\',\'' + alumnos[i].nombre + '\')"><span class="btn-inner--icon"><i class="fa fa-eye"></i></span></button>' 
+                +'<td class="text-right"><a rel="tooltip" class="btn btn-info btn-sm btn-icon"  type="button" href="alumnos/' + alumnos[i].id + '/actualizar"><i class="fas fa-pencil-alt fa-2"></i></a>' 
+                +'<a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href="alumnos/' + alumnos[i].id + '"><i class="fa fa-eye "></i></a>' 
                 +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + alumnos[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
                 +  "</tr>";
         }
