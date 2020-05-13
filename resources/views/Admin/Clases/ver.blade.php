@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">  
                     <div class="card-header card-header-primary">
-                        <h4 class="card-title ">Clase {{ $clase->materia->nombre . ' - '.$clase->clave }}</h4>
+                        <h6 class="card-title ">Clase {{ $clase->materia->nombre . ' - '.$clase->clave }}</h6>
                         <div class="row">
                             <div class="col-md-3">   
                                  <h6> Grupo {{ $clase->grupo->numero }} </h6>
@@ -14,8 +14,10 @@
                             <div class="col-md-3">                   
                                 <h6> Docente {{ $clase->docente->nombre }} </h6>
                             </div>
-            
-                            <div class="col-md-6">
+                            <div class="col-md-3">   
+                                <h6> Semestre {{ $clase->grupo->semestre->periodo() }} </h6>
+                           </div>
+                            <div class="col-md-3">
                                 <h6> Horario {{ $clase->horarioCompleto() }} </h6>
                             </div>
                         </div>
@@ -43,6 +45,53 @@
                             <div class="tab-pane fade show active" id="tab-detalles" role="tabpanel" aria-labelledby="tab-detalles-tab">
                                 <div class="card">
                                     <h1>Detalles xd</h1>
+                                    <div class="card-body">
+                                        <div class="card-description">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <h6>Dias: </h6>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="card-text">
+                                                        {{ $clase->dias }}
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h6>Salon: </h6>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="card-text">
+                                                        {{ $clase->salon }}
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <h6>Capacidad: </h6>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="card-text">
+                                                        {{ $clase->capacidad }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <h6>Unidades: </h6>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    {{ $clase->unidades }}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h6>Creditos: </h6>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p class="card-text">
+                                                        {{ $clase->creditos }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab-alumnos" role="tabpanel" aria-labelledby="tab-alumnos-tab">
@@ -52,16 +101,17 @@
                                             <th scope="col">Número</th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Correo</th>
-                                            <th scope="col"></th>
+                                            <th scope="col">Promedio</th>
                                         </thead>
                                         <tbody>
-                                            @foreach ($clase->grupo->alumnos as $alumno)
+                                            @foreach ($clase->calificaciones as $calificacion)
                                                 <tr>
-                                                    <td>{{ $alumno->numero_alumno }}</td>
-                                                    <td>{{ $alumno->nombre}}</td>
+                                                    <td>{{ $calificacion->alumno->numero_alumno }}</td>
+                                                    <td>{{ $calificacion->alumno->nombre}}</td>
                                                     <td>
-                                                        <a href="mailto:{{ $alumno->email }}">{{ $alumno->email }}</a>
+                                                        <a href="mailto:{{ $calificacion->alumno->email }}">{{ $calificacion->alumno->email }}</a>
                                                     </td>
+                                                    <td class="{{ $calificacion->promedio < 70 ? 'bg-danger' : 'bg-success' }}">{{ $calificacion->promedio() }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -6,6 +6,7 @@ use App\Clase;
 use App\Http\Requests\ActualizarClaseRequest;
 use App\Http\Requests\ClaseRequest;
 use App\Http\Resources\ClaseResource;
+use App\Materia;
 use Illuminate\Http\Request;
 
 class ClaseController extends Controller
@@ -83,8 +84,14 @@ class ClaseController extends Controller
     public function store(ClaseRequest $request)
     {
         $datosvalidados = $request->validated();
+        $materia = Materia::findOrFail($datosvalidados['materia_id']);
+        $datosvalidados['unidades'] = $materia->unidades;
+        $datosvalidados['creditos'] = $materia->creditos;
         Clase::create($datosvalidados);
-        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
+        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+            ->orderBy('created_at')
+            ->paginate(15)
+        ;
 
         return ClaseResource::collection($clases);
     }
@@ -96,7 +103,7 @@ class ClaseController extends Controller
      */
     public function show(Clase $clase)
     {
-        $clase->load('materia', 'docente', 'grupo.alumnos');
+        $clase->load('materia', 'docente', 'grupo', 'calificaciones.alumno');
 
         return view('Admin.Clases.ver', compact('clase'));
     }

@@ -51,4 +51,11 @@ class UserAlumnoController extends Controller
 
         return view('Alumnos.horario', compact('alumno'));
     }
+
+    public function kardex(Alumno $alumno)
+    {
+        $alumno->load('calificaciones.clase');
+
+        return view('Alumnos.kardex', compact('alumno'));
+    }
 }

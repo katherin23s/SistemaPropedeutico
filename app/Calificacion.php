@@ -11,6 +11,7 @@ class Calificacion extends Model
         'clase_id',
         'promedio',
     ];
+    protected $table = 'calificaciones';
     protected $casts = [
         'id' => 'integer',
         'alumno_id' => 'integer',
@@ -28,8 +29,13 @@ class Calificacion extends Model
         return $this->belongsTo('App\Clase');
     }
 
-    public function getPromedioAttribute($value)
+    public function calificaciones()
     {
-        return number_format($value, 2);
+        return $this->hasMany('App\CalificacionUnidad');
+    }
+
+    public function promedio()
+    {
+        return number_format($this->promedio, 2);
     }
 }

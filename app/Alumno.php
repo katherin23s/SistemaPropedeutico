@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\AlumnoRegistrado;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -28,6 +29,14 @@ class Alumno extends Authenticatable
         'escuela_procedencia' => 'max:255',
         'grupo_id' => 'required|integer',
     ];
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => AlumnoRegistrado::class,
+    ];
     protected $guard = 'alumno';
     /**
      * The attributes that should be hidden for arrays.
@@ -52,5 +61,10 @@ class Alumno extends Authenticatable
     public function grupo()
     {
         return $this->belongsTo('App\Grupo');
+    }
+
+    public function calificaciones()
+    {
+        return $this->hasMany('App\Calificacion');
     }
 }

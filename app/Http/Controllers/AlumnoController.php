@@ -68,7 +68,7 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno)
     {
-        $alumno->load('grupo.clases.docente', 'grupo.clases.materia');
+        $alumno->load('grupo.clases.docente', 'grupo.clases.materia', 'calificaciones.clase.materia');
 
         return view('Admin.Alumnos.ver', compact('alumno'));
     }

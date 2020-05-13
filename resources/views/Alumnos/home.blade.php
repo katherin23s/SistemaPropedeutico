@@ -1,7 +1,7 @@
-@extends('layouts.Alumnos.app', ['pageSlug' => 'dashboard'])
+@extends('layouts.Alumnos.app', ['pageSlug' => 'inicio', 'alumno' => $alumno])
 
 @section('content')
-    {{ $alumno->nombre ?? ''}}
+    {{ $alumno->nombre }}
     <div class="row">
         <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
