@@ -149,6 +149,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('alumnos/buscar', 'AlumnoController@buscar')->name('alumnos.buscar');
     Route::get('alumnos/{alumno}', 'AlumnoController@show')->name('alumnos.ver');
 
+    Route::get('documentos', 'DocumentoController@index')->name('documentos.index');
+    Route::post('documentos/agregar', 'DocumentoController@store')->name('documentos.store');
+    Route::post('documentos/encontrar', 'DocumentoController@encontrar')->name('documentos.encontrar');
+    Route::patch('documentos/actualizar', 'DocumentoController@update')->name('documentos.update');
+    Route::delete('documentos/eliminar', 'DocumentoController@eliminar')->name('documentos.eliminar');
+    Route::get('documentos/alumno', 'DocumentoController@documentosAlumno')->name('documentos.alumno');
+
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
     Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
