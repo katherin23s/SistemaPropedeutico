@@ -90,7 +90,7 @@
             type:"patch",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "id": id,
+                "clase_id": id,
                 "clave": clave,
                 "hora_inicio": hora_inicio_fecha,
                 "hora_final": hora_final_fecha,
@@ -99,7 +99,7 @@
                 "capacidad": capacidad,
             },
         success: function (response) {   
-          mostrarclases(response.data);                     
+          mostrarClases(response.data);                     
             $('#ModalEditar').modal('hide')
             }
         });

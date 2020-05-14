@@ -44,7 +44,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tab-detalles" role="tabpanel" aria-labelledby="tab-detalles-tab">
                                 <div class="card">
-                                    <h1>Detalles xd</h1>
+                                    <h1>Detalles</h1>
                                     <div class="card-body">
                                         <div class="card-description">
                                             <div class="row">
