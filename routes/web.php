@@ -30,15 +30,16 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 //Alumno
 Route::group(['middleware' => ['auth.alumno']], function () {
     // login protected routes.
-    Route::get('/{alumno}/inicio', 'UserAlumnoController@home')->name('alumno.home');
-    Route::get('/{alumno}/horario', 'UserAlumnoController@horario')->name('alumno.horario');
-    Route::get('/{alumno}/kardex', 'UserAlumnoController@kardex')->name('alumno.kardex');
+    Route::get('/alumno/{alumno}/inicio', 'UserAlumnoController@home')->name('alumno.home');
+    Route::get('/alumno/{alumno}/horario', 'UserAlumnoController@horario')->name('alumno.horario');
+    Route::get('/alumno/{alumno}/kardex', 'UserAlumnoController@kardex')->name('alumno.kardex');
 });
 
 //DOCENTE
 Route::group(['middleware' => ['auth.docente']], function () {
     // login protected routes.
-    Route::view('/docente', 'Docentes.horario');
+    Route::get('/docente/{docente}/inicio', 'UserDocenteController@home')->name('docente.home');
+    Route::get('/docente/{docente}/horario', 'UserDocenteController@horario')->name('docente.horario');
 });
 
 //ADMIN
