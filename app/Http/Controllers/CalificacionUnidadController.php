@@ -6,7 +6,9 @@ use App\Calificacion;
 use App\CalificacionUnidad;
 use App\Http\Requests\ActualizarCalificacionUnidadRequest;
 use App\Http\Resources\CalificacionUnidadResource;
+use App\Mail\CalificacionActualizada;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CalificacionUnidadController extends Controller
 {
@@ -82,6 +84,12 @@ class CalificacionUnidadController extends Controller
 
         $calificacion = Calificacion::findOrFail($calificacion_unidad->calificacion_id);
         $calificacion->calcularPromedio();
+
+        $calificacion_unidad->load('calificacion.clase.docente', 'calificacion.clase.materia', 'calificacion.alumno');
+
+        Mail::to($calificacion_unidad->calificacion->alumno->email)->send(
+            new CalificacionActualizada($calificacion_unidad)
+        );
 
         return new CalificacionUnidadResource($calificacion_unidad);
     }
