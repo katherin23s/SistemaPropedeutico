@@ -38,4 +38,10 @@ class Calificacion extends Model
     {
         return number_format($this->promedio, 2);
     }
+
+    public function calcularPromedio()
+    {
+        $this->promedio = $this->calificaciones->where('habilitada', 1)->avg('valor');
+        $this->save();
+    }
 }

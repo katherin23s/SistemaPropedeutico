@@ -10,7 +10,7 @@
         <tbody>
             @foreach ($clases as $clase)
                 <tr>
-                    <td> {{ $clase->materia->nombre }}</td>
+                    <td> <a href="{{ route('docente.clase.ver', [$docente, $clase]) }}">{{ $clase->materia->nombre }}</a></td>
                     <td> {{ $clase->grupo->numero }}</td>
                     <td>{{ $clase->horarioCompleto() }}</td>
                     <td>{{ $clase->dias }}</td>
