@@ -151,7 +151,7 @@
               var dias = document.getElementById("actualizar-dias").value;
               var capacidad = document.getElementById("actualizar-capacidad").value;
 
-              actualizarClase(clase_id, clave, hora_inicio_fecha, hora_inicio_fecha, salon, dias, capacidad);
+              actualizarClase(clase_id, clave, hora_inicio_fecha, hora_final_fecha, salon, dias, capacidad);
           }
           else {
             alert("Horario invalido.");
