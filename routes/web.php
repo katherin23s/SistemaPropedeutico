@@ -157,8 +157,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('documentos/agregar', 'DocumentoController@store')->name('documentos.store');
     Route::post('documentos/encontrar', 'DocumentoController@encontrar')->name('documentos.encontrar');
     Route::patch('documentos/actualizar', 'DocumentoController@update')->name('documentos.update');
+    Route::patch('documentos/revisar', 'DocumentoController@revisar')->name('documentos.revisar');
     Route::delete('documentos/eliminar', 'DocumentoController@eliminar')->name('documentos.eliminar');
     Route::get('documentos/alumno', 'DocumentoController@documentosAlumno')->name('documentos.alumno');
+
+    Route::get('materiales', 'MaterialController@index')->name('materiales.index');
+    Route::post('materiales/agregar', 'MaterialController@store')->name('materiales.store');
+    Route::post('materiales/encontrar', 'MaterialController@encontrar')->name('materiales.encontrar');
+    Route::patch('materiales/actualizar', 'MaterialController@update')->name('materiales.update');
+    Route::delete('materiales/eliminar', 'MaterialController@eliminar')->name('materiales.eliminar');
+    Route::get('materiales/alumno', 'MaterialController@materialesClase')->name('materiales.clase');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

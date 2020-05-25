@@ -117,6 +117,17 @@
 
                     </ul>
                 </div>
+                <div class="collapse show" id="laravel-examples7">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug ?? '' == 'documentos') class="active " @endif>
+                            <a href="{{ route('documentos.index')  }}">
+                                <i class="tim-icons icon-single-02"></i>
+                                <p>{{ _('Documentos') }}</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
             </li>            
         </ul>
     </div>

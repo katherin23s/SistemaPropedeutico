@@ -24,7 +24,7 @@ class RevisarDocumentoRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer',
+            'documento_id' => 'required|integer',
             'estado' => 'required|integer',
             'comentarios' => 'max:500',
         ];

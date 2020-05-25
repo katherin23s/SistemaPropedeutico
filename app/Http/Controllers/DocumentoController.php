@@ -17,8 +17,35 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
+
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        if (is_null($request->estado)) {
+            $estado = 10;
+        } else {
+            $estado = $request->estado;
+        }
+        if ($estado < 10) {
+            $documentos = Documento::whereLike(['alumno.nombre', 'nombre'], $busqueda)
+                ->where('estado', $estado)
+                ->paginate($cantidad)
+            ;
+        } else {
+            $documentos = Documento::whereLike(['alumno.nombre', 'nombre'], $busqueda)->paginate($cantidad);
+        }
+
+        return view('Admin.Documentos.index', compact('documentos', 'cantidad', 'busqueda', 'estado'));
     }
 
     /**
@@ -77,7 +104,7 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarDocumentoRequest $request)
+    public function update(ActualizarDocumentoRequest $request) //alumno
     {
         $validados = $request->validated();
         $documento = Documento::findOrFail($validados['id']);
@@ -86,10 +113,10 @@ class DocumentoController extends Controller
         return new DocumentoResource($documento);
     }
 
-    public function revisar(RevisarDocumentoRequest $request)
+    public function revisar(RevisarDocumentoRequest $request) //admin
     {
         $validados = $request->validated();
-        $documento = Documento::findOrFail($validados['id']);
+        $documento = Documento::findOrFail($validados['documento_id']);
         $documento->fill($validados);
         $documento->save();
 
