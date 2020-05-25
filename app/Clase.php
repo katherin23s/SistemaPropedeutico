@@ -49,6 +49,11 @@ class Clase extends Model
         return $this->belongsTo('App\Docente');
     }
 
+    public function materiales() //documentos del docente
+    {
+        return $this->hasMany('App\Material');
+    }
+
     public function horarioCompleto()
     {
         return $this->hora_inicio->toTimeString().' - '.$this->hora_final->toTimeString();

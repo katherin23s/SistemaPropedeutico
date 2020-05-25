@@ -31,4 +31,11 @@ class UserDocenteController extends Controller
 
         return view('Docentes.Clases.ver', compact('clase', 'docente'));
     }
+
+    public function evidencias()
+    {
+        //Planificacion
+        //Calificaciones PDF
+        //Evidencias de alumnos
+    }
 }

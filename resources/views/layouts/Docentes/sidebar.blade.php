@@ -41,16 +41,10 @@
                     <p>Horario</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'kardex') class="active " @endif>
-                <a href="">
-                    <i class="far fa-clipboard"></i>
-                    <p>Kardex</p>
-                </a>
-            </li>
-            <li @if ($pageSlug == 'documentos') class="active " @endif>
-                <a href="">
+            <li @if ($pageSlug == 'evidencias') class="active " @endif>
+                <a href="{{ route('docente.evidencias', $docente) }}">
                     <i class="far fa-file-alt"></i>
-                    <p>Documentos</p>
+                    <p>Evidencias</p>
                 </a>
             </li>
         </ul>

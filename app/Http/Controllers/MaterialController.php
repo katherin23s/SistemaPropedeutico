@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Documento;
-use App\Http\Requests\ActualizarDocumentoRequest;
-use App\Http\Requests\DocumentoRequest;
-use App\Http\Requests\RevisarDocumentoRequest;
-use App\Http\Resources\DocumentoResource;
+use App\Http\Requests\ActualizarMaterialRequest;
+use App\Http\Requests\MaterialRequest;
+use App\Http\Requests\RevisarMaterialRequest;
+use App\Http\Resources\MaterialResource;
+use App\Material;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class DocumentoController extends Controller
+class MaterialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,14 +37,14 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(DocumentoRequest $request)
+    public function store(MaterialRequest $request)
     {
         $validados = $request->validated();
         $validados['fecha'] = Carbon::today();
         $validados['estado'] = 0;
-        $documento = Documento::create($validados);
+        $material = Material::create($validados);
 
-        return new DocumentoResource($documento);
+        return new MaterialResource($material);
     }
 
     /**
@@ -52,7 +52,7 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Documento $documento)
+    public function show(Material $material)
     {
     }
 
@@ -61,15 +61,15 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Documento $documento)
+    public function edit(Material $material)
     {
     }
 
     public function encontrar(Request $request)
     {
-        $documento = Documento::findOrFail($request->documento_id);
+        $material = Material::findOrFail($request->material_id);
 
-        return new DocumentoResource($documento);
+        return new MaterialResource($material);
     }
 
     /**
@@ -77,32 +77,32 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarDocumentoRequest $request)
+    public function update(ActualizarMaterialRequest $request)
     {
         $validados = $request->validated();
-        $documento = Documento::findOrFail($validados['id']);
+        $material = Material::findOrFail($validados['id']);
         $validados['estado'] = 0;
 
-        return new DocumentoResource($documento);
+        return new MaterialResource($material);
     }
 
-    public function revisar(RevisarDocumentoRequest $request)
+    public function revisar(RevisarMaterialRequest $request)
     {
         $validados = $request->validated();
-        $documento = Documento::findOrFail($validados['id']);
-        $documento->fill($validados);
-        $documento->save();
+        $material = Material::findOrFail($validados['id']);
+        $material->fill($validados);
+        $material->save();
 
-        return new DocumentoResource($documento);
+        return new MaterialResource($material);
     }
 
-    public function documentosAlumno(Request $request)
+    public function materialesClase(Request $request)
     {
-        $documentos = Documento::where('alumno_id', $request['alumno_id'])
+        $materiales = Material::where('clase_id', $request['clase_id'])
             ->get()
         ;
 
-        return DocumentoResource::collection($documentos);
+        return MaterialResource::collection($materiales);
     }
 
     /**
@@ -112,9 +112,9 @@ class DocumentoController extends Controller
      */
     public function eliminar(Request $request)
     {
-        $documento = Documento::findOrFail($request->documento_id);
+        $material = Material::findOrFail($request->material_id);
 
-        $documento->delete();
+        $material->delete();
 
         return 'OK';
     }

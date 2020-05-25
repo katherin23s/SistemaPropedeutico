@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth.docente']], function () {
     // login protected routes.
     Route::get('/docente/{docente}/inicio', 'UserDocenteController@home')->name('docente.home');
     Route::get('/docente/{docente}/horario', 'UserDocenteController@horario')->name('docente.horario');
+    Route::get('/docente/{docente}/evidencias', 'UserDocenteController@evidencias')->name('docente.evidencias');
     Route::get('/docente/{docente}/clase/{clase}', 'UserDocenteController@clase')->name('docente.clase.ver');
     Route::patch('docente//calificacion/actualizar', 'CalificacionUnidadController@actualizarValor')->name('calificacion.actualizar');
 });
