@@ -15,6 +15,8 @@ class Documento extends Model
         'comentarios',
     ];
 
+    protected $dates = ['fecha'];
+
     public function alumno()
     {
         return $this->belongsTo('App\Alumno');
@@ -22,7 +24,7 @@ class Documento extends Model
 
     public function estado()
     {
-        switch ($this->estado()) {
+        switch ($this->estado) {
             case 0:
                 return 'Pendiente de revisión';
 
@@ -47,7 +49,7 @@ class Documento extends Model
 
     public function clase()
     {
-        switch ($this->estado()) {
+        switch ($this->estado) {
             case 0:
                 return 'bg-warning';
 

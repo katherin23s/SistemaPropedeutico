@@ -13,7 +13,7 @@
             @foreach ($documentos as $documento)
                 <tr id="fila{{ $documento->id }}" class="{{ $documento->clase() }}">
                     <td>{{ $documento->nombre }}</td>
-                    <td><a href="{{ route('alumno.ver', $documento->alumno) }}">{{ $documento->alumno->nombre }}</a></td>
+                    <td><a href="{{ route('alumnos.ver', $documento->alumno) }}">{{ $documento->alumno->nombre }}</a></td>
                     <td>{{ $documento->fecha->format('d-m-Y')}}</td>
                     <td>{{ $documento->ubicacion }}</td>
                     <td id="estado{{ $documento->id }}">{{ $documento->estado() }}</td>

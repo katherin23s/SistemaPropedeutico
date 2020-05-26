@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="col-lg-12 col-md-12" style="padding-left: 80px;padding-right: 80px;">
+    {{--  <div class="col-lg-12 col-md-12" style="padding-left: 80px;padding-right: 80px;">
         <div class="row">
             <div class="col-lg-4 col-md-8 mb-5 mb-lg-0 mx-auto">
                 <a class="after-loop-item card border-0 card-themes shadow-lg " style="padding-bottom: 16px;">
@@ -198,14 +198,7 @@
             </div>
         </div>
     </div>
-    </div>
+    </div>  --}}
 @endsection
 
-@push('js')
-    <script src="{{ asset('white') }}/js/plugins/chartjs.min.js"></script>
-    <script>
-        $(document).ready(function() {
-          demo.initDashboardPageCharts();
-        });
-    </script>
-@endpush
+
