@@ -59,24 +59,6 @@
 
 @push('js')
 <script>
-    function mostrarDocumentos(data){
-        var departamentos = data;
-        var output = "";
-
-        for(var i = 0; i < departamentos.length; i++){
-            output += "<tr value="+departamentos[i].id+">"
-                + "<td>" + departamentos[i].id + "</td>"
-                + "<td>" + departamentos[i].nombre + "</td>" 
-                + "<td>" + departamentos[i].plantel + "</td>" 
-                +'<td class="text-right"><button class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalEditar(\'' + departamentos[i].id + '\')"><span class="btn-inner--icon"><i class="fas fa-pencil-alt fa-2"></i></span></button>' 
-                +'<a rel="tooltip" class="btn btn-success btn-sm btn-icon"  type="button" href="departamentos/' + departamentos[i].id + '"><i class="fa fa-eye "></i></a>' 
-                +'<button class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar(\'' + departamentos[i].id + '\')"><span class="btn-inner--icon"><i class="fa fa-trash"></i></span></button></td>' 
-                +  "</tr>";
-        }
-
-        $('#tabla-departamentos tbody').html(output);
-    }
-
     function obtenerDatos(documento_id){
         $.ajax({
             url: "{{route('documentos.encontrar')}}",
@@ -88,19 +70,19 @@
             },
         success: function (response) {          
               mostrarDatosEnModal(response.data.id, response.data.nombre, 
-              response.data.fecha, response.data.ubicacion, response.data.estado_n,
+              response.data.fecha, response.data.ubicacion,
               response.data.estado, response.data.comentarios);            
             }
         });
         return false;         
     }
 
-    function mostrarDatosEnModal(documento_id, nombre, fecha, estado_n, ubicacion, estado, comentarios){
+    function mostrarDatosEnModal(documento_id, nombre, fecha, ubicacion, estado, comentarios){
         document.getElementById("actualizar-documento_id").value = documento_id;
-        document.getElementById("actualizar-nombre").value = nombre;
-        document.getElementById("actualizar-fecha").value = fecha;
-        document.getElementById("actualizar-ubicacion").value = ubicacion;
-        document.getElementById("actualizar-estado").value = estado;
+        document.getElementById("actualizar-nombre").innerHTML = nombre;
+        document.getElementById("actualizar-fecha").innerHTML = fecha;
+        document.getElementById("actualizar-ubicacion").innerHTML = ubicacion;
+        document.getElementById("actualizar-estado").innerHTML = estado;
         document.getElementById("actualizar-comentarios").value = comentarios;
         $('#ModalEditar').modal('show')
     }

@@ -24,7 +24,6 @@
                 </div>
 
                 <div class="card-body">
-                    <p class="text-dark mb-2">Sign in with <strong>admin@white.com</strong> and the password <strong>secret</strong></p>
                     <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
@@ -45,15 +44,15 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="submit" href="" class="btn btn-primary btn-lg btn-block mb-3">{{ _('Get Started') }}</button>
+                    <button type="submit" href="" class="btn btn-primary btn-lg btn-block mb-3">{{ _('Acceder') }}</button>
                     <div class="pull-left">
                         <h6>
-                            <a href="{{ route('register') }}" class="link footer-link">{{ _('Create Account') }}</a>
+                            <a href="{{ route('register') }}" class="link footer-link">{{ _('Registrarse') }}</a>
                         </h6>
                     </div>
                     <div class="pull-right">
                         <h6>
-                            <a href="{{ route('password.request') }}" class="link footer-link">{{ _('Forgot password?') }}</a>
+                            <a href="{{ route('password.request') }}" class="link footer-link">{{ _('') }}</a>
                         </h6>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-<div class="modal modal-lg fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -28,13 +28,11 @@
           </div>
 
           <div class="form-row">
-            <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-align-justify"></i></span>
-                </div>
-                <textarea type="text" rows="3" name="comments" id="actualizar-comentarios"
-                 placeholder="Comentarios"></textarea>
+            <div class="col-lg-12">
+              <textarea type="text" rows="3" name="comments" id="actualizar-comentarios"
+                placeholder="Comentarios"></textarea>
             </div>
+              
           </div>
           
     
