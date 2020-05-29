@@ -50,3 +50,74 @@
       </div>
     </div>
 </div>
+@push('js')
+<script>
+    function obtenerDatos(documento_id){
+        $.ajax({
+            url: "{{route('documentos.encontrar')}}",
+            dataType: 'json',
+            type:"post",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "documento_id" : documento_id
+            },
+        success: function (response) {          
+              mostrarDatosEnModal(response.data.id, response.data.nombre, 
+              response.data.fecha, response.data.ubicacion,
+              response.data.estado, response.data.comentarios);            
+            }
+        });
+        return false;         
+    }
+
+    function mostrarDatosEnModal(documento_id, nombre, fecha, ubicacion, estado, comentarios){
+        document.getElementById("actualizar-documento_id").value = documento_id;
+        document.getElementById("actualizar-nombre").innerHTML = nombre;
+        document.getElementById("actualizar-fecha").innerHTML = fecha;
+        document.getElementById("actualizar-ubicacion").innerHTML = ubicacion;
+        document.getElementById("actualizar-estado").innerHTML = estado;
+        document.getElementById("actualizar-comentarios").value = comentarios;
+        $('#ModalEditar').modal('show')
+    }
+
+    function actualizarDocumento(estado){
+        $.ajax({
+            url: "{{route('documentos.revisar')}}",
+            dataType: 'json',
+            type:"patch",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "documento_id" : document.getElementById("actualizar-documento_id").value,
+                "estado" : estado,
+                "comentarios": document.getElementById("actualizar-comentarios").value
+            },
+        success: function (response) {          
+              actualizarFila(response.data.id, response.data.estado, response.data.estado_n, response.data.comentarios);    
+              $('#ModalEditar').modal('hide')        
+            }
+        });
+        return false;    
+    }
+
+    function actualizarFila(documento_id, estado, estado_n, comentarios){
+        var fila = document.getElementById("fila"+documento_id);
+        var tdEstado = document.getElementById("estado"+documento_id);
+        var tdComentarios = document.getElementById("comentarios"+documento_id);
+
+        var clase = "";
+        if(estado_n == 2){
+            clase = "bg-danger"
+        }
+        else{
+            clase = "bg-success";
+        }
+
+        fila.className = clase;
+        tdEstado.innerHTML = estado;
+        tdComentarios.innerHTML = comentarios;
+    }
+ 
+
+</script>
+
+@endpush

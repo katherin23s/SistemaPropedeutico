@@ -39,6 +39,7 @@ class DocumentoController extends Controller
         if ($estado < 10) {
             $documentos = Documento::whereLike(['alumno.nombre', 'nombre'], $busqueda)
                 ->where('estado', $estado)
+                ->orderBy('updated_at', 'desc')
                 ->paginate($cantidad)
             ;
         } else {
