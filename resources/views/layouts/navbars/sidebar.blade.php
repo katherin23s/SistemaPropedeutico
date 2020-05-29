@@ -9,17 +9,17 @@
             <li @if ($pageSlug ?? '' == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
                     <i class="tim-icons icon-chart-pie-36"></i>
-                    <p>{{ _('Dashboard') }}</p>
+                    <p>Inicio</p>
                 </a>
             </li>
             <!-- TODO: GESTION DE OFERTA EDUCATIVA -->
             <li>
-                <a  href="#laravel-examples" >
+                <a data-toggle="collapse" href="#oferta-educativa" aria-expanded="true" >
                     <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Gestion de Oferta Educativa') }}</span>
+                    <span class="nav-link-text" >{{ __('Oferta Educativa') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
-                <div class="collapse show" id="laravel-examples">
+                <div class="collapse show" id="oferta-educativa">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'planteles' ?? '' ) class="active " @endif>
                             <a href="{{ route('planteles.index')  }}">
@@ -44,12 +44,12 @@
             </li>
              <!-- TODO: CURSOS PROPEDEUTICOS -->
              <li>
-                <a href="#laravel-examples3" >
+                <a data-toggle="collapse" aria-expanded="true" href="#cursos" >
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Cursos Propedeuticos') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
-                <div class="collapse show" id="laravel-examples3">
+                <div class="collapse show" id="cursos">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'semestres') class="active " @endif>
                             <a href="{{ route('semestres.index')  }}">
@@ -81,12 +81,12 @@
             <!-- -->
             <!-- TODO: GESTION DEL ESTUDIANTE-->
             <li>
-                <a href="#laravel-examples5" >
+                <a data-toggle="collapse" aria-expanded="true"  href="#alumnos" >
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Gestion de Alumnos') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
-                <div class="collapse show" id="laravel-examples5">
+                <div class="collapse show" id="alumnos">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug ?? '' == 'alumnos') class="active " @endif>
                             <a href="{{ route('alumnos.index')  }}">
@@ -101,12 +101,12 @@
             <!-- -->
              <!-- TODO: GESTION DEL DOCENTE -->
              <li>
-                <a href="#laravel-examples6">
+                <a data-toggle="collapse" aria-expanded="true"  href="#docente">
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Gestion de Docente') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
-                <div class="collapse show" id="laravel-examples6">
+                <div class="collapse show" id="docente">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug ?? '' == 'docentes') class="active " @endif>
                             <a href="{{ route('docentes.index')  }}">
@@ -114,11 +114,6 @@
                                 <p>{{ _('Docentes') }}</p>
                             </a>
                         </li>
-
-                    </ul>
-                </div>
-                <div class="collapse show" id="laravel-examples7">
-                    <ul class="nav pl-4">
                         <li @if ($pageSlug ?? '' == 'documentos') class="active " @endif>
                             <a href="{{ route('documentos.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
