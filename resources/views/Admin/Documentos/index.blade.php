@@ -91,15 +91,15 @@
         $.ajax({
             url: "{{route('documentos.revisar')}}",
             dataType: 'json',
-            type:"post",
+            type:"patch",
             data: {
                 "_token": "{{ csrf_token() }}",
-                "documento_id" : documento_id,
+                "documento_id" : document.getElementById("actualizar-documento_id").value,
                 "estado" : estado,
-                "comentarios": comentarios
+                "comentarios": document.getElementById("actualizar-comentarios").value
             },
         success: function (response) {          
-              actualizarFila(response.data.id, response.data.estado, response.data.comentarios);    
+              actualizarFila(response.data.id, response.data.estado_n, response.data.comentarios);    
               $('#ModalEditar').modal('hide')        
             }
         });
@@ -111,9 +111,12 @@
         var tdEstado = document.getElementById("estado"+documento_id);
         var tdComentarios = document.getElementById("comentarios"+documento_id);
 
-        var clase = "bg-success";
-        if(estado === 2){
+        var clase = "";
+        if(estado == 2){
             clase = "bg-danger"
+        }
+        else{
+            clase = "bg-success";
         }
 
         fila.className = clase;

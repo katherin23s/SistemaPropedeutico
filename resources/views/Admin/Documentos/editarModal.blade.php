@@ -29,7 +29,7 @@
 
           <div class="form-row">
             <div class="col-lg-12">
-              <textarea type="text" rows="3" name="comments" id="actualizar-comentarios"
+              <textarea type="text" style="width: 100%" rows="3" name="comments" id="actualizar-comentarios"
                 placeholder="Comentarios"></textarea>
             </div>
               

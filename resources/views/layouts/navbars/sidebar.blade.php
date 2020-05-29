@@ -83,7 +83,7 @@
             <li>
                 <a data-toggle="collapse" aria-expanded="true"  href="#alumnos" >
                     <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Gestion de Alumnos') }}</span>
+                    <span class="nav-link-text" >{{ __('Gestión de Alumnos') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
                 <div class="collapse show" id="alumnos">
@@ -103,7 +103,7 @@
              <li>
                 <a data-toggle="collapse" aria-expanded="true"  href="#docente">
                     <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Gestion de Docente') }}</span>
+                    <span class="nav-link-text" >{{ __('Gestión de Docente') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
                 <div class="collapse show" id="docente">
