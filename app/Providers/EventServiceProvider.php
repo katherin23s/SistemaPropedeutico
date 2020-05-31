@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\AlumnoRegistrado;
 use App\Listeners\CrearCalificacionesAlumno;
+use App\Listeners\CrearDocumentosAlumno;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +23,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         AlumnoRegistrado::class => [
             CrearCalificacionesAlumno::class,
+            CrearDocumentosAlumno::class,
         ],
     ];
 

@@ -15,7 +15,7 @@
                     <td>{{ $documento->nombre }}</td>
                     <td><a href="{{ route('alumnos.ver', $documento->alumno) }}">{{ $documento->alumno->nombre }}</a></td>
                     <td>{{ $documento->fecha->format('d-m-Y')}}</td>
-                    <td>{{ $documento->ubicacion }}</td>
+                    <td><a href="{{ $documento->ubicacion }}">{{ $documento->ubicacion }}</a></td>
                     <td id="estado{{ $documento->id }}">{{ $documento->estado() }}</td>
                     <td id="comentarios{{ $documento->id }}">{{ $documento->comentarios }}</td>
                     <td class="td-actions text-right">
@@ -27,9 +27,5 @@
             @endforeach
         </tbody>
     </table>
-    <div class="card-footer py-4">
-        <nav class="d-flex justify-content-end" aria-label="...">
-            {{ $documentos->appends(['busqueda'=>$busqueda, 'cantidad'=>$cantidad, 'estado'=>$estado])->links() }}
-        </nav>
-    </div>
 </div>  
+@include('Admin.Documentos.editarModal')

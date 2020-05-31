@@ -3,33 +3,51 @@
 @section('content')
     <div class="row">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Detalles</h5>
-                </div>
-                
-                <div class="card-body">
-                    @include('alerts.success')
-                    @include('components.tablaCalificacionesAlumno', ['calificaciones' => $alumno->calificaciones])
-                    
+            <div class="nav-wrapper">
+                <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-clases-tab" data-toggle="tab" href="#tab-clases" role="tab" aria-controls="tab-clases" aria-selected="true"><i class="fas fa-chalkboard"></i>Clases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mb-sm-3 mb-md-0" id="tabs-documentos-tab" data-toggle="tab" href="#tab-documentos" role="tab" aria-controls="tab-documentos" aria-selected="false"><i class="far fa-file-alt"></i>Documentos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content" id="tabContent">
+                <div class="tab-pane fade show active" id="tab-clases" role="tabpanel" aria-labelledby="tab-clases-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="title">Detalles</h5>
+                        </div>
                         
+                        <div class="card-body">
+                            @include('alerts.success')
+                            @include('components.tablaCalificacionesAlumno', ['calificaciones' => $alumno->calificaciones])
+                            
+                                
+                        </div>
+                        <div class="card-footer">
+                           
+                        </div>
+                    </div>
+        
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="title">Clases</h5>
+                        </div>
+                        <div class="card-body">
+                            @include('components.tablaClases', ['clases' => $alumno->grupo->clases])
+                        </div>
+                        <div class="card-footer">
+                            
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer">
-                   
+                <div class="tab-pane fade show active" id="tab-documentos" role="tabpanel" aria-labelledby="tab-documentos-tab">
+                    @include('Admin.Documentos.tabla', ['documentos'=>$alumno->documentos])  
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Clases</h5>
-                </div>
-                <div class="card-body">
-                    @include('components.tablaClases', ['clases' => $alumno->grupo->clases])
-                </div>
-                <div class="card-footer">
-                    
-                </div>
-            </div>
+            
         </div>
         <div class="col-md-4">
             <div class="card card-user">

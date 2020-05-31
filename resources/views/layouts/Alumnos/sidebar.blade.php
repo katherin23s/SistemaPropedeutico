@@ -48,7 +48,7 @@
                 </a>
             </li>
             <li @if ($pageSlug == 'documentos') class="active " @endif>
-                <a href="">
+                <a href="{{ route('alumno.documentos', $alumno) }}">
                     <i class="far fa-file-alt"></i>
                     <p>Documentos</p>
                 </a>

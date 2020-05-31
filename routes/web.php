@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth.alumno']], function () {
     Route::get('/alumno/{alumno}/inicio', 'UserAlumnoController@home')->name('alumno.home');
     Route::get('/alumno/{alumno}/horario', 'UserAlumnoController@horario')->name('alumno.horario');
     Route::get('/alumno/{alumno}/kardex', 'UserAlumnoController@kardex')->name('alumno.kardex');
+    Route::get('/alumno/{alumno}/documentos', 'UserAlumnoController@documentos')->name('alumno.documentos');
 });
 
 //DOCENTE
