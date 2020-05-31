@@ -58,4 +58,9 @@ class UserAlumnoController extends Controller
 
         return view('Alumnos.kardex', compact('alumno'));
     }
+
+    public function documentos(Alumno $alumno)
+    {
+        return view('Alumnos.documentos', compact('alumno'));
+    }
 }

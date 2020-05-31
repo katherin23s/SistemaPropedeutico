@@ -20,7 +20,7 @@
 
           <div class="form-row">
             <div class="col-md-6">
-                <label id="actualizar-ubicacion"></label>
+              <a id="enlace" href=""><span id="actualizar-ubicacion"></span></a>
             </div>
             <div class="col-md-6">
                 <label id="actualizar-fecha"></label>
@@ -74,6 +74,8 @@
         document.getElementById("actualizar-documento_id").value = documento_id;
         document.getElementById("actualizar-nombre").innerHTML = nombre;
         document.getElementById("actualizar-fecha").innerHTML = fecha;
+
+        document.getElementById("enlace").href = ubicacion;
         document.getElementById("actualizar-ubicacion").innerHTML = ubicacion;
         document.getElementById("actualizar-estado").innerHTML = estado;
         document.getElementById("actualizar-comentarios").value = comentarios;

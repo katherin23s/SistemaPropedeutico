@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Documento;
+use App\Events\DocumentoRevisado;
 use App\Http\Requests\ActualizarDocumentoRequest;
 use App\Http\Requests\DocumentoRequest;
 use App\Http\Requests\RevisarDocumentoRequest;
@@ -110,6 +111,9 @@ class DocumentoController extends Controller
         $validados = $request->validated();
         $documento = Documento::findOrFail($validados['id']);
         $validados['estado'] = 0;
+        $documento->fill($validados);
+        $documento->fecha = Carbon::today();
+        $documento->save();
 
         return new DocumentoResource($documento);
     }
@@ -120,6 +124,8 @@ class DocumentoController extends Controller
         $documento = Documento::findOrFail($validados['documento_id']);
         $documento->fill($validados);
         $documento->save();
+
+        event(new DocumentoRevisado($documento));
 
         return new DocumentoResource($documento);
     }

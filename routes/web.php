@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth.alumno']], function () {
     Route::get('/alumno/{alumno}/horario', 'UserAlumnoController@horario')->name('alumno.horario');
     Route::get('/alumno/{alumno}/kardex', 'UserAlumnoController@kardex')->name('alumno.kardex');
     Route::get('/alumno/{alumno}/documentos', 'UserAlumnoController@documentos')->name('alumno.documentos');
+    Route::patch('alumno/documento/cargar', 'DocumentoController@update')->name('documento.cargar');
+    Route::post('documento/encontrar', 'DocumentoController@encontrar')->name('documento.encontrar');
 });
 
 //DOCENTE
@@ -43,7 +45,7 @@ Route::group(['middleware' => ['auth.docente']], function () {
     Route::get('/docente/{docente}/horario', 'UserDocenteController@horario')->name('docente.horario');
     Route::get('/docente/{docente}/evidencias', 'UserDocenteController@evidencias')->name('docente.evidencias');
     Route::get('/docente/{docente}/clase/{clase}', 'UserDocenteController@clase')->name('docente.clase.ver');
-    Route::patch('docente//calificacion/actualizar', 'CalificacionUnidadController@actualizarValor')->name('calificacion.actualizar');
+    Route::patch('docente/calificacion/actualizar', 'CalificacionUnidadController@actualizarValor')->name('calificacion.actualizar');
 });
 
 //ADMIN

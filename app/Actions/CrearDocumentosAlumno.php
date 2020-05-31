@@ -22,9 +22,10 @@ class CrearDocumentosAlumno
         for ($i = 0; $i < $this->cantidad_documentos; ++$i) {
             $documento = new Documento();
             $documento->alumno_id = $this->alumno->id;
-            $documento->nombre = 'Nombre del doc '.$i + 1;
+            $documento->nombre = 'Nombre del doc '.$i;
             $documento->fecha = $fecha;
             $documento->estado = 3;
+            $documento->ubicacion = '';
             $documento->save();
         }
     }
