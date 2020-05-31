@@ -87,7 +87,7 @@ class CalificacionUnidadController extends Controller
 
         $calificacion_unidad->load('calificacion.clase.docente', 'calificacion.clase.materia', 'calificacion.alumno');
 
-        Mail::to($calificacion_unidad->calificacion->alumno->email)->send(
+        Mail::to($calificacion_unidad->calificacion->alumno->email)->queue(
             new CalificacionActualizada($calificacion_unidad)
         );
 

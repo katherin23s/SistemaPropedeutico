@@ -23,7 +23,7 @@ class NotificarAlumnoDocumentoRevisado
     public function handle(DocumentoRevisado $event)
     {
         $documento = $event->documento;
-        Mail::to($documento->alumno->email)->send(
+        Mail::to($documento->alumno->email)->queue(
             new DocumentoActualizado($documento)
         );
     }
