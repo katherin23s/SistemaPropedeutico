@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Events\DocumentoRevisado;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Documento extends Model
 {
+    use Notifiable;
     public $fillable = [
         'alumno_id',
         'nombre',
@@ -13,6 +16,14 @@ class Documento extends Model
         'ubicacion',
         'estado',
         'comentarios',
+    ];
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'saved' => DocumentoRevisado::class,
     ];
 
     protected $dates = ['fecha'];
