@@ -17,8 +17,36 @@ class MaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
+
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        if (is_null($request->estado)) {
+            $estado = 10;
+        } else {
+            $estado = $request->estado;
+        }
+        if ($estado < 10) {
+            $materiales = Material::with('clase')->whereLike(['clase.clave', 'nombre'], $busqueda)
+                ->where('estado', $estado)
+                ->orderBy('updated_at', 'desc')
+                ->paginate($cantidad)
+            ;
+        } else {
+            $materiales = Material::with('clase')->whereLike(['clase.clave', 'nombre'], $busqueda)->paginate($cantidad);
+        }
+
+        return view('Admin.Materiales.index', compact('materiales', 'cantidad', 'busqueda', 'estado'));
     }
 
     /**
@@ -77,11 +105,13 @@ class MaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarMaterialRequest $request)
+    public function update(ActualizarMaterialRequest $request) //docente
     {
         $validados = $request->validated();
         $material = Material::findOrFail($validados['id']);
         $validados['estado'] = 0;
+        $material->fill($validados);
+        $material->save();
 
         return new MaterialResource($material);
     }

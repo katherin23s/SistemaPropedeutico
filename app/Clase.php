@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Events\ClaseRegistrada;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Clase extends Model
 {
+    use Notifiable;
     public $fillable = [
         'clave',
         'hora_inicio',
@@ -28,6 +31,14 @@ class Clase extends Model
         'materia_id' => 'integer',
         'grupo_id' => 'integer',
         'docente_id' => 'integer',
+    ];
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ClaseRegistrada::class,
     ];
     protected $dates = ['hora_inicio', 'hora_final'];
 

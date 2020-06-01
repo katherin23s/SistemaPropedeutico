@@ -168,6 +168,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('materiales/agregar', 'MaterialController@store')->name('materiales.store');
     Route::post('materiales/encontrar', 'MaterialController@encontrar')->name('materiales.encontrar');
     Route::patch('materiales/actualizar', 'MaterialController@update')->name('materiales.update');
+    Route::patch('materiales/revisar', 'MaterialController@revisar')->name('materiales.revisar');
     Route::delete('materiales/eliminar', 'MaterialController@eliminar')->name('materiales.eliminar');
     Route::get('materiales/alumno', 'MaterialController@materialesClase')->name('materiales.clase');
 

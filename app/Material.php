@@ -22,7 +22,7 @@ class Material extends Model
 
     public function estado()
     {
-        switch ($this->estado()) {
+        switch ($this->estado) {
             case 0:
                 return 'Pendiente de revisión';
 

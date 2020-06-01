@@ -1,7 +1,7 @@
 <div class="table-responsive">
     <table class="table" id="tabla-documentos">
         <thead>
-            <th scope="col">Nombre</th>
+            <th scope="col">Documento</th>
             <th scope="col">Alumno</th>
             <th scope="col">Fecha</th>
             <th scope="col">Ubicación</th>

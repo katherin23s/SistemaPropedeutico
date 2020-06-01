@@ -38,13 +38,13 @@ class DocumentoController extends Controller
             $estado = $request->estado;
         }
         if ($estado < 10) {
-            $documentos = Documento::whereLike(['alumno.nombre', 'nombre'], $busqueda)
+            $documentos = Documento::with('alumno')->whereLike(['alumno.nombre', 'nombre'], $busqueda)
                 ->where('estado', $estado)
                 ->orderBy('updated_at', 'desc')
                 ->paginate($cantidad)
             ;
         } else {
-            $documentos = Documento::whereLike(['alumno.nombre', 'nombre'], $busqueda)->paginate($cantidad);
+            $documentos = Documento::with('alumno')->whereLike(['alumno.nombre', 'nombre'], $busqueda)->paginate($cantidad);
         }
 
         return view('Admin.Documentos.index', compact('documentos', 'cantidad', 'busqueda', 'estado'));
