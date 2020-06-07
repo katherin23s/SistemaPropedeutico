@@ -33,7 +33,7 @@
 <script>
     function obtenerMateriales(id){
         $.ajax({
-            url: "{{route('clases.materiales')}}",
+            url: "{{route('clase.materiales')}}",
             dataType: 'json',
             type:"post",
             data: {

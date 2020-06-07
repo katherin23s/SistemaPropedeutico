@@ -170,7 +170,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('materiales/actualizar', 'MaterialController@update')->name('materiales.update');
     Route::patch('materiales/revisar', 'MaterialController@revisar')->name('materiales.revisar');
     Route::delete('materiales/eliminar', 'MaterialController@eliminar')->name('materiales.eliminar');
-    Route::get('materiales/alumno', 'MaterialController@materialesClase')->name('materiales.clase');
+    Route::get('clase/materiales', 'MaterialController@materialesClase')->name('clase.materiales');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
