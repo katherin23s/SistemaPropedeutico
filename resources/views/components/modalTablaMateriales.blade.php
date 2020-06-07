@@ -1,5 +1,5 @@
 <div class="modal fade" id="verMateriales" tabindex="-1" role="dialog" aria-labelledby="verMateriales" aria-hidden="true" >
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5  align="center" class="modal-title" >Materiales</h5>
@@ -41,7 +41,7 @@
                 "clase_id" : id
             },
         success: function (data) {          
-                mostrarMateriales(data);           
+                mostrarMateriales(data.data);           
             }
         });
             return false;
@@ -52,6 +52,7 @@
     }
     function mostrarMateriales(data){
         var materiales = data;
+        console.log(materiales);
         var output = "";
         for(var i = 0; i < materiales.length; i++){
             output += "<tr id=fila"+materiales[i].id+" class="+materiales[i].class+">"

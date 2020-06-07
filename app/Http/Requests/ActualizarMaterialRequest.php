@@ -13,7 +13,7 @@ class ActualizarMaterialRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class ActualizarMaterialRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'ubicacion' => 'required|max:255',
+            'id' => 'required|integer',
         ];
     }
 }

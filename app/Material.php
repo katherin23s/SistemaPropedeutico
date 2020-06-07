@@ -15,6 +15,8 @@ class Material extends Model
         'comentarios',
     ];
 
+    protected $dates = ['fecha'];
+
     public function clase()
     {
         return $this->belongsTo('App\Clase');

@@ -29,6 +29,11 @@
                                         <i class="fas fa-chalkboard"></i>Detalles</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-materiales-tab" data-toggle="tab" 
+                                        href="#tab-materiales" role="tab" aria-controls="tab-materiales">
+                                        <i class="fas fa-chalkboard"></i>Materiales</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link mb-sm-3 mb-md-0" id="tabs-alumnos-tab" data-toggle="tab" 
                                         href="#tab-alumnos" role="tab" aria-controls="tab-detalles" aria-selected="false">
                                         <i class="fas fa-users mr-2"></i>Alumnos</a>
@@ -93,6 +98,9 @@
 
                                     </div>
                                 </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-materiales" role="tabpanel" aria-labelledby="tab-materiales-tab">
+                                @include('Admin.Materiales.tabla', ['materiales' => $clase->materiales])                               
                             </div>
                             <div class="tab-pane fade" id="tab-alumnos" role="tabpanel" aria-labelledby="tab-alumnos-tab">
                                 <div class="table-responsive">

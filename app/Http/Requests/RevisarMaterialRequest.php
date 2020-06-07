@@ -24,7 +24,7 @@ class RevisarMaterialRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer',
+            'material_id' => 'required|integer',
             'estado' => 'required|integer',
             'comentarios' => 'max:500',
         ];

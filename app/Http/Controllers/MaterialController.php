@@ -119,7 +119,7 @@ class MaterialController extends Controller
     public function revisar(RevisarMaterialRequest $request)
     {
         $validados = $request->validated();
-        $material = Material::findOrFail($validados['id']);
+        $material = Material::findOrFail($validados['material_id']);
         $material->fill($validados);
         $material->save();
 

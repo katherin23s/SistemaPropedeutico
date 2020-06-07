@@ -26,6 +26,7 @@ class CrearMaterialesClase
             $material->fecha = $fecha;
             $material->estado = 3;
             $material->ubicacion = '';
+            $material->comentarios = '';
             $material->save();
         }
     }
