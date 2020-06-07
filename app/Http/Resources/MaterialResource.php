@@ -23,6 +23,7 @@ class MaterialResource extends JsonResource
             'estado' => $this->estado(),
             'estado_n' => $this->estado,
             'comentarios' => $this->comentarios,
+            'class' => $this->class(),
         ];
     }
 }

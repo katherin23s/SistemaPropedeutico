@@ -20,6 +20,31 @@ class Material extends Model
         return $this->belongsTo('App\Clase');
     }
 
+    public function class()
+    {
+        switch ($this->estado) {
+            case 0:
+                return 'bg-warning';
+
+                break;
+            case 1:
+                return 'bg-success';
+
+                break;
+            case 2:
+                return 'bg-danger';
+
+                break;
+            case 3:
+                return 'bg-yelow';
+
+                break;
+            default:
+                // code...
+                break;
+        }
+    }
+
     public function estado()
     {
         switch ($this->estado) {

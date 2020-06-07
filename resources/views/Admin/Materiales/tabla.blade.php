@@ -11,7 +11,7 @@
         </thead>
         <tbody>
             @foreach ($materiales as $material)
-                <tr id="fila{{ $material->id }}" class="{{ $material->clase() }}">
+                <tr id="fila{{ $material->id }}" class="{{ $material->class() }}">
                     <td>{{ $material->nombre }}</td>
                     <td><a href="{{ route('clases.ver', $material->clase) }}">{{ $material->clase->clave }}</a></td>
                     <td>{{ $material->fecha->format('d-m-Y')}}</td>
