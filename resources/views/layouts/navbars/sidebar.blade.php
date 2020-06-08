@@ -8,7 +8,7 @@
         <ul class="nav">
             <li @if ($pageSlug ?? '' == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
-                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <i class="fas fa-home"></i>
                     <p>Inicio</p>
                 </a>
             </li>
@@ -23,7 +23,7 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'planteles' ?? '' ) class="active " @endif>
                             <a href="{{ route('planteles.index')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="fas fa-school"></i>
                                 <p>{{ _('Planteles') }}</p>
                             </a>
                         </li>
@@ -53,7 +53,7 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'semestres') class="active " @endif>
                             <a href="{{ route('semestres.index')  }}">
-                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <i class="far fa-calendar-alt"></i>
                                 <p>{{ _('Semestres') }}</p>
                             </a>
                         </li>
@@ -71,7 +71,7 @@
                         </li>
                         <li @if ($pageSlug == 'clases') class="active " @endif>
                             <a href="{{ route('clases.index')  }}">
-                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <i class="fas fa-chalkboard-teacher"></i>
                                 <p>Clases</p>
                             </a>
                         </li>
@@ -90,14 +90,14 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'alumnos') class="active " @endif>
                             <a href="{{ route('alumnos.index')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="fas fa-user"></i>
                                 <p>{{ _('Alumnos') }}</p>
                             </a>
 
                         </li>
                         <li @if ($pageSlug == 'documentos') class="active " @endif>
                             <a href="{{ route('documentos.index')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="fas fa-file-alt"></i>
                                 <p>{{ _('Documentos') }}</p>
                             </a>
                         </li>
@@ -117,13 +117,13 @@
                     <ul class="nav pl-4">
                         <li @if ($pageSlug  == 'docentes') class="active " @endif>
                             <a href="{{ route('docentes.index')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="fas fa-id-card"></i>
                                 <p>{{ _('Docentes') }}</p>
                             </a>
                         </li>
                         <li @if ($pageSlug  == 'materiales') class="active " @endif>
                             <a href="{{ route('materiales.index')  }}">
-                                <i class="tim-icons icon-single-02"></i>
+                                <i class="fas fa-book"></i>
                                 <p>{{ _('Materiales') }}</p>
                             </a>
                         </li>

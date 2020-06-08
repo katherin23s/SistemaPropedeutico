@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth.docente']], function () {
     Route::get('/docente/{docente}/evidencias', 'UserDocenteController@evidencias')->name('docente.evidencias');
     Route::get('/docente/{docente}/clase/{clase}', 'UserDocenteController@clase')->name('docente.clase.ver');
     Route::patch('docente/calificacion/actualizar', 'CalificacionUnidadController@actualizarValor')->name('calificacion.actualizar');
+    Route::patch('docente/material/cargar', 'MaterialController@update')->name('material.cargar');
+    Route::post('material/encontrar', 'MaterialController@encontrar')->name('material.encontrar');
 });
 
 //ADMIN

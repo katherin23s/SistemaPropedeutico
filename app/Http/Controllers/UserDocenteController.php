@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\ObtenerSemestreActual;
 use App\Clase;
 use App\Docente;
+use App\Semestre;
 use Carbon\Carbon;
 
 class UserDocenteController extends Controller
@@ -20,6 +21,10 @@ class UserDocenteController extends Controller
         $obtenerSemestre = new ObtenerSemestreActual();
         $semestre = $obtenerSemestre->obtenerSemestre(Carbon::today());
 
+        if (is_null($semestre)) {
+            $semestre = Semestre::first();
+        }
+
         $clases = $obtenerSemestre->obtenerClasesDocenteActuales($docente->clases, $semestre->grupos);
 
         return view('Docentes.horario', compact('docente', 'clases', 'semestre'));
@@ -32,10 +37,7 @@ class UserDocenteController extends Controller
         return view('Docentes.Clases.ver', compact('clase', 'docente'));
     }
 
-    public function evidencias()
+    public function evidencias(Docente $docente)
     {
-        //Planificacion
-        //Calificaciones PDF
-        //Evidencias de alumnos
     }
 }
