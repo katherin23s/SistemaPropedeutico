@@ -88,10 +88,17 @@
                 </a>
                 <div class="collapse show" id="alumnos">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug ?? '' == 'alumnos') class="active " @endif>
+                        <li @if ($pageSlug == 'alumnos') class="active " @endif>
                             <a href="{{ route('alumnos.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Alumnos') }}</p>
+                            </a>
+
+                        </li>
+                        <li @if ($pageSlug == 'documentos') class="active " @endif>
+                            <a href="{{ route('documentos.index')  }}">
+                                <i class="tim-icons icon-single-02"></i>
+                                <p>{{ _('Documentos') }}</p>
                             </a>
                         </li>
 
@@ -108,16 +115,16 @@
                 </a>
                 <div class="collapse show" id="docente">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug ?? '' == 'docentes') class="active " @endif>
+                        <li @if ($pageSlug  == 'docentes') class="active " @endif>
                             <a href="{{ route('docentes.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ _('Docentes') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug ?? '' == 'documentos') class="active " @endif>
-                            <a href="{{ route('documentos.index')  }}">
+                        <li @if ($pageSlug  == 'materiales') class="active " @endif>
+                            <a href="{{ route('materiales.index')  }}">
                                 <i class="tim-icons icon-single-02"></i>
-                                <p>{{ _('Documentos') }}</p>
+                                <p>{{ _('Materiales') }}</p>
                             </a>
                         </li>
 

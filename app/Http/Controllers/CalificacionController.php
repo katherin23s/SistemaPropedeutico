@@ -54,6 +54,7 @@ class CalificacionController extends Controller
         //calificaciones que le pertenecen al alumno y a su respectiva clase
         $calificaciones = Calificacion::where('alumno_id', $alumno_id)
             ->where('clase_id', $clase_id)
+            ->orderBy('updated_at', 'desc')
             ->paginate(5)
         ;
 

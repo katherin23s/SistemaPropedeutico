@@ -46,22 +46,28 @@ class ClaseController extends Controller
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
                 ->whereLike(['numero'], $busqueda)
                 ->where([['grupo_id', $grupo], ['materia_id', $materia]])
+                ->orderBy('created_at', 'desc')
                 ->paginate($cantidad)
             ;
         } elseif ($grupo > 0 && $materia <= 0) {
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
                 ->whereLike(['numero'], $busqueda)
                 ->where('grupo_id', $grupo)
+                ->orderBy('created_at', 'desc')
                 ->paginate($cantidad)
             ;
         } elseif ($grupo <= 0 && $materia > 0) {
             $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
                 ->whereLike(['numero'], $busqueda)
                 ->where('materia_id', $materia)
+                ->orderBy('created_at', 'desc')
                 ->paginate($cantidad)
             ;
         } else {
-            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate($cantidad);
+            $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+                ->orderBy('created_at', 'desc')
+                ->paginate($cantidad)
+            ;
         }
 
         return view('Admin.Clases.index', compact('clases', 'cantidad', 'busqueda'));
@@ -89,7 +95,7 @@ class ClaseController extends Controller
         $datosvalidados['creditos'] = $materia->creditos;
         Clase::create($datosvalidados);
         $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'desc')
             ->paginate(15)
         ;
 
@@ -131,7 +137,10 @@ class ClaseController extends Controller
         $clase->fill($datos_validados);
         $clase->save();
 
-        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
+        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(15)
+        ;
 
         return ClaseResource::collection($clases);
     }
@@ -149,7 +158,10 @@ class ClaseController extends Controller
 
         $clase->delete();
 
-        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')->paginate(15);
+        $clases = Clase::with('grupo.carrera', 'grupo.semestre', 'docente')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(15)
+        ;
 
         return ClaseResource::collection($clases);
     }
