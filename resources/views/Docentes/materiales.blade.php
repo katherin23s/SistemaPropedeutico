@@ -16,9 +16,7 @@
                             </div>
             
                             <div class="col-md-6">
-                                @if (count($clases) > 0)
-                                    <h6> Horario {{ $clases[0]->hora_inicio->format('H:i') . ' - ' . $clases[count($clases)-1]->hora_final->format('H:i') }} </h6>
-                                @endif
+                                
                                 
                             </div>
                         </div>

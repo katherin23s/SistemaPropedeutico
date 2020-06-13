@@ -41,7 +41,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tab-detalles" role="tabpanel" aria-labelledby="tab-detalles-tab">
                                 <div class="card">
-                                    <h1>Detalles</h1>
+                                    <h3>Detalles</h3>
                                     <div class="card-body">
                                         <div class="card-description">
                                             <div class="row">
@@ -87,7 +87,12 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <h3>Materiales</h3>
+                                    <div class="card-body">
+                                        @include('Docentes.tablaMateriales', ['materiales' => $clase->materiales])
                                     </div>
                                 </div>
                             </div>

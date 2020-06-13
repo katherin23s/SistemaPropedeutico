@@ -41,10 +41,10 @@
                     <p>Horario</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'evidencias') class="active " @endif>
-                <a href="{{ route('docente.evidencias', $docente) }}">
+            <li @if ($pageSlug == 'materiales') class="active " @endif>
+                <a href="{{ route('docente.materiales', $docente) }}">
                     <i class="far fa-file-alt"></i>
-                    <p>Evidencias</p>
+                    <p>Materiales</p>
                 </a>
             </li>
         </ul>
