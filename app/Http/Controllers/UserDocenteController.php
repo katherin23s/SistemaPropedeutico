@@ -16,8 +16,9 @@ class UserDocenteController extends Controller
         return view('Docentes.home', compact('docente'));
     }
 
-    public function horario(Docente $docente)
+    public function horario()
     {
+        $docente = auth('docente')->user();
         $obtenerSemestre = new ObtenerSemestreActual();
         $semestre = $this->obtenerSemestre($obtenerSemestre);
         $clases = $this->obtenerClases($docente, $semestre, $obtenerSemestre);
@@ -25,15 +26,17 @@ class UserDocenteController extends Controller
         return view('Docentes.horario', compact('docente', 'clases', 'semestre'));
     }
 
-    public function clase(Docente $docente, Clase $clase)
+    public function clase(Clase $clase)
     {
+        $docente = auth('docente')->user();
         $clase->load('materia', 'grupo', 'calificaciones.alumno');
 
         return view('Docentes.Clases.ver', compact('clase', 'docente'));
     }
 
-    public function materiales(Docente $docente)
+    public function materiales()
     {
+        $docente = auth('docente')->user();
         $obtenerSemestre = new ObtenerSemestreActual();
         $semestre = $this->obtenerSemestre($obtenerSemestre);
         $clases = $this->obtenerClases($docente, $semestre, $obtenerSemestre);
