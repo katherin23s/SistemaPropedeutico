@@ -6,7 +6,7 @@
         </div>
         <ul class="nav">
             <li @if ($pageSlug == 'inicio') class="active " @endif>
-                <a href="{{ route('docente.home', $docente) }}">
+                <a href="{{ route('docente.home') }}">
                     <i class="fas fa-home"></i>
                     <p>Inicio</p>
                 </a>
@@ -36,13 +36,13 @@
                 </div>
             </li>  --}}
             <li @if ($pageSlug == 'horario') class="active " @endif>
-                <a href="{{ route('docente.horario', $docente) }}">
+                <a href="{{ route('docente.horario') }}">
                     <i class="far fa-calendar-alt"></i>
                     <p>Horario</p>
                 </a>
             </li>
             <li @if ($pageSlug == 'materiales') class="active " @endif>
-                <a href="{{ route('docente.materiales', $docente) }}">
+                <a href="{{ route('docente.materiales') }}">
                     <i class="far fa-file-alt"></i>
                     <p>Materiales</p>
                 </a>

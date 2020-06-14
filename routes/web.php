@@ -41,10 +41,10 @@ Route::group(['middleware' => ['auth.alumno']], function () {
 //DOCENTE
 Route::group(['middleware' => ['auth.docente']], function () {
     // login protected routes.
-    Route::get('/docente/{docente}/inicio', 'UserDocenteController@home')->name('docente.home');
-    Route::get('/docente/{docente}/horario', 'UserDocenteController@horario')->name('docente.horario');
-    Route::get('/docente/{docente}/materiales', 'UserDocenteController@materiales')->name('docente.materiales');
-    Route::get('/docente/{docente}/clase/{clase}', 'UserDocenteController@clase')->name('docente.clase.ver');
+    Route::get('/docente/inicio', 'UserDocenteController@home')->name('docente.home');
+    Route::get('/docente/horario', 'UserDocenteController@horario')->name('docente.horario');
+    Route::get('/docente/materiales', 'UserDocenteController@materiales')->name('docente.materiales');
+    Route::get('/docente/clase/{clase}', 'UserDocenteController@clase')->name('docente.clase.ver');
     Route::patch('docente/calificacion/actualizar', 'CalificacionUnidadController@actualizarValor')->name('calificacion.actualizar');
     Route::patch('docente/material/cargar', 'MaterialController@update')->name('material.cargar');
     Route::post('material/encontrar', 'MaterialController@encontrar')->name('material.encontrar');
@@ -54,10 +54,10 @@ Route::group(['middleware' => ['auth.docente']], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
 
-    Route::resource('inscripcionAlumnos', 'AlumnosController');
+    //Route::resource('inscripcionAlumnos', 'AlumnosController');
     // Route::resource('inscripcionDocentes', 'DocenteController');
 
-    Route::get('/plantel', 'UserController@plantel')->name('Plantel');
+    /* Route::get('/plantel', 'UserController@plantel')->name('Plantel');
     Route::get('/grupo', 'UserController@grupo')->name('Grupo');
     Route::get('/gestionAlumnos', 'UserController@gestionAlumnos')->name('GestionAlumnos');
     Route::get('/gestionDocentes', 'UserController@gestionDocentes')->name('GestionDocentes');
@@ -71,7 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/horarioDocente', 'UserController@horarioDocente')->name('HorarioDocente');
     Route::get('/DocumentosAlumnos', 'UserController@documentosAlumnos')->name('DocumentosAlumnos');
     Route::get('/DocumentosDocentes', 'UserController@documentosDocente')->name('DocumentosDocentes');
-    Route::get('/gruposDocente', 'UserController@gruposDocente')->name('GruposDocente');
+    Route::get('/gruposDocente', 'UserController@gruposDocente')->name('GruposDocente'); */
     // Route::get('/Carreras', 'UserController@carreras')->name('Carreras');
 
     Route::get('planteles', 'PlantelController@index')->name('planteles.index');

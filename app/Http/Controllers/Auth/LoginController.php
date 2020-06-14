@@ -54,7 +54,7 @@ class LoginController extends Controller
         if (Auth::guard('docente')->attempt(['email' => $validados['email'], 'password' => $validados['password']], $request->get('remember'))) {
             $docente = Docente::where('email', $validados['email'])->first();
 
-            return redirect()->action('UserDocenteController@home', ['docente' => $docente]);
+            return redirect()->action('UserDocenteController@home');
         }
 
         return back()->withInput($request->only('email', 'remember'));

@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\MaterialRevisado;
+use App\Mail\MaterialActualizada;
+use Illuminate\Support\Facades\Mail;
 
 class NotificarDocenteMaterialRevisado
 {
@@ -21,5 +23,8 @@ class NotificarDocenteMaterialRevisado
     public function handle(MaterialRevisado $event)
     {
         $material = $event->material;
+        Mail::to($material->clase->docente->email)->queue(
+            new MaterialActualizada($material)
+        );
     }
 }

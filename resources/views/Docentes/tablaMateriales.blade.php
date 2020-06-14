@@ -13,7 +13,7 @@
             @foreach ($materiales as $material)
                 <tr id="fila{{ $material->id }}" class="{{ $material->class() }}">
                     <td>{{ $material->nombre }}</td>
-                    <td><a href="{{ route('docente.clase.ver', [$docente,$material->clase]) }}">{{ $material->clase->clave }}</a></td>
+                    <td><a href="{{ route('docente.clase.ver', [$material->clase]) }}">{{ $material->clase->clave }}</a></td>
                     <td id="fecha{{ $material->id }}">{{ $material->fecha->format('d-m-Y')}}</td>
                     <td ><a id="enlace{{ $material->id }}" href="{{ $material->ubicacion }}"><span id="ubicacion{{ $material->id }}">{{ $material->ubicacion }}</span></a></td>
                     <td id="estado{{ $material->id }}">{{ $material->estado() }}</td>

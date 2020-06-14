@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MaterialRevisado;
 use App\Http\Requests\ActualizarMaterialRequest;
 use App\Http\Requests\MaterialRequest;
 use App\Http\Requests\RevisarMaterialRequest;
@@ -122,6 +123,8 @@ class MaterialController extends Controller
         $material = Material::findOrFail($validados['material_id']);
         $material->fill($validados);
         $material->save();
+
+        event(new MaterialRevisado($material));
 
         return new MaterialResource($material);
     }

@@ -11,8 +11,10 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserDocenteController extends Controller
 {
-    public function home(Docente $docente)
+    public function home()
     {
+        $docente = auth('docente')->user();
+
         return view('Docentes.home', compact('docente'));
     }
 
