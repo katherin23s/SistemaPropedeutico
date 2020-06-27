@@ -71,7 +71,11 @@ class MateriaController extends Controller
     {
         $materia->load('carrera');
 
-        $clases = Clase::with('grupo', 'docente', 'materia')->paginate();
+        $clases = Clase::with('grupo', 'docente', 'materia')
+            ->where('materia_id', $materia->id)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(15)
+        ;
 
         return view('Admin.Materias.ver', compact('materia', 'clases'));
     }

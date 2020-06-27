@@ -21,6 +21,7 @@ class DocumentoResource extends JsonResource
             'fecha' => $this->fecha->format('d-m-Y'),
             'ubicacion' => $this->ubicacion,
             'estado' => $this->estado(),
+            'estado_n' => $this->estado,
             'comentarios' => $this->comentarios,
         ];
     }

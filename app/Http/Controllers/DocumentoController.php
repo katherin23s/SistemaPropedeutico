@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Documento;
+use App\Events\DocumentoRevisado;
 use App\Http\Requests\ActualizarDocumentoRequest;
 use App\Http\Requests\DocumentoRequest;
 use App\Http\Requests\RevisarDocumentoRequest;
@@ -17,8 +18,36 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if (is_null($request->cantidad)) {
+            $cantidad = 10;
+        } else {
+            $cantidad = $request->cantidad;
+        }
+
+        if (is_null($request->busqueda)) {
+            $busqueda = '';
+        } else {
+            $busqueda = $request->busqueda;
+        }
+
+        if (is_null($request->estado)) {
+            $estado = 10;
+        } else {
+            $estado = $request->estado;
+        }
+        if ($estado < 10) {
+            $documentos = Documento::with('alumno')->whereLike(['alumno.nombre', 'nombre'], $busqueda)
+                ->where('estado', $estado)
+                ->orderBy('updated_at', 'desc')
+                ->paginate($cantidad)
+            ;
+        } else {
+            $documentos = Documento::with('alumno')->whereLike(['alumno.nombre', 'nombre'], $busqueda)->paginate($cantidad);
+        }
+
+        return view('Admin.Documentos.index', compact('documentos', 'cantidad', 'busqueda', 'estado'));
     }
 
     /**
@@ -77,19 +106,26 @@ class DocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarDocumentoRequest $request)
+    public function update(ActualizarDocumentoRequest $request) //alumno
     {
         $validados = $request->validated();
         $documento = Documento::findOrFail($validados['id']);
         $validados['estado'] = 0;
+        $documento->fill($validados);
+        $documento->fecha = Carbon::today();
+        $documento->save();
 
         return new DocumentoResource($documento);
     }
 
-    public function revisar(RevisarDocumentoRequest $request)
+    public function revisar(RevisarDocumentoRequest $request) //admin
     {
         $validados = $request->validated();
-        $documento = Documento::findOrFail($validados['id']);
+        $documento = Documento::findOrFail($validados['documento_id']);
+        $documento->fill($validados);
+        $documento->save();
+
+        event(new DocumentoRevisado($documento));
 
         return new DocumentoResource($documento);
     }

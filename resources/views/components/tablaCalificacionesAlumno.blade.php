@@ -14,7 +14,7 @@
             @foreach ($calificaciones as $calificacion)
                 <tr>
                     <td>{{ $calificacion->clase->materia->nombre }}</td>
-                    <td>{{ $calificacion->promedio() }}</td>
+                    <td class="{{ $calificacion->promedio < 70 ? 'bg-danger' : 'bg-success' }}">{{ $calificacion->promedio() }}</td>
                     @foreach ($calificacion->calificaciones as $calificacion)
                         <td class="{{ $calificacion->valor < 70 ? 'bg-danger' : 'bg-success' }}">{{ $calificacion->valor() }}</td>
                     @endforeach
@@ -22,4 +22,4 @@
             @endforeach
         </tbody>
     </table>
-</div> 
+</div>

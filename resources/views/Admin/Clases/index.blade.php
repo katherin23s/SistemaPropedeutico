@@ -65,11 +65,11 @@
                                 <tbody>
                                     @foreach ($clases as $clase)
                                         <tr>
-                                            <td>{{ $clase->clave }}</td>
-                                            <td>{{ $clase->materia->nombre }}</td>
-                                            <td>{{ $clase->docente->nombre }}</td>
-                                            <td>{{ $clase->grupo->numero }}</td>
-                                            <td>{{ $clase->grupo->carrera->nombre }}</td>
+                                            <td> <a href="{{ route('clases.ver', $clase) }}">{{ $clase->clave }}</a> </td>
+                                            <td> <a href="{{ route('materias.ver', $clase->materia) }}">{{ $clase->materia->nombre }}</a> </td>
+                                            <td> <a href="{{ route('docentes.ver', $clase->docente) }}">{{ $clase->docente->nombre }}</a> </td>
+                                            <td> <a href="{{ route('grupos.ver', $clase->grupo) }}">{{ $clase->grupo->numero }}</a> </td>
+                                            <td> <a href="{{ route('carreras.ver', $clase->grupo->carrera) }}">{{ $clase->grupo->carrera->nombre }}</a> </td>
                                             <td>{{ $clase->salon }}</td>
                                             <td>{{ $clase->horarioCompleto()}}</td>
                                             <td class="td-actions text-right">

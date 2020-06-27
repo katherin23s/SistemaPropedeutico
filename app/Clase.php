@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Events\ClaseRegistrada;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Clase extends Model
 {
+    use Notifiable;
     public $fillable = [
         'clave',
         'hora_inicio',
@@ -29,6 +32,14 @@ class Clase extends Model
         'grupo_id' => 'integer',
         'docente_id' => 'integer',
     ];
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ClaseRegistrada::class,
+    ];
     protected $dates = ['hora_inicio', 'hora_final'];
 
     //Una clase pertenece a un grupo
@@ -47,6 +58,11 @@ class Clase extends Model
     public function docente()
     {
         return $this->belongsTo('App\Docente');
+    }
+
+    public function materiales() //documentos del docente
+    {
+        return $this->hasMany('App\Material');
     }
 
     public function horarioCompleto()

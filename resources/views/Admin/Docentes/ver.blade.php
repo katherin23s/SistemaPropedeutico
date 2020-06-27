@@ -36,16 +36,24 @@
                     <div class="table-responsive">                           
                         <table class="table" id="tabla-clases" >
                             <thead class=" text-primary" >
+                                <th scope="col">Clave</th>
                                 <th scope="col">Materia</th>
                                 <th scope="col">Semestre</th>
                                 <th scope="col">Horario</th>
+                                <th scope="col">Materiales</th>
                             </thead>
                             <tbody>
                                 @foreach ($docente->clases as $clase)
                                     <tr>
+                                        <td><a href="{{ route('clases.ver', $clase ) }}">{{ $clase->clave}}</a> </td>
                                         <td>{{ $clase->materia->nombre }}</td>
                                         <td>{{ $clase->grupo->semestre->periodo() }}</td>
                                         <td>{{ $clase->horarioCompleto() }}</td>
+                                        <td class="td-actions text-right">
+                                            <button rel="tooltip" class="btn btn-info btn-sm btn-icon"  type="button" onClick="mostrarModalMateriales({{ $clase->id }})">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -92,4 +100,5 @@
             </div>
         </div>
     </div>
+    @include('components.modalTablaMateriales')
 @endsection

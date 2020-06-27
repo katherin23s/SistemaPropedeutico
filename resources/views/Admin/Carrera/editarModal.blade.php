@@ -67,7 +67,7 @@
             $('#ModalEditar').modal('hide')
             }
         });
-            return false;
+        return false;
     }
     function mostrarDatosEnModal(carrera_id, nombre, numero_serie, departamento_id){
       document.getElementById("actualizar-carrera_id").value = carrera_id;

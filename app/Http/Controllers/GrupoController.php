@@ -45,22 +45,29 @@ class GrupoController extends Controller
             $grupos = Grupo::with('carrera', 'semestre')
                 ->whereLike(['numero'], $busqueda)
                 ->where([['carrera_id', $carrera], ['semestre_id', $semestre]])
+                ->orderBy('created_at', 'desc')
                 ->paginate($cantidad)
             ;
         } elseif ($carrera > 0 && $semestre <= 0) {
             $grupos = Grupo::with('carrera', 'semestre')
                 ->whereLike(['numero'], $busqueda)
                 ->where('carrera_id', $carrera)
+                ->orderBy('created_at', 'desc')
                 ->paginate($cantidad)
             ;
         } elseif ($carrera <= 0 && $semestre > 0) {
             $grupos = Grupo::with('carrera', 'semestre')
                 ->whereLike(['numero'], $busqueda)
                 ->where('semestre_id', $semestre)
+                ->orderBy('created_at', 'desc')
                 ->paginate($cantidad)
             ;
         } else {
-            $grupos = Grupo::with('carrera', 'semestre')->whereLike(['numero'], $busqueda)->paginate($cantidad);
+            $grupos = Grupo::with('carrera', 'semestre')
+                ->whereLike(['numero'], $busqueda)
+                ->orderBy('created_at', 'desc')
+                ->paginate($cantidad)
+            ;
         }
 
         return view('Admin.Grupos.index', compact('grupos', 'cantidad', 'busqueda'));
@@ -87,7 +94,9 @@ class GrupoController extends Controller
         $datosvalidados = $request->validated();
         Grupo::create($datosvalidados);
 
-        return GrupoResource::collection(Grupo::with('carrera', 'semestre')->paginate(15));
+        return GrupoResource::collection(Grupo::with('carrera', 'semestre')
+            ->orderBy('created_at', 'desc')
+            ->paginate(15));
     }
 
     /**
@@ -130,7 +139,9 @@ class GrupoController extends Controller
         $grupo->fill($datos_validados);
         $grupo->save();
 
-        return GrupoResource::collection(Grupo::with('carrera', 'semestre')->paginate(15));
+        return GrupoResource::collection(Grupo::with('carrera', 'semestre')
+            ->orderBy('created_at', 'desc')
+            ->paginate(15));
     }
 
     public function encontrar(Request $request)
@@ -146,7 +157,9 @@ class GrupoController extends Controller
 
         $grupo->delete();
 
-        return GrupoResource::collection(Grupo::paginate(10));
+        return GrupoResource::collection(Grupo::with('carrera', 'semestre')
+            ->orderBy('created_at', 'desc')
+            ->paginate(15));
     }
 
     public function busqueda(Request $request)

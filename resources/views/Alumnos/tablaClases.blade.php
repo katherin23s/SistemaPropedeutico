@@ -15,10 +15,6 @@
                     <td>{{ $clase->horarioCompleto() }}</td>
                     <td>{{ $clase->dias }}</td>
                     <td>{{ $clase->salon }}</td>
-                    {{--  <button rel="tooltip" class="btn btn-danger btn-sm btn-icon"  type="button" onClick="Eliminar({{ $grupo->id }})">
-                            <i class="fas fa-trash"></i>
-                    </button>  --}}
-                    </td>
                 </tr>
             @endforeach
         </tbody>

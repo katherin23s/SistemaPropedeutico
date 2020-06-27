@@ -1,6 +1,7 @@
 <div class="table-responsive">                           
     <table class="table" id="tabla-clases" >
         <thead class=" text-primary" >
+            <th scope="col">Clase</th>
             <th scope="col">Materia</th>
             <th scope="col">Docente</th>
             <th scope="col">Horario</th>
@@ -12,6 +13,7 @@
         <tbody>
             @foreach ($clases as $clase)
                 <tr>
+                    <td> <a href="{{ route('clases.ver', $clase) }}">{{ $clase->clave }}</a> </td>
                     <td> <a href="{{ route('materias.ver', $clase->materia) }}">{{ $clase->materia->nombre }}</a> </td>
                     <td> <a href="{{ route('docentes.ver', $clase->docente) }}">{{ $clase->docente->nombre }}</a> </td>
                     <td>{{ $clase->horarioCompleto() }}</td>

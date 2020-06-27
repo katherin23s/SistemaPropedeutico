@@ -67,4 +67,9 @@ class Alumno extends Authenticatable
     {
         return $this->hasMany('App\Calificacion');
     }
+
+    public function documentos()
+    {
+        return $this->hasMany('App\Documento');
+    }
 }

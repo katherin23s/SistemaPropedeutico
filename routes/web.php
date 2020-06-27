@@ -30,25 +30,34 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 //Alumno
 Route::group(['middleware' => ['auth.alumno']], function () {
     // login protected routes.
-    Route::get('/{alumno}/inicio', 'UserAlumnoController@home')->name('alumno.home');
-    Route::get('/{alumno}/horario', 'UserAlumnoController@horario')->name('alumno.horario');
-    Route::get('/{alumno}/kardex', 'UserAlumnoController@kardex')->name('alumno.kardex');
+    Route::get('/alumno/{alumno}/inicio', 'UserAlumnoController@home')->name('alumno.home');
+    Route::get('/alumno/{alumno}/horario', 'UserAlumnoController@horario')->name('alumno.horario');
+    Route::get('/alumno/{alumno}/kardex', 'UserAlumnoController@kardex')->name('alumno.kardex');
+    Route::get('/alumno/{alumno}/documentos', 'UserAlumnoController@documentos')->name('alumno.documentos');
+    Route::patch('alumno/documento/cargar', 'DocumentoController@update')->name('documento.cargar');
+    Route::post('documento/encontrar', 'DocumentoController@encontrar')->name('documento.encontrar');
 });
 
 //DOCENTE
 Route::group(['middleware' => ['auth.docente']], function () {
     // login protected routes.
-    Route::view('/docente', 'Docentes.horario');
+    Route::get('/docente/inicio', 'UserDocenteController@home')->name('docente.home');
+    Route::get('/docente/horario', 'UserDocenteController@horario')->name('docente.horario');
+    Route::get('/docente/materiales', 'UserDocenteController@materiales')->name('docente.materiales');
+    Route::get('/docente/clase/{clase}', 'UserDocenteController@clase')->name('docente.clase.ver');
+    Route::patch('docente/calificacion/actualizar', 'CalificacionUnidadController@actualizarValor')->name('calificacion.actualizar');
+    Route::patch('docente/material/cargar', 'MaterialController@update')->name('material.cargar');
+    Route::post('material/encontrar', 'MaterialController@encontrar')->name('material.encontrar');
 });
 
 //ADMIN
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
 
-    Route::resource('inscripcionAlumnos', 'AlumnosController');
+    //Route::resource('inscripcionAlumnos', 'AlumnosController');
     // Route::resource('inscripcionDocentes', 'DocenteController');
 
-    Route::get('/plantel', 'UserController@plantel')->name('Plantel');
+    /* Route::get('/plantel', 'UserController@plantel')->name('Plantel');
     Route::get('/grupo', 'UserController@grupo')->name('Grupo');
     Route::get('/gestionAlumnos', 'UserController@gestionAlumnos')->name('GestionAlumnos');
     Route::get('/gestionDocentes', 'UserController@gestionDocentes')->name('GestionDocentes');
@@ -62,7 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/horarioDocente', 'UserController@horarioDocente')->name('HorarioDocente');
     Route::get('/DocumentosAlumnos', 'UserController@documentosAlumnos')->name('DocumentosAlumnos');
     Route::get('/DocumentosDocentes', 'UserController@documentosDocente')->name('DocumentosDocentes');
-    Route::get('/gruposDocente', 'UserController@gruposDocente')->name('GruposDocente');
+    Route::get('/gruposDocente', 'UserController@gruposDocente')->name('GruposDocente'); */
     // Route::get('/Carreras', 'UserController@carreras')->name('Carreras');
 
     Route::get('planteles', 'PlantelController@index')->name('planteles.index');
@@ -153,8 +162,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('documentos/agregar', 'DocumentoController@store')->name('documentos.store');
     Route::post('documentos/encontrar', 'DocumentoController@encontrar')->name('documentos.encontrar');
     Route::patch('documentos/actualizar', 'DocumentoController@update')->name('documentos.update');
+    Route::patch('documentos/revisar', 'DocumentoController@revisar')->name('documentos.revisar');
     Route::delete('documentos/eliminar', 'DocumentoController@eliminar')->name('documentos.eliminar');
     Route::get('documentos/alumno', 'DocumentoController@documentosAlumno')->name('documentos.alumno');
+
+    Route::get('materiales', 'MaterialController@index')->name('materiales.index');
+    Route::post('materiales/agregar', 'MaterialController@store')->name('materiales.store');
+    Route::post('materiales/encontrar', 'MaterialController@encontrar')->name('materiales.encontrar');
+    Route::patch('materiales/actualizar', 'MaterialController@update')->name('materiales.update');
+    Route::patch('materiales/revisar', 'MaterialController@revisar')->name('materiales.revisar');
+    Route::delete('materiales/eliminar', 'MaterialController@eliminar')->name('materiales.eliminar');
+    Route::post('clase/materiales', 'MaterialController@materialesClase')->name('clase.materiales');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
