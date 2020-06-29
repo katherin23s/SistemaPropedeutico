@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Alumno;
-use App\Docente;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IniciarSesionRequest;
 use App\Providers\RouteServiceProvider;
@@ -52,9 +50,7 @@ class LoginController extends Controller
         $validados = $request->validated();
 
         if (Auth::guard('docente')->attempt(['email' => $validados['email'], 'password' => $validados['password']], $request->get('remember'))) {
-            $docente = Docente::where('email', $validados['email'])->first();
-
-            return redirect()->action('UserDocenteController@home');
+            return redirect()->action('UserDocenteController@horario');
         }
 
         return back()->withInput($request->only('email', 'remember'));
@@ -70,9 +66,7 @@ class LoginController extends Controller
         $validados = $request->validated();
 
         if (Auth::guard('alumno')->attempt(['email' => $validados['email'], 'password' => $validados['password']], $request->get('remember'))) {
-            $alumno = Alumno::where('email', $validados['email'])->first();
-
-            return redirect()->action('UserAlumnoController@home', ['alumno' => $alumno]);
+            return redirect()->action('UserAlumnoController@horario');
         }
 
         return back()->withInput($request->only('email', 'remember'));

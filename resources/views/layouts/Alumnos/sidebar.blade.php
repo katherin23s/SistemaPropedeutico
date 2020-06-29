@@ -5,12 +5,6 @@
             <a href="#" class="simple-text logo-normal">CURSOS</a>
         </div>
         <ul class="nav">
-            <li @if ($pageSlug == 'inicio') class="active " @endif>
-                <a href="{{ route('alumno.home', $alumno) }}">
-                    <i class="fas fa-home"></i>
-                    <p>Inicio</p>
-                </a>
-            </li>
             {{--  <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
@@ -36,19 +30,19 @@
                 </div>
             </li>  --}}
             <li @if ($pageSlug == 'horario') class="active " @endif>
-                <a href="{{ route('alumno.horario', $alumno) }}">
+                <a href="{{ route('alumno.horario') }}">
                     <i class="far fa-calendar-alt"></i>
                     <p>Horario</p>
                 </a>
             </li>
             <li @if ($pageSlug == 'kardex') class="active " @endif>
-                <a href="{{ route('alumno.kardex', $alumno) }}">
+                <a href="{{ route('alumno.kardex') }}">
                     <i class="far fa-clipboard"></i>
                     <p>Kardex</p>
                 </a>
             </li>
             <li @if ($pageSlug == 'documentos') class="active " @endif>
-                <a href="{{ route('alumno.documentos', $alumno) }}">
+                <a href="{{ route('alumno.documentos') }}">
                     <i class="far fa-file-alt"></i>
                     <p>Documentos</p>
                 </a>

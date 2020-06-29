@@ -56,7 +56,7 @@
                 </div>
             </div>
         @endauth
-        <div class="fixed-plugin">
+        {{-- <div class="fixed-plugin">
             <div class="dropdown show-dropdown">
                 <a href="#" data-toggle="dropdown">
                 <i class="fa fa-cog fa-2x"> </i>
@@ -76,7 +76,7 @@
                 
                 </ul>
             </div>
-        </div>       
+        </div>  --}}      
         <script src="{{ asset('white') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('white') }}/js/core/bootstrap.min.js"></script>
         <script src="{{ asset('white') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -86,7 +86,7 @@
         <!-- Chart JS -->
         {{-- <script src="{{ asset('white') }}/js/plugins/chartjs.min.js"></script> --}}
         <!--  Notifications Plugin    -->
-        <script src="{{ asset('white') }}/js/plugins/bootstrap-notify.js"></script>
+        {{-- <script src="{{ asset('white') }}/js/plugins/bootstrap-notify.js"></script> --}}
 
         <script src="{{ asset('white') }}/js/white-dashboard.min.js?v=1.0.0"></script>
         <script src="{{ asset('white') }}/js/theme.js"></script>
@@ -164,26 +164,7 @@
                         }, 1000);
                     });
 
-                    $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
-                            var $btn = $(this);
-
-                            if (white_color == true) {
-                                $('body').addClass('change-background');
-                                setTimeout(function() {
-                                    $('body').removeClass('change-background');
-                                    $('body').removeClass('white-content');
-                                }, 900);
-                                white_color = false;
-                            } else {
-                                $('body').addClass('change-background');
-                                setTimeout(function() {
-                                    $('body').removeClass('change-background');
-                                    $('body').addClass('white-content');
-                                }, 900);
-
-                                white_color = true;
-                            }
-                    });
+                    
 
                     $('.light-badge').click(function() {
                         $('body').addClass('white-content');

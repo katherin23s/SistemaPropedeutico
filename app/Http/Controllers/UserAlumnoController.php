@@ -40,27 +40,33 @@ class UserAlumnoController extends Controller
         return redirect()->route('user.index')->withStatus(__('User successfully updated.'));
     }
 
-    public function home(Alumno $alumno)
+    public function home()
     {
+        $alumno = auth('alumno')->user();
+
         return view('Alumnos.home', compact('alumno'));
     }
 
-    public function horario(Alumno $alumno)
+    public function horario()
     {
+        $alumno = auth('alumno')->user();
         $alumno->load('grupo.clases');
 
         return view('Alumnos.horario', compact('alumno'));
     }
 
-    public function kardex(Alumno $alumno)
+    public function kardex()
     {
+        $alumno = auth('alumno')->user();
         $alumno->load('calificaciones.clase');
 
         return view('Alumnos.kardex', compact('alumno'));
     }
 
-    public function documentos(Alumno $alumno)
+    public function documentos()
     {
+        $alumno = auth('alumno')->user();
+
         return view('Alumnos.documentos', compact('alumno'));
     }
 }

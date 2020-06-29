@@ -5,12 +5,12 @@
             <a href="#" class="simple-text logo-normal">CURSOS</a>
         </div>
         <ul class="nav">
-            <li @if ($pageSlug == 'inicio') class="active " @endif>
+            {{-- <li @if ($pageSlug == 'inicio') class="active " @endif>
                 <a href="{{ route('docente.home') }}">
                     <i class="fas fa-home"></i>
                     <p>Inicio</p>
                 </a>
-            </li>
+            </li> --}}
             {{--  <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>

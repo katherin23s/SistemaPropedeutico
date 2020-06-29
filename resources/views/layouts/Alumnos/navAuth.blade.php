@@ -17,7 +17,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto">
-                <li class="dropdown nav-item">
+                {{-- <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="notification d-none d-lg-block d-xl-block"></div>
                         <i class="tim-icons icon-sound-wave"></i>
@@ -28,7 +28,7 @@
                             <a href="#" class="nav-item dropdown-item">Documentacion pendiente</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <div class="photo">
@@ -37,12 +37,12 @@
                         <b class="caret d-none d-lg-block d-xl-block"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-navbar">
-                        <li class="nav-link">
+                        {{-- <li class="nav-link">
                             <a href="{{ route('profile.edit') }}" class="nav-item dropdown-item">Perfil</a>
                         </li>
                         <li class="nav-link">
                             <a href="#" class="nav-item dropdown-item">Configuracion</a>
-                        </li>
+                        </li> --}}
                         <li class="dropdown-divider"></li>
                         <li class="nav-link">
                             <a href="{{ route('logout') }}" class="nav-item dropdown-item" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">Salir</a>
