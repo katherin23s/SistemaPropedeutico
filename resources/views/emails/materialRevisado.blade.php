@@ -10,7 +10,5 @@ Su material <a href="{{ $material->ubicacion }}">{{ $material->nombre }} </a> ha
 @component('mail::button', ['url' => '/docente/materiales'])
 Materiales
 @endcomponent
-
-Gracias
-
+    Gracias
 @endcomponent

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'login-page', 'page' => _('Login Page'), 'contentClass' => 'login-page'])
+@extends('layouts.app', ['class' => 'login-page', 'page' => 'Inicio de Sesión', 'contentClass' => 'login-page'])
 
 @section('content')
     <div class="col-md-10 text-center ml-auto mr-auto">
@@ -18,11 +18,9 @@
                     </div>
             
                     <div style="margin-left: 125px;">
-                    <span class="fa fa-user fa-6x">
+                        <span class="fa fa-user fa-6x">
                     </span> 
-                    
                 </div>
-
                 <div class="card-body">
                     <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                         <div class="input-group-prepend">
@@ -45,14 +43,14 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" href="" class="btn btn-primary btn-lg btn-block mb-3">{{ _('Acceder') }}</button>
-                    <div class="pull-left">
+                    {{-- <div class="pull-left">
                         <h6>
                             <a href="{{ route('register') }}" class="link footer-link">{{ _('Registrarse') }}</a>
                         </h6>
-                    </div>
+                    </div> --}}
                     <div class="pull-right">
                         <h6>
-                            <a href="{{ route('password.request') }}" class="link footer-link">{{ _('') }}</a>
+                            <a href="{{ route('password.request') }}" class="link footer-link">{{ _('¿Olvidaste tu cuenta?') }}</a>
                         </h6>
                     </div>
                 </div>

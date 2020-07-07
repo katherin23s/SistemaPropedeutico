@@ -30,10 +30,9 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 //Alumno
 Route::group(['middleware' => ['auth.alumno']], function () {
     // login protected routes.
-    Route::get('/alumno/{alumno}/inicio', 'UserAlumnoController@home')->name('alumno.home');
-    Route::get('/alumno/{alumno}/horario', 'UserAlumnoController@horario')->name('alumno.horario');
-    Route::get('/alumno/{alumno}/kardex', 'UserAlumnoController@kardex')->name('alumno.kardex');
-    Route::get('/alumno/{alumno}/documentos', 'UserAlumnoController@documentos')->name('alumno.documentos');
+    Route::get('/alumno/horario', 'UserAlumnoController@horario')->name('alumno.horario');
+    Route::get('/alumno/kardex', 'UserAlumnoController@kardex')->name('alumno.kardex');
+    Route::get('/alumno/documentos', 'UserAlumnoController@documentos')->name('alumno.documentos');
     Route::patch('alumno/documento/cargar', 'DocumentoController@update')->name('documento.cargar');
     Route::post('documento/encontrar', 'DocumentoController@encontrar')->name('documento.encontrar');
 });
@@ -52,27 +51,8 @@ Route::group(['middleware' => ['auth.docente']], function () {
 
 //ADMIN
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/register', 'UserController@store')->name('register');
     Route::resource('user', 'UserController', ['except' => ['show']]);
-
-    //Route::resource('inscripcionAlumnos', 'AlumnosController');
-    // Route::resource('inscripcionDocentes', 'DocenteController');
-
-    /* Route::get('/plantel', 'UserController@plantel')->name('Plantel');
-    Route::get('/grupo', 'UserController@grupo')->name('Grupo');
-    Route::get('/gestionAlumnos', 'UserController@gestionAlumnos')->name('GestionAlumnos');
-    Route::get('/gestionDocentes', 'UserController@gestionDocentes')->name('GestionDocentes');
-    Route::get('/dashboardDocentes', 'UserController@dashboardDocentes')->name('SidebarDocente');
-    Route::get('/informacionPerfilAlumno', 'UserController@InformacionPerfilAlumno')->name('InformacionPerfilAlumno');
-    Route::get('/informacionPerfilDocente', 'UserController@InformacionPerfilDocente')->name('InformacionPerfilDocente');
-    Route::get('/configuracionAlumno', 'UserController@configuracionAlumno')->name('ConfiguracionAlumno');
-    Route::get('/configuracionDocente', 'UserController@configuracionDocente')->name('ConfiguracionDocente');
-    Route::get('/kardex_Alumno', 'UserController@kardexAlumno')->name('Kardex_Alumno');
-    Route::get('/horarioAlumno', 'UserController@horarioAlumno')->name('HorarioAlumno');
-    Route::get('/horarioDocente', 'UserController@horarioDocente')->name('HorarioDocente');
-    Route::get('/DocumentosAlumnos', 'UserController@documentosAlumnos')->name('DocumentosAlumnos');
-    Route::get('/DocumentosDocentes', 'UserController@documentosDocente')->name('DocumentosDocentes');
-    Route::get('/gruposDocente', 'UserController@gruposDocente')->name('GruposDocente'); */
-    // Route::get('/Carreras', 'UserController@carreras')->name('Carreras');
 
     Route::get('planteles', 'PlantelController@index')->name('planteles.index');
     Route::post('planteles/agregar', 'PlantelController@store')->name('planteles.store');

@@ -11,102 +11,11 @@ class UserController extends Controller
     /**
      * Display a listing of the users.
      *
-     * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
     public function index(User $model)
     {
         return view('users.index', ['users' => $model->paginate(15)]);
-    }
-
-    public function departamento(User $model)
-    {
-        return view('users.Departamento', ['users' => $model->paginate(15)]);
-    }
-
-    public function plantel(User $model)
-    {
-        return view('users.Plantel', ['users' => $model->paginate(15)]);
-    }
-
-    public function materia(User $model)
-    {
-        return view('users.Materia', ['users' => $model->paginate(15)]);
-    }
-
-    public function grupo(User $model)
-    {
-        return view('users.Grupo', ['users' => $model->paginate(15)]);
-    }
-
-    public function gestionAlumnos(User $model)
-    {
-        return view('users.GestionAlumnos', ['users' => $model->paginate(15)]);
-    }
-
-    public function gestionDocentes(User $model)
-    {
-        return view('users.GestionDocentes', ['users' => $model->paginate(15)]);
-    }
-
-    public function dashboardDocentes(User $model)
-    {
-        return view('users.SidebarDocente', ['users' => $model->paginate(15)]);
-    }
-
-    public function informacionPerfilAlumno(User $model)
-    {
-        return view('users.InformacionPerfilAlumno', ['users' => $model->paginate(15)]);
-    }
-
-    public function informacionPerfilDocente(User $model)
-    {
-        return view('users.InformacionPerfilDocente', ['users' => $model->paginate(15)]);
-    }
-
-    public function configuracionAlumno(User $model)
-    {
-        return view('users.ConfiguracionAlumno', ['users' => $model->paginate(15)]);
-    }
-
-    public function configuracionDocente(User $model)
-    {
-        return view('users.ConfiguracionDocente', ['users' => $model->paginate(15)]);
-    }
-
-    public function kardexAlumno(User $model)
-    {
-        return view('users.Kardex_Alumno', ['users' => $model->paginate(15)]);
-    }
-
-    public function horarioAlumno(User $model)
-    {
-        return view('users.HorarioAlumno', ['users' => $model->paginate(15)]);
-    }
-
-    public function horarioDocente(User $model)
-    {
-        return view('users.HorarioDocente', ['users' => $model->paginate(15)]);
-    }
-
-    public function documentosAlumnos(User $model)
-    {
-        return view('users.DocumentosAlumnos', ['users' => $model->paginate(15)]);
-    }
-
-    public function documentosDocente(User $model)
-    {
-        return view('users.DocumentosDocentes', ['users' => $model->paginate(15)]);
-    }
-
-    public function gruposDocente(User $model)
-    {
-        return view('users.GruposDocente', ['users' => $model->paginate(15)]);
-    }
-
-    public function carreras(User $model)
-    {
-        return view('users.Carreras', ['users' => $model->paginate(15)]);
     }
 
     /**
@@ -122,8 +31,6 @@ class UserController extends Controller
     /**
      * Store a newly created user in storage.
      *
-     * @param  \App\Http\Requests\UserRequest  $request
-     * @param  \App\User  $model
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(UserRequest $request, User $model)
@@ -136,12 +43,11 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified user.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\View\View
      */
     public function edit(User $user)
     {
-        if ($user->id == 1) {
+        if (1 == $user->id) {
             return redirect()->route('user.index');
         }
 
@@ -151,8 +57,6 @@ class UserController extends Controller
     /**
      * Update the specified user in storage.
      *
-     * @param  \App\Http\Requests\UserRequest  $request
-     * @param  \App\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UserRequest $request, User $user)
@@ -171,12 +75,11 @@ class UserController extends Controller
     /**
      * Remove the specified user from storage.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(User $user)
     {
-        if ($user->id == 1) {
+        if (1 == $user->id) {
             return abort(403);
         }
 

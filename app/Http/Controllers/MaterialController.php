@@ -146,7 +146,6 @@ class MaterialController extends Controller
     public function eliminar(Request $request)
     {
         $material = Material::findOrFail($request->material_id);
-
         $material->delete();
 
         return 'OK';

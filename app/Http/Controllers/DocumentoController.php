@@ -147,7 +147,6 @@ class DocumentoController extends Controller
     public function eliminar(Request $request)
     {
         $documento = Documento::findOrFail($request->documento_id);
-
         $documento->delete();
 
         return 'OK';
